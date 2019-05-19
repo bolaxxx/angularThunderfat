@@ -1,0 +1,308 @@
+<div class="card bg-dark text-white p-3 mt-1 mb-4 ">
+  <div class="card-header" >
+    <h2 class="card-title " >Detalles del alimento</h2>
+  </div>
+  <ng-form (ngSubmit)="create()">
+    <div class="row ml-3">
+      <div class="col-sm-6 ">
+        <div class="form-group">
+          <label for="nombre" class="text-white ">Nombre</label>
+          <input hidden [(ngModel)]="alimento.id" name="id" />
+          <input
+            class="form-control"
+            [(ngModel)]="alimento.nombre"
+            name="nombre"
+            required="required"
+          />
+        </div>
+      </div>
+
+      <div class="col-sm-3 padding-left=50px; ">
+        <div class="form-group">
+          <label class="text-white" for="estado">Estado</label>
+          <input
+            class="form-control"
+            [(ngModel)]="alimento.estado"
+            name="estado"
+            required="required"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row ml-3 mr-3">
+      <label class=" col-sm-4 text-white " > Composicion</label>
+    </div>
+    <div class="row ml-3 mr-3">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="cal" class="text-white">Calorias</label>
+          <input
+            class="form-control"
+            [(ngModel)]="alimento.cal"
+            name="cal"
+            required="required"
+          />
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="hidraratos_de_carbono" class="text-white">Hidratos de Carbono</label>
+          <input
+            class="form-control"
+            [(ngModel)]="alimento.hidratosdecarbono"
+            name="hidratos_de_carbono"
+            required="required"
+          />
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="h2o" class="text-white">Agua</label>
+          <input
+            class="form-control"
+            [(ngModel)]="alimento.h2o"
+            name="h2o"
+            required="required"
+          />
+        </div>
+      </div>
+    </div>
+    <div class= "row ml-3 mr-3">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="noespecifico" class="text-white">No Especifico</label>
+        <input
+          class="form-control"
+          [(ngModel)]="alimento.noespecifico"
+          name="noespecifico"
+          required="required"
+        />
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="grasas" class="text-white">Grasas </label>
+        <input
+          class="form-control"
+          [(ngModel)]="alimento.grasas"
+          name="grasas"
+          required="required"
+        />
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="proteinas" class="text-white">Proteinas </label>
+        <input
+          class="form-control"
+          [(ngModel)]="alimento.proteinas"
+          name="proteinas"
+          required="required"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row ml-3 mr-3">
+      <label class=" col-sm-4 text-white " > Vitaminas</label>
+    </div>
+  <div class="row ml-3 mr-3">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="vitamina_a" class="text-white">Vitamina A</label>
+        <input
+          class="form-control"
+          [(ngModel)]="alimento.vitamina"
+          name="vitamina_a"
+        />
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="vitamina_b2" class="text-white">Vitamina B2</label>
+        <input
+          class="form-control"
+          [(ngModel)]="alimento.vitaminb2"
+          name="vitamina_b2"
+        />
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="vitamina_b1" class="text-white">Vitamina B1</label>
+        <input
+          class="form-control"
+          [(ngModel)]="alimento.vitaminb1"
+          name="vitamina_b1"
+        />
+      </div>
+    </div>
+ 
+  </div>
+  <div class="row ml-3 mr-3">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="niac" class="text-white">NiaC</label>
+        <input class="form-control" [(ngModel)]="alimento.niac" name="niac" />
+      </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+          <label for="vitamina_c" class="text-white">Vitamina C</label>
+          <input
+            class="form-control"
+            [(ngModel)]="alimento.vitaminc"
+            name="vitamina_c"
+          />
+        </div>
+      </div>
+    
+  </div>
+  <div class="row ml-3 mr-3">
+      <label class=" col-sm-4 text-white " > Sustancias Minerales </label>
+    </div>
+  <div class="row ml-3 mr-3">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="sodio" class="text-white">Sodio</label>
+        <input class="form-control" [(ngModel)]="alimento.sodio" name="sodio" />
+      </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+          <label for="cobre" class="text-white">Cobre</label>
+          <input class="form-control" [(ngModel)]="alimento.cobre" name="cobre" />
+        </div>
+      </div>
+  
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="potasio"class="text-white">Potasio</label>
+          <input
+            class="form-control"
+            [(ngModel)]="alimento.potasio"
+            name="potasio"
+          />
+        </div>
+      </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="azufre" class="text-white">Azufre</label>
+        <input class="form-control" [(ngModel)]="alimento.azufre" name="azufre" />
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="calcio" class="text-white">Calcio</label>
+        <input class="form-control" [(ngModel)]="alimento.calcio" name="calcio" />
+      </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+          <label for="fosforo" class="text-white">Fosforo</label>
+          <input
+            class="form-control"
+            [(ngModel)]="alimento.fosforo"
+            name="fosforo"
+          />
+        </div>
+      </div>
+  </div>
+  <div class="row ml-3 mr-3">
+ 
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="hierro" class="text-white">Hierro</label>
+        <input class="form-control" [(ngModel)]="alimento.hierro" name="hierro" />
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="magnesio" class="text-white">Magnesio</label>
+        <input
+          class="form-control"
+          [(ngModel)]="alimento.magnesio"
+          name="magnesio"
+        />
+      </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+          <label for="cloro"class="text-white">Cloro</label>
+          <input class="form-control" [(ngModel)]="alimento.cloro" name="cloro" />
+        </div>
+      </div>
+  </div>
+  <div class="row ml-3 mr-3">
+      <label class=" col-sm-4 text-white " > Aminoacidos </label>
+    </div>
+  <div class="row ml-3 mr-3">
+   
+
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="met" class="text-white">Met</label>
+        <input class="form-control" [(ngModel)]="alimento.met" name="met_c" />
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="lis" class="text-white">Lis</label>
+        <input class="form-control" [(ngModel)]="alimento.lis" name="lis" />
+      </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+          <label for="fen"class="text-white">Fen</label>
+          <input class="form-control" [(ngModel)]="alimento.fen" name="fen" />
+        </div>
+      </div>
+  
+  </div>
+  
+  <div class="row ml-3 mr-3">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="leu"class="text-white">Leu</label>
+        <input class="form-control" [(ngModel)]="alimento.leu" name="leu" />
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="illeu"class="text-white">Illeu</label>
+        <input class="form-control" [(ngModel)]="alimento.illeu" name="illeu" />
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="tre"class="text-white">Tre</label>
+        <input class="form-control" [(ngModel)]="alimento.tre" name="tre" />
+      </div>
+    </div>
+  </div>
+  <div class="row ml-3 mr-3">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="tri"class="text-white">Tri</label>
+        <input class="form-control" [(ngModel)]="alimento.tri" name="tri" />
+      </div>
+    </div>
+
+   
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="val"class="text-white">Val</label>
+        <input class="form-control" [(ngModel)]="alimento.val" name="val" />
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="wrapper text-center"><div class="btn-group ml-3 mr-3 ">
+        <button type="submit" class="btn btn-danger">Guardar</button>
+      </div></div>
+    </div>
+  </ng-form>
+</div>
