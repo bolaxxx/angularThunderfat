@@ -14,12 +14,21 @@ export class AlimentoServiceService {
   private urlEndPoint = 'http://localhost:8080/alimentos/';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'aplication/json' });
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
+
+  private agregarAuthorizationHeader(){
+    let token = this.authService.getTokenn();
+    if (token != null) {
+      return this.httpHeaders.append('Authorization', 'Bearer ' + token);
+    }
+  }
   getAlimentos(): Observable<Alimento[]> {
     return this.http
-      .get(this.urlEndPoint)
+      .get(this.urlEndPoint, {headers: this.agregarAuthorizationHeader()})
       .pipe(map(response => response as Alimento[]));
     //  return  this.http.get<Cliente[]>(this.urlEndPoint);
   }
+
+
   private isNotAuthorizado(e): boolean {
     if (e.status === 401 ) {
       if (this.authService.isAuthenticated()) {
