@@ -12,6 +12,8 @@ import {FormsModule} from '@angular/forms';
 import { FindNutricionistaComponent } from './find-nutricionista/find-nutricionista.component';
 import { PacienteComponent } from './paciente/paciente.component';
 import { AlimentosComponent } from './alimentos/alimentos.component';
+import { AlimentoServiceService } from './service/alimento-service.service';
+import { AlimentoformComponent } from './componentes/alimentoform.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { AlimentosComponent } from './alimentos/alimentos.component';
     FooterComponent,
     FindNutricionistaComponent,
     PacienteComponent,
-    AlimentosComponent
+    AlimentosComponent,
+    AlimentoformComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,7 @@ import { AlimentosComponent } from './alimentos/alimentos.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [ClienteService],
+  providers: [ClienteService, AlimentoServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

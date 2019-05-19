@@ -1,3 +1,26 @@
-<p>
-  alimentos works!
-</p>
+<title class="title">Listado de Alimentos  </title>
+<h2 class="title">Listado de Alimentos</h2>
+<div class="container-fluid align-content-lg-center " >
+  <div class="container-fluid align-content-center" *ngFor="let alimento of alimentos">
+
+      <br>
+     
+    <div class="card col"  style="width: 800px;">
+  
+  <div class="card-header">
+    <a class="card-title mt-0">{{alimento.nombre}} {{alimento.estado}}</a>
+  </div>
+  <div class="card-body">
+    <img class="card-img" src="assets/descarga.jpg"> 
+    <div class="card"></div>
+  </div>
+  <div class="card-footer">
+    <div class="btn-group center">
+      <button type="button"class="btn-success btn-sm rounded" [routerLink]="[ '/alimentos/create']"> Detalle</button>
+    </div>
+  </div>
+
+</div>
+<br><br>
+</div>
+</div>
