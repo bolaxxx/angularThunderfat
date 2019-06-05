@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" [routerLink]="[ '/']">ThunderFat Nutrition App</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbarCollapsing()">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarText">
+  <div class="collapse navbar-collapse" id="navbarText" [class.collapse]="navbarCollapsed">
     <ul class="navbar-nav mr-auto" *ngIf="!authService.isAuthenticated()">
       <li class="nav-item active">
         <a class="nav-link"[routerLink]="[ '/']">Home  <span class="sr-only">(current)</span></a>
@@ -17,10 +17,10 @@
     </ul>
     <ul class="navbar-nav mr-auto" *ngIf="authService.hasRoles('ROLE_ADMIN')">
         <li class="nav-item">
-            <a [routerLink]="[ '/find-nutricionista']" class="nav-link">Pacientes</a>
+            <a [routerLink]="[ '/paciente']" class="nav-link">Pacientes</a>
           </li>
           <li class="nav-item">
-              <a [routerLink]="[ '/find-nutricionista']" class="nav-link">Citas</a>
+              <a [routerLink]="[ '/cita']" class="nav-link">Citas</a>
             </li>
             <li class="nav-item">
                 <a [routerLink]="[ '/alimentos']" class="nav-link">Alimentos</a>

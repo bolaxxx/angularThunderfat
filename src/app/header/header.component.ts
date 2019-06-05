@@ -10,7 +10,7 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
   styleUrls: ['./header.component.sass']
 })
 export class HeaderComponent implements OnInit {
-
+  navbarCollapsed = true;
   constructor(  public authService: AuthService, private router: Router ) { }
     logout(): void {
       console.log('logut del componet');
@@ -21,5 +21,9 @@ export class HeaderComponent implements OnInit {
     }
   ngOnInit() {
   }
+ 
 
+  toggleNavbarCollapsing() {
+      this.navbarCollapsed = !this.navbarCollapsed;
+  }
 }

@@ -1,0 +1,163 @@
+<ng-form id="pacienteFormulario" name="pacienteFormulario">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="nombre">Nombre</label>
+      <input hidden name="id_usuario" id="id_usuario" />
+      <input
+        hidden
+        name="nutricionista.id_usuario"
+        value="${nutricionista}"
+        id="nutricionista.id_usuario"
+      />
+      <input
+        class="form-control"
+        path="nombre"
+        id="nombre"
+        required="required"
+        placeholder="Nombre"
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="apellidos">Apellidos</label>
+      <input
+        class="form-control"
+        name="apellidos"
+        id="apellidos"
+        required="required"
+        placeholder="Apellidos"
+      />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="direccion">Direccion</label>
+    <input
+      class="form-control"
+      name="direccion"
+      id="direccion"
+      required="required"
+      placeholder="Direccion"
+    />
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="localidad">Localidad</label>
+      <input
+        class="form-control"
+        name="localidad"
+        id="localidad"
+        required="required"
+        placeholder="Localidad"
+      />
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="provincia">Provincia </label>
+      <input
+        class="form-control"
+        path="provincia"
+        id="provincia"
+        required="required"
+        placeholder="Provincia"
+      />
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="codigopostal">Codigo Postal</label>
+      <input
+        class="form-control"
+        path="codigopostal"
+        id="codigopostal"
+        required="required"
+        placeholder="Codigo Postal"
+      />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="fechanacimiento">Fecha Nacimiento</label>
+      <input
+        type="date"
+        class="form-control"
+        path="fechanacimiento"
+        id="fechanacimiento"
+        required="required"
+      />
+    </div>
+    <div class="form-group col-md-4">
+      <label for="dni">DNI </label>
+      <input
+        class="form-control"
+        path="dni"
+        id="dni"
+        required="required"
+        placeholder="DNI"
+      />
+    </div>
+    <div class="form-group col-md-4">
+      <label for="email">Email</label>
+      <input
+        path="email"
+        id="email"
+        class="form-control"
+        required="required"
+        placeholder="Email"
+      />
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="altura">Altura</label>
+      <input
+        class="form-control"
+        path="altura"
+        id="altura"
+        required="required"
+        type="number"
+        min="0.01"
+        step="0.01"
+        placeholder="Altura en Metros"
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="telefono">Telefono</label>
+      <input
+        class="form-control"
+        path="telefono"
+        id="telefono"
+        required="required"
+        placeholder="Telefono de contacto"
+      />
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="sexo">Sexo</label>
+
+      <div class="form-check form-check">
+        <input
+          type="radio"
+          path="sexo"
+          value="hombre"
+          class="form-check-input"
+          name="sexo"
+          id="sexo_hombre"
+        />
+        <label class="form-check-label" for="sexo">Hombre</label>
+      </div>
+      <div class="form-check form-check">
+        <input
+          type="radio"
+          path="sexo"
+          value="mujer"
+          class="form-check-input"
+          id="sexo_mujer"
+          name="sexo"
+        />
+        <label class="form-check-label" for="sexo">Mujer</label>
+      </div>
+    </div>
+  </div>
+</ng-form>

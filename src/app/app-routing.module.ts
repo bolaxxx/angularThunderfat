@@ -4,14 +4,18 @@ import { LoginComponent } from './usuarios/login.component';
 import { FindNutricionistaComponent } from './find-nutricionista/find-nutricionista.component';
 import { PacienteComponent } from './paciente/paciente.component';
 import { AlimentosComponent } from './alimentos/alimentos.component';
-import { AlimentoformComponent } from './componentes/alimentoform.component';
+import { MediciongeneralComponent } from './componentes/mediciongeneral/mediciongeneral.component';
+import { CitaComponent } from './cita/cita.component';
+
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'find-nutricionista', component: FindNutricionistaComponent},
-  {path: 'paciente/:id', component: PacienteComponent},
+  {path: 'paciente', component: PacienteComponent},
   {path: 'alimentos', component: AlimentosComponent},
-  {path: 'alimentos/create', component: AlimentoformComponent}
+  {path: 'mediciongeneral/:id', component: MediciongeneralComponent},
+  {path: 'cita', component: CitaComponent}
+
 ];
 
 @NgModule({

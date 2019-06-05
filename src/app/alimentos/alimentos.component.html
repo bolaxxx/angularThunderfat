@@ -1,11 +1,11 @@
 <title class="title">Listado de Alimentos  </title>
-<h2 class="title">Listado de Alimentos</h2>
+<h2 class="title mt-3 ml-4">Listado de Alimentos</h2>
 <div class="container-fluid align-content-lg-center " >
-  <div class="container-fluid align-content-center" *ngFor="let alimento of alimentos">
+  <div class="container-fluid align-content-center" >
 
       <br>
      
-    <div class="card col"  style="width: 800px;">
+    <div class="card  mt-3 ml-lg-5"  style="width: 800px;" *ngFor="let alimento of alimentos">
   
   <div class="card-header">
     <a class="card-title mt-0">{{alimento.nombre}} {{alimento.estado}}</a>
@@ -16,7 +16,7 @@
   </div>
   <div class="card-footer">
     <div class="btn-group center">
-      <button type="button"class="btn-success btn-sm rounded" [routerLink]="[ '/alimentos/create']"> Detalle</button>
+       <button mat-raised-button (click)="openBottonSheet(alimento.id)" > Detalle</button >
     </div>
   </div>
 

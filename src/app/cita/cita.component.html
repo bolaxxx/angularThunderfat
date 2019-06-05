@@ -1,0 +1,22 @@
+
+<div class="row mt-5 mb-5">
+<button (click)="updateEvents()" id="updateEvents" class="btn-danger btn-sm">Update events</button>
+<button (click)="updateHeader()" id="updateHeader">Update header</button>
+</div>
+<div class="row mb-5 center">
+<full-calendar
+  *ngIf="options"
+  #fullcalendar
+  [editable]="true"
+  [events]="eventsModel"
+  [header]="options.header"
+  [customButtons]="options.customButtons"
+  (dateClick)="dateClick($event)"
+  (eventDragStop)="eventDragStop($event)"
+  [plugins]="options.plugins"
+  (eventClick)="eventClick($event)"
+  [eventSources]="options.eventSources"
+  [locale]= "options.locale"
+  [buttonText]="options.buttonText"
+></full-calendar>
+</div>

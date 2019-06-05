@@ -1,0 +1,74 @@
+<h2 class="title mt-3 ml-4">Listado de Paciente</h2>
+<div class="container-fluid align-content-lg-center ">
+  <div class="container-fluid align-content-center">
+    <br />
+    <div class="row mt-5 mb-5 ml-5 mr-5">
+      
+   <div class=" row ">
+    <form> 
+      <div class="form-group">
+      <button mat-flat-button class="btn-success ">Nuevo</button>
+        <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select >
+              <mat-option>None</mat-option>
+              <mat-option value="option1">Option 1</mat-option>
+              <mat-option value="option2">Option 2</mat-option>
+              <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+     
+   
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Favorite food" value="Sushi">
+            </mat-form-field>
+            <button mat-icon-button disabled aria-label="Example icon-button with a heart icon">
+                <mat-icon>favorite</mat-icon>
+              </button>
+          </div>
+          </form>  
+  </div>
+    
+    <div *ngFor="let paciente of pacientes" class="mt-2">
+      <mat-card class="bg-dark text-white ">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image">
+            <img src="assets\baseline-account_box-24px.svg" />
+          </div>
+          <mat-card-title
+            >Nombre : {{ paciente.nombre | titlecase }} {{ paciente.apellidos| titlecase }}</mat-card-title
+          >
+          <mat-card-subtitle class="text-white">Nº Telefono :{{ paciente.telefono }}   Fecha nacimiento: {{paciente.fechanacimiento| date:'dd/MM/yyyy' }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p></p>
+        </mat-card-content>
+
+        <mat-card-actions >
+          <button mat-raised-button>Detalle</button>
+          <button mat-button [matMenuTriggerFor]="mediciones" class="bg-light text-dark">
+            Mediciones
+          </button>
+          <mat-menu #mediciones="matMenu">
+            <button mat-menu-item (click)="listarMedicionGeneral(paciente.id)">Generales</button>
+            <button mat-menu-item >Segmentales</button>
+            <button mat-menu-item>Especifica</button>
+          </mat-menu>
+          <button mat-button [matMenuTriggerFor]="antecedente" class="bg-light text-dark">
+                Antecedentes
+              </button>
+          <mat-menu #antecedente="matMenu">
+                <button mat-menu-item>Clinicos</button>
+                <button mat-menu-item>Tratamientos</button>
+                
+              </mat-menu>
+          <button mat-raised-button>Citas</button>
+          <button mat-raised-button>Planes Dieta</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+   
+    <br /><br />
+  </div>
+</div>

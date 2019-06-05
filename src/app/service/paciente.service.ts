@@ -1,39 +1,41 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Alimento } from '../model/alimento';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { AuthService } from './auth.service';
+import { Paciente } from '../model/paciente';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AuthService } from './auth.service';
 import swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AlimentoServiceService {
-  private urlEndPoint = 'http://localhost:8080/alimentos/';
+export class PacienteService {
+  private urlEndPoint = 'http://localhost:8080/paciente/';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'aplication/json' });
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
 
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
   private agregarAuthorizationHeader(){
     let token = this.authService.getTokenn();
     if (token != null) {
       return this.httpHeaders.append('Authorization', 'Bearer ' + token);
     }
   }
-  getAlimentos(): Observable<Alimento[]> {
+  getPacientes(id: number): Observable<Paciente[]> {
     return this.http
-      .get(this.urlEndPoint, {headers: this.agregarAuthorizationHeader()})
-      .pipe(map(response => response as Alimento[]));
+      .get(this.urlEndPoint + id + '/', {headers: this.agregarAuthorizationHeader()})
+      .pipe(map(response => response as Paciente[]));
     //  return  this.http.get<Cliente[]>(this.urlEndPoint);
   }
 
-  getAlimentoByid(id: number): Observable<Alimento> {
+
+  getPacienteByid(id: number): Observable<Paciente> {
     return this.http
-      .get(this.urlEndPoint + id, {headers: this.agregarAuthorizationHeader()})
-      .pipe(map(response => response as Alimento));
+      .get(this.urlEndPoint + 'detalle/' + id, {headers: this.agregarAuthorizationHeader()})
+      .pipe(map(response => response as Paciente));
     //  return  this.http.get<Cliente[]>(this.urlEndPoint);
   }
+
   private isNotAuthorizado(e): boolean {
     if (e.status === 401 ) {
       if (this.authService.isAuthenticated()) {
