@@ -1,3 +1,102 @@
-<p>
-  medicion-general-form works!
-</p>
+<div class="bg-dark text-white container-fluid flex-fill">
+<ng-form id="formularioMedicionGeneral" name="formularioMedicionGeneral" class="col-md-6">
+    <div class="form-group row ">
+      <label for="fecha" class="col-2 col-form-label">Fecha</label>
+      <div class="col-10">
+        <input hidden [(ngModel)]="medicion.id" name="id"/>
+        <input class="form-control" [(ngModel)]="medicion.fecha" name="fecha" id="fecha"
+          required="required" autocomplete="nope" type="date" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="brazo" class="col-2 col-form-label">Circunferencia
+        Brazo(cm)</label>
+      <div class="col-10">
+        <input class="form-control"  [(ngModel)]="medicion.brazo"name="brazo" id="brazo"
+          required="required" type="text" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="cadera" class="col-2 col-form-label">Cadera(cm)</label>
+      <div class="col-10">
+        <input class="form-control" name="cadera" id="cadera" [(ngModel)]="medicion.cadera"
+          required="required" type="text" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="cintura" class="col-2 col-form-label">Cintura(cm)</label>
+      <div class="col-10">
+        <input class="form-control" name="cintura" [(ngModel)]="medicion.cintura" id="cintura"
+          required="required" type="text" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="icc" class="col-2 col-form-label">I.C.C</label>
+      <div class="col-10">
+        <input class="form-control" name="icc" [(ngModel)]="medicion.icc" id="icc" type="text" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="peso_actual" class="col-2 col-form-label">Peso
+        Actual(Kg)</label>
+      <div class="col-10">
+        <input class="form-control" name="pesoactual" [(ngModel)]="medicion.pesoactual"
+          name="peso_actual" required="required" type="text" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="peso_ideal" class="col-2 col-form-label">Peso
+        Ideal(Kg)</label>
+      <div class="col-10">
+        <input class="form-control" name="peso_ideal"
+          id="peso_ideal" required="required" [(ngModel)]="medicion.pesoideal" type="text" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="IMC" class="col-2 col-form-label">IMC</label>
+      <div class="col-10">
+        <input class="form-control" name="IMC" id="IMC" [(ngModel)]="medicion.imc" type="text" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="porcentajegrasas" class="col-2 col-form-label">%Grasas</label>
+      <div class="col-10">
+        <input class="form-control" name="porcentajegrasas"
+         [(ngModel)]="medicion.porcentajegrasas" id="porcentajegrasas" type="text" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="tension_max" class="col-2 col-form-label">Tension
+        Maxima</label>
+      <div class="col-10">
+        <input class="form-control" name="tension_max" [(ngModel)]="medicion.tensionmax"
+          id="tension_max" type="text" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="tension_min" class="col-2 col-form-label">Tension
+        Minima</label>
+      <div class="col-10">
+        <input class="form-control" name="tension_min" [(ngModel)]="medicion.tensionmin"
+          id="tension_min" type="text" />
+      </div>
+    </div>
+    <div class="row ">
+        <div class="btn-group center ml-3 flex mb-3">
+      <ng-container *ngIf="isNew; else elseTemplate">
+        <button class="btn-success lg ml-2 mr-2" (click)="guardarMedicion()"> Guardar</button>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <button class="btn-primary lg ml-2 mr-2" (click)="GuardarEdicion()">Editar</button>
+          <button class="btn-danger lg ml-2 mr-2"(click)="Eliminar()"><a
+          >Eliminar</a> <span class="glyphicon glyphicon-bin"></span></button>
+        </ng-template>
+      </div>
+    </div>
+  </ng-form>
+
+</div>

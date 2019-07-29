@@ -10,6 +10,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import esLocale from '@fullcalendar/core/locales/es';
 import { ActivatedRoute } from '@angular/router';
+import {MatDialog} from '@angular/material';
+import { CitaformComponent } from './citaform/citaform.component';
 @Component({
   selector: 'app-cita',
   templateUrl: './cita.component.html',
@@ -21,7 +23,8 @@ export class CitaComponent implements OnInit {
   @ViewChild('fullcalendar') fullcalendar: FullCalendarComponent;
   calendarPlugins = [dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin];
 
-  constructor(private authService: AuthService,  private citaService: CitaService, private route: ActivatedRoute) { }
+  constructor(private authService: AuthService,  private citaService: CitaService, private route: ActivatedRoute,
+              public dialog: MatDialog) { }
    ngOnInit() {
     this.options = {
       editable: true,
@@ -44,7 +47,17 @@ export class CitaComponent implements OnInit {
     };
   }
   eventClick(model) {
-    console.log(model.event.id+ ' esto es lo que muesta cuando clicka');
+    const dialogRef = this.dialog.open(CitaformComponent, {
+      width: '850px',
+      autoFocus: true,
+      data: {isNew: false, id: model.event.id}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      const calendario = this.fullcalendar.getApi() ;
+      calendario.refetchEvents();
+    });
+   
   }
   eventDragStop(model) {
     console.log(model);
@@ -59,6 +72,19 @@ export class CitaComponent implements OnInit {
       right: ''
     };
   }
+  openDialog(){
+    const dialogRef = this.dialog.open(CitaformComponent, {
+      width: '850px',
+      autoFocus:true,
+      data: {isNew: true}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      const calendario2 = this.fullcalendar.getApi() ;
+      calendario2.refetchEvents();
+    });
+   
+  }
   updateEvents() {
     this.eventsModel = [{
       title: 'Updaten Event',
@@ -66,10 +92,8 @@ export class CitaComponent implements OnInit {
       end: this.yearMonth + '-10'
     }];
   }
-  get yearMonth(): string {
+  get yearMonth():string {
     const dateObj = new Date();
     return dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
   }
   }
-
-

@@ -1,5 +1,6 @@
 import { Comida } from './comida';
 import { FiltroAlimentario } from './filtro-alimentario';
+import { DiaDieta } from './diadieta';
 export class PlanDieta {
 id: number;
 fechaini: Date;
@@ -11,6 +12,6 @@ repartoglucidodiario: number;
 repartolipidodiario: number;
 repartoprotidodiario: number	;
 comidasdiarias: number;
-comidas: Comida[] = [];
+dias: DiaDieta[] = [];
 filtrosaplicados: FiltroAlimentario;
 }

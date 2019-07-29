@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-sm-auto ml-lg-5 ">
+  <div class="row mt-2 mb-2" *ngFor="let comida of diaSalida.comidas" >
+    <div class="card bg-dark text-white border-primary" (click)="selectComida(comida)">
+      <div class="card-header"><p class="card-title">{{diaSelected.fecha|date:'dd/MM/yyyy'}}</p></div>
+      <div class="card-body " >
+      <h5 class="card-title">Hora</h5>
+     <input type="time" class="form-control"[(ngModel)]="comida.hora">
+    </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="btn-group-lg width">
+    <button class="btn-success " (click)="saveMealsToDay()">Guardar Comidas</button></div>
+  </div>
+  </div>
+<div class="col-6-xl-auto"style="width: 700px;">
+  <app-platoplandieta 
+  [selectedMeal]="comidaselect"
+   (platosComida)="guardarPlatosEnComidaSelecionada($event)"
+    *ngIf="isComidaSelect">
+  </app-platoplandieta>
+</div>
+</div>

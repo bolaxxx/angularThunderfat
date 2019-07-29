@@ -26,13 +26,13 @@
                 <a [routerLink]="[ '/alimentos']" class="nav-link">Alimentos</a>
               </li>
               <li class="nav-item">
-                  <a [routerLink]="[ '/find-nutricionista']" class="nav-link">Filtros Alimentarios</a>
+                  <a [routerLink]="[ '/filtroalimentario']" class="nav-link">Filtros Alimentarios</a>
                 </li>
                 <li class="nav-item">
-                    <a [routerLink]="[ '/find-nutricionista']" class="nav-link">Platos</a>
+                    <a [routerLink]="[ '/platopredeterminado']" class="nav-link">Platos</a>
                   </li>
                   <li class="nav-item">
-                      <a [routerLink]="[ '/find-nutricionista']" class="nav-link">Planes Dieta</a>
+                      <a [routerLink]="[ '/plandieta']" class="nav-link">Planes Dieta</a>
                     </li>
     </ul>
      <ul class="navbar-nav mr-auto"*ngIf="authService.hasRoles('ROLE_USER')">

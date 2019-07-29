@@ -1,0 +1,43 @@
+<div>
+  <ng-form id="antecedenteTratamientoFormulario"
+                name="antecedenteTratamientoFormulario">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="antecedente_tratamiento">Antecedente
+                        Tratamiento </label> <input   name="antecedente" [(ngModel)]="antecedente.antecedente"/>
+                    
+  
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label for="fecha">Fecha </label> <input type="date"
+                        class="form-control" [(ngModel)]="antecedente.fecha" name="fecha" id="fecha"
+                        required="required" />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="observacion ">Observacion </label>
+                      <textarea class="form-control" [(ngModel)]="antecedente.observacion"name="observacion"
+                        id="observacion"></textarea>
+                    </div>
+                  </div>
+                </div>
+  
+  
+              </ng-form>
+            </div>
+            <div class="modal-footer">
+  
+              <div class="btn-group">
+              <button type="button" class="btn btn-success" (click)="guardarMedicion()" title="Guardar Antecedente Tratamiento">Guardar</button>
+                <button type="button" id="botonEditar" class="btn btn-primary"
+                  title="Editar Antecedente Tratamiento" (click)="GuardarEdicion()">Editar</button>
+                <button id="botonEliminar" class="btn btn-danger"
+                  title="Eliminar Antecedente Tratamiento" (click)="Eliminar()">Eliminar</button>
+              </div>
+            </div>

@@ -4,8 +4,8 @@ id: number;
 nombre: string;
 ingredientes: Ingrediente [] = [];
 receta: string;
-kcaltotales: number;
-proteinastotales: number;
-grasastotales: number;
-hidratostotales: number;
+kcaltotales: number=0;
+proteinastotales: number=0;
+grasastotales: number=0;
+hidratostotales: number=0;
 }

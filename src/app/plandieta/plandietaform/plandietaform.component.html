@@ -1,0 +1,223 @@
+<form modelAttribute="plandieta">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="paciente">Paciente</label>
+          <mat-form-field class="example-full-width col-12">
+              <input
+                matInput
+                placeholder="Paciente"
+                aria-label="Paciente"
+                [matAutocomplete]="auto"
+                [formControl]="stateCtrl"
+                style="flex: 100%"
+              />
+              <mat-autocomplete
+                #auto="matAutocomplete"
+                [displayWith]="displayFn(pacientes)"
+              >
+                <mat-option
+                  *ngFor="let paciente of filteredPaciente | async"
+                  [value]="paciente.id"
+                  with
+                >
+                  <img
+                    class="example-option-img"
+                    aria-hidden
+                    src="assets\baseline-account_box-24px.svg"
+                    height="25"
+                  />
+                  <span>{{ paciente.nombre }} {{ paciente.apellidos }} </span> |
+                  <!--<small>Apellidos: {{paciente.apellidos}}</small>|-->
+                  <small> Dni: {{ paciente.dni }}</small>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="fecha_fin">Fecha Inicio </label>
+
+          <input class="form-control mb-2 mr-sm-2 mb-sm-0"
+            name="fecha_ini" id="fecha_ini" required="required"
+           [(ngModel)]="dieta.fechaini" autocomplete="false" type="date" />
+        </div>
+
+      </div>
+
+      <div class="col-sm-4 ">
+        <div class="form-group">
+          <label for="fecha_fin">Fecha Fin </label>
+
+          <input class="form-control mb-2 mr-sm-2 mb-sm-0"
+            name="fecha_fin" id="fecha_fin" required="required"
+            [(ngModel)]="dieta.fechafin"autocomplete="false" type="date" />
+        </div>
+      </div>
+
+
+      <div class="col-sm-4 ">
+        <div class="form-group">
+          <label for="comidas_diarias">Nº Comidas Diarias </label>
+
+          <input name="comidas_diarias" id="comidas_diarias"
+            required="required" autocomplete="false" type="number" step="1"
+            [(ngModel)]="dieta.comidasdiarias"class="form-control mb-2 mr-sm-2 mb-sm-0" />
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <div class="row">
+
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="cal_rango_max">Max Rango (Kcal)</label>
+
+          <input name="cal_rango_max" id="cal_rango_max"
+             [(ngModel)]="dieta.calrangomax" required="required" autocomplete="false" type="number"
+            step="0.01" class="form-control" />
+
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="ingesta_cal_diaria">Ingesta diaria(Kcal) </label>
+
+          <input name="ingesta_cal_diaria" id="ingesta_cal_diaria"
+            required="required" autocomplete="false" type="number"
+           [(ngModel)]="dieta.ingestacaldiaria" step="0.01" class="form-control" />
+
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="cal_rango_min">Min Rango (Kcal) </label>
+
+          <input class="form-control" name="cal_rango_min"
+            id="cal_rango_min" required="required" autocomplete="false"
+            [(ngModel)]="dieta.calrangomin"type="number" step="0.01" class="form-control" />
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="reparto_glucido_diario">Reparto Glucido Diario
+          </label>
+
+          <input name="reparto_glucido_diario"
+            id="reparto_glucido_diario" required="required"
+           [(ngModel)]="dieta.repartoglucidodiario" autocomplete="false" type="number" step="0.01"
+            class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="reparto_lipido_diario">Reparto Lipido Diario</label>
+
+          <input name="reparto_lipido_diario"
+            id="reparto_lipido_diario" required="required"
+            autocomplete="false" type="number" step="0.01"
+            [(ngModel)]="dieta.repartolipidodiario"class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="reparto_protido_diario">Reparto Protido Diario</label>
+
+          <input name="reparto_protido_diario"
+            id="reparto_protido_diario" required="required"
+            [(ngModel)]="dieta.repartoprotidodiario"autocomplete="false" type="number" step="0.01"
+            class="form-control" />
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="filtros_aplicados">Filtros Alimentario</label>
+          <mat-form-field class="example-full-width col-12">
+              <input
+                matInput
+                placeholder="Fiiltro Alimentario"
+                aria-label="Filtro Alimentario"
+                [matAutocomplete]="auto1"
+                [formControl]="stateCtrl2"
+                style="flex: 100%"
+              />
+              <mat-autocomplete
+                #auto1="matAutocomplete"
+                [displayWith]="displayFn1(filtros)"
+              >
+                <mat-option
+                  *ngFor="let filtro of filteredFiltros | async"
+                  [value]="filtro.id"
+                  with
+                >
+                  <img
+                    class="example-option-img"
+                    aria-hidden
+                    src="assets\baseline-account_box-24px.svg"
+                    height="25"
+                  />
+                  <span>{{ filtro.nombre }}  </span> |
+                  <!--<small>Apellidos: {{paciente.apellidos}}</small>|-->
+                  <small> Descripcion: {{ filtro.descripcion }}</small>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+
+          <input class="form-check-input" type="checkbox" id="visiblie"
+            value="1"> <label class="form-check-label" for="visible">
+            Visible</label>
+
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+
+          <input class="form-check-input" type="checkbox"
+            id="intercambiable" value="1"> <label
+            class="form-check-label" for="intercambiable">Intercambiable</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="btn-group" id="comidasButton" role="group"
+          aria-label="Definir comidas Plan">
+          <button type="button" class="btn btn-secondary" (click)="definirComida()">Comidas</button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+    <div class="container mt-3" *ngIf="isNew">
+      <app-diadieta [dias]="dieta.dias"  (listaDiaDieta)="guardarPlan($event)" ></app-diadieta>
+    </div>
+  </div>
+    <br>
+    <br>

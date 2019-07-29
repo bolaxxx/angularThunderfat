@@ -11,8 +11,8 @@ import swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class CitaService {
-  private urlEndPoint = 'http://localhost:8080/paciente/';
-  private httpHeaders = new HttpHeaders({ 'Content-Type': 'aplication/json' });
+  private urlEndPoint = 'http://localhost:8080/cita/';
+  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
   private agregarAuthorizationHeader() {
     const token = this.authService.getTokenn();
@@ -34,7 +34,14 @@ export class CitaService {
       .pipe(map(response => response as Cita));
     //  return  this.http.get<Cliente[]>(this.urlEndPoint);
   }
+  borrarCita(id: number): Observable<any> {
+    return this.http.delete(this.urlEndPoint + 'delete/' + id , {headers: this.agregarAuthorizationHeader()});
 
+  }
+guardarCita(cita: Cita): Observable<Cita>{
+  return this.http.post<Cita>(this.urlEndPoint + 'save/' + this.authService.getusuario().id, 
+  cita , {headers: this.agregarAuthorizationHeader()});
+}
   private isNotAuthorizado(e): boolean {
     if (e.status === 401 ) {
       if (this.authService.isAuthenticated()) {

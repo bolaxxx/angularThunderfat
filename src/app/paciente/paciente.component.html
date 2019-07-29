@@ -1,29 +1,57 @@
-<h2 class="title mt-3 ml-4">Listado de Paciente</h2>
+<div  class="row">
+  <h2 class="title mt-3 ml-4">Listado de Paciente</h2>  
+</div>
+<div class="row">
+  
+
+<div class="col-sm-3">
+   <div class="row ml-2">
+    <div class="form-group">
+      <label for="">Busqueda Paciente</label>
+      <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+      <small id="helpId" class="form-text text-muted">Introduzca Termino de busqueda </small>
+    </div>  
+  </div>
+ <mat-list class="make-scrollable">  
+   <mat-list-item *ngFor="let pacienteItem of pacientes" (click)="selecionarPaciente(pacienteItem)">
+     
+       <mat-icon src="src/assets/iconouser.svg" ></mat-icon>
+      <h4 mat-line>    {{ pacienteItem.nombre |titlecase }} {{pacienteItem.apellidos |titlecase}}</h4>
+      <p mat-line> {{pacienteItem.dni }} </p>
+    <mat-divider></mat-divider>
+  
+
+    </mat-list-item>
+ </mat-list> 
+</div>
+<div class="col-9">
+  
+
 <div class="container-fluid align-content-lg-center ">
   <div class="container-fluid align-content-center">
-    <br />
+<!--     <br />
     <div class="row mt-5 mb-5 ml-5 mr-5">
       
    <div class=" row ">
     <form> 
       <div class="form-group">
-      <button mat-flat-button class="btn-success ">Nuevo</button>
-        <mat-form-field>
-            <mat-label>Select an option</mat-label>
-            <mat-select >
-              <mat-option>None</mat-option>
-              <mat-option value="option1">Option 1</mat-option>
-              <mat-option value="option2">Option 2</mat-option>
-              <mat-option value="option3">Option 3</mat-option>
+      <button mat-flat-button class="btn-success  mr-4" (click)="openNewBottonSheet()">Nuevo</button>
+        <mat-form-field class="mr-2">
+            <mat-label>Selecione un criterio de Busqueda</mat-label>
+            <mat-select [(ngModel)]="searchtype" [ngModelOptions]="{standalone: true}">
+              <mat-option value=0>Niguno</mat-option>
+              <mat-option value=1>DNI</mat-option>
+              <mat-option value=2>Nombre Completo</mat-option>
+              <mat-option value=3>Telefono</mat-option>
             </mat-select>
           </mat-form-field>
      
    
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Favorite food" value="Sushi">
+              <input matInput placeholder="Termino a buscar " [(ngModel)]="searchTerm" [ngModelOptions]="{standalone: true}">
             </mat-form-field>
-            <button mat-icon-button disabled aria-label="Example icon-button with a heart icon">
-                <mat-icon>favorite</mat-icon>
+            <button (click)='buscarPaciente()' mat-icon-button  aria-label="Example icon-button with a heart icon">
+                <mat-icon>search</mat-icon>
               </button>
           </div>
           </form>  
@@ -33,7 +61,7 @@
       <mat-card class="bg-dark text-white ">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image">
-            <img src="assets\baseline-account_box-24px.svg" />
+            <img src=" " />
           </div>
           <mat-card-title
             >Nombre : {{ paciente.nombre | titlecase }} {{ paciente.apellidos| titlecase }}</mat-card-title
@@ -45,21 +73,21 @@
         </mat-card-content>
 
         <mat-card-actions >
-          <button mat-raised-button>Detalle</button>
+          <button mat-raised-button (click)="openBottonSheet(paciente.id)">Detalle</button>
           <button mat-button [matMenuTriggerFor]="mediciones" class="bg-light text-dark">
             Mediciones
           </button>
           <mat-menu #mediciones="matMenu">
             <button mat-menu-item (click)="listarMedicionGeneral(paciente.id)">Generales</button>
-            <button mat-menu-item >Segmentales</button>
-            <button mat-menu-item>Especifica</button>
+            <button mat-menu-item (click)="listarMedicionSegmental(paciente.id)">Segmentales</button>
+            <button mat-menu-item (click)="listarMedicionEspecifica(paciente.id)">Especifica</button>
           </mat-menu>
           <button mat-button [matMenuTriggerFor]="antecedente" class="bg-light text-dark">
                 Antecedentes
               </button>
           <mat-menu #antecedente="matMenu">
-                <button mat-menu-item>Clinicos</button>
-                <button mat-menu-item>Tratamientos</button>
+                <button mat-menu-item (click)="listarAntecedenteClinico(paciente.id)">Clinicos</button>
+                <button mat-menu-item (click)="listarAntecedenteTratamiento(paciente.id)">Tratamientos</button>
                 
               </mat-menu>
           <button mat-raised-button>Citas</button>
@@ -67,8 +95,13 @@
         </mat-card-actions>
       </mat-card>
     </div>
-
-   
-    <br /><br />
   </div>
+ 
+    <br /><br />
+  </div> -->
+  
+  <app-informe *ngIf="isPaciententeSelected"
+  [paciente]="pacienteSelected"></app-informe>
+</div>  
+
 </div>

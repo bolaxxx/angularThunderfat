@@ -11,13 +11,24 @@ import swal from 'sweetalert2';
 })
 export class MedicionGeneralService {
   private urlEndPoint = 'http://localhost:8080/medicion_general/';
-  private httpHeaders = new HttpHeaders({ 'Content-Type': 'aplication/json' });
+  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
   private agregarAuthorizationHeader(){
     let token = this.authService.getTokenn();
     if (token != null) {
       return this.httpHeaders.append('Authorization', 'Bearer ' + token);
     }
+  }
+  guardarMedicion(medicion: MedicionGeneral, paciente: number): Observable<MedicionGeneral> {
+    return this.http.post<MedicionGeneral>(this.urlEndPoint + 'save/' + paciente, medicion , {headers: this.agregarAuthorizationHeader()} );
+  }
+  updateMedicicion(medicion: MedicionGeneral): Observable<MedicionGeneral>{
+    console.log(JSON.stringify(medicion ) + 'update medicion');
+    return this.http.put<MedicionGeneral>(this.urlEndPoint + 'actualizar/' + medicion.id,
+     medicion, {headers: this.agregarAuthorizationHeader()});
+  }
+  eliminarMedicion(id: number): Observable<any> {
+    return   this.http.delete(this.urlEndPoint + 'eliminar/' + id, {headers: this.agregarAuthorizationHeader()});
   }
   getMedciones(id: number): Observable<MedicionGeneral[]> {
     return this.http
@@ -28,6 +39,7 @@ export class MedicionGeneralService {
 
 
   getMedicionByid(id: number): Observable<MedicionGeneral> {
+    console.log('id getmedicion' + id);
     return this.http
       .get(this.urlEndPoint + 'detalle/' + id, {headers: this.agregarAuthorizationHeader()})
       .pipe(map(response => response as MedicionGeneral));

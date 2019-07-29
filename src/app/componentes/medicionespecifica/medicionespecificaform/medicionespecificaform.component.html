@@ -1,0 +1,171 @@
+<div class="bg-dark text-white container-fluid flex-fill">
+<ng-form id="formularioMedicionEspecifica" >
+  <div class="form-group row ">
+    <label for="fecha" class="col-3 col-form-label">Fecha</label>
+    <div class="col-10">
+       <input class="form-control"
+        name="fecha" [(ngModel)]="medicion.fecha" id="fecha" required="required" autocomplete="false"
+        type="date" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="peso" class="col-3 col-form-label">Peso</label>
+    <div class="col-10">
+      <input class="form-control" [(ngModel)]="medicion.peso" name="peso" id="peso"
+        required="required" type="text" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="porcentajegrasa" class="col-3 col-form-label">%Grasas</label>
+    <div class="col-10">
+      <input class="form-control" [(ngModel)]="medicion.porcentajegrasa" name="porcentajegrasa"
+        id="porcentajegrasa" required="required" type="text" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="metabolismo" class="col-3 col-form-label">Metabolismo</label>
+    <div class="col-10">
+      <input class="form-control" [(ngModel)]="medicion.metabolismo"name="metabolismo" id="metabolismo"
+        required="required" type="text" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="edad_met" class="col-3 col-form-label">Edad
+      Metabolica</label>
+    <div class="col-10">
+      <input class="form-control" name="edadmet" [(ngModel)]="medicion.edadmet" id="edad_met"
+        required="required" type="text" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="musculo" class="col-3 col-form-label">Musculo</label>
+    <div class="col-10">
+      <input class="form-control" name="musculo" [(ngModel)]="medicion.musculo" id="musculo"
+        required="required" type="text" />
+    </div>
+  </div>
+
+
+
+  <div class="form-group row">
+    <label for="grasas" class="col-3 col-form-label">Grasa</label>
+    <div class="col-10">
+      <input class="form-control" name="grasas" [(ngModel)]="medicion.grasas" id="grasas"
+        required="required" type="text" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="grasavisceral" class="col-3 col-form-label">Grasa
+      Visceral</label>
+    <div class="col-10">
+      <input class="form-control" name="grasavisceral"
+        id="grasavisceral" required="required" [(ngModel)]="medicion.grasavisceral" type="text" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="masa_osea" class="col-3 col-form-label">Masa
+      Osea</label>
+    <div class="col-10">
+      <input class="form-control" name="masaosea" [(ngModel)]="medicion.masaosea" id="masa_osea"
+        required="required" type="text" />
+    </div>
+  </div>
+  
+  <div id="calculado">
+    <div class="form-group row">
+      <label for="mbi" class="col-3 col-form-label">MBI</label>
+      <div class="col-10">
+        <input class="form-control" id="mbi" [(ngModel)]="medicion.mbi" name="mbi" required
+          type="text" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="grasasIdMin" class="col-3 col-form-label">grasasIdMin</label>
+      <div class="col-10">
+        <input class="form-control" id="grasasIdMin"
+          name="grasasIdMin" required type="text" [(ngModel)]="medicion.grasasidmin" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="grasasIdMax" class="col-3 col-form-label">grasasIdMax</label>
+      <div class="col-10">
+        <input class="form-control" id="grasasIdMax" name="grasasIdMax" required
+          type="text" [(ngModel)]="medicion.grasaidmax" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="aguaId" class="col-3 col-form-label">aguaId</label>
+      <div class="col-10">
+        <input class="form-control" id="aguaId" [(ngModel)]="medicion.aguaid"  name="aguaId" required
+          type="text" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="MusculoIdMax" class="col-3 col-form-label">MusculoIdMax</label>
+      <div class="col-10">
+        <input class="form-control" id="MusculoIdMax"
+          name="MusculoIdMax" required type="text" [(ngModel)]="medicion.musculoidmax" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="MusculoIdMin" class="col-3 col-form-label">MusculoIdMin</label>
+      <div class="col-10">
+        <input class="form-control" id="MusculoIdMin"
+          name="MusculoIdMin" required type="text" [(ngModel)]="medicion.musculoidmin" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="PesoOxMuscMax" class="col-3 col-form-label">PesoOxMuscMax</label>
+      <div class="col-10">
+        <input class="form-control" id="PesoOxMuscMax"
+          name="PesoOxMuscMax" required type="text" [(ngModel)]="medicion.poxmusmax" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="PesoOxMuscMin" class="col-3 col-form-label">PesoOxMuscMin</label>
+      <div class="col-10">
+        <input class="form-control" id="PesoOxMuscMin"
+          name="PesoOxMuscMin" required type="text" [(ngModel)]="medicion.poxmusmin"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="LitrosAgua" class="col-3 col-form-label">LitrosAgua</label>
+      <div class="col-10">
+        <input class="form-control" id="LitrosAgua" [(ngModel)]="medicion.litrosagua" name="LitrosAgua"
+          required type="text" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="RetencionLiquidos" class="col-3 col-form-label">RetencionLiquidos</label>
+      <div class="col-10">
+        <input class="form-control" id="RetencionLiquidos"
+          name="RetencionLiquidos" required type="text" [(ngModel)]="medicion.retencionliquidos"/>
+      </div>
+    </div>
+  </div><div class="form-group row">
+    <label for="porcentajeagua" class="col-3 col-form-label">%Agua</label>
+    <div class="col-10">
+      <input class="form-control" name="porcentajeagua" [(ngModel)]="medicion.porcentajeagua" id="porcentajeagua" required="required" type="text">
+    </div>
+  </div>
+
+  
+</ng-form>
+
+
+<div class="modal-footer">
+<div class="btn-group">
+    <ng-container *ngIf="isNew; else elseTemplate">
+  <button id="botonGuardar" type="button" title="Guardar Medicion Especifica"
+    class="btn btn-success" (click)="guardarMedicion()" >Guardar</button>
+    </ng-container>
+    <ng-template #elseTemplate>
+  <button type="button" id="botonEditar" class="btn btn-primary"
+    title="Editar cita" (click)="GuardarEdicion()">Editar</button> <button type="button"
+    id="botonEliminar" class="btn btn-danger" title="Eliminar cita" (click)="Eliminar()" >Eliminar</button>
+    </ng-template>
+</div>
+</div>
+</div>

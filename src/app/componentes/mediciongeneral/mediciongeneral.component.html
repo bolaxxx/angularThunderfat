@@ -1,3 +1,6 @@
+<div class="row mt-4">
+  <button class="btn-success btn-sm" (click)="openNewBottonSheet()">Nuevo</button>
+</div>
 <div class="row mt-5">
   <div class="col-md-6">
 <mat-form-field>
@@ -13,7 +16,7 @@
   <!-- Position Column -->
   <ng-container matColumnDef="Fecha">
     <th mat-header-cell *matHeaderCellDef>Fecha</th>
-    <td mat-cell *matCellDef="let element">{{ element.fecha }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.fecha | date: 'dd/MM/yyyy'}}</td>
   </ng-container>
 
   <!-- Name Column -->
@@ -62,13 +65,25 @@
     <td mat-cell *matCellDef="let element">{{ element.imc }}</td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="openBottonSheet(row)"></tr>
 </mat-table>
 </div>
 </div>
 
 
 <div class="card col md-6 ml-3">
-  <div class="card-body"><app-grafica1 ></app-grafica1></div>
+  <div class="card-body">
+      <canvas baseChart width="400" height="400"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      [plugins]="lineChartPlugins">
+    </canvas>
+  </div>
 </div>
 </div>
+
+<div class="row"><button (click)="spy()"> espiar</button></div>

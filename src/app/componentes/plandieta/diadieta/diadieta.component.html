@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-sm-auto">
+    <div *ngFor="let dia of listdia"class=" row mt-2 mb-2">
+      <div class="card body bg-dark text-white  ">
+      <div class="card-body" (click)="selectday(dia)" >
+      
+        <a class="card-text"> {{dia.fecha|date:'dd/MM/yyyy'}}</a>
+      </div>
+    </div>
+    </div>
+
+ </div>
+ 
+
+   <app-comida [diaSelected]="diaSelected" *ngIf="isDaySelected" (diaDieta)="guardarComidaEnDays($event)"></app-comida>
+   
+ </div>
+ <div class="row mt-2"><button class="btn btn-success btn-block" (click)="SaveDaysToPlan()">Guardar Plan</button></div>

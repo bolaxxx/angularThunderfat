@@ -1,0 +1,45 @@
+      <div>
+      <ng-form id="antecedenteClinicoFormulario"
+          name="antecedenteClinicoFormulario">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="antecedente_tratamiento">Antecedente
+                   Clinico </label><input hidden id="paciente.id_usuario" /> <input
+                  class="form-control" [(ngModel)]="antecedente.antecedente" name="antecedente"
+                  required="required" />
+
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="form-group">
+                <label for="fecha">Fecha </label> <input type="date"
+                  class="form-control" [(ngModel)]="antecedente.fecha" name="fecha"
+                  required="required" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="observacion ">Observacion </label>
+                <textarea class="form-control" [(ngModel)]="antecedente.observacion"
+                  name="observacion"></textarea>
+              </div>
+            </div>
+          </div>
+
+
+        </ng-form>
+      </div>
+      <div class="modal-footer">
+
+        <div class="btn-group">
+          <button type ="button" id="botonGuardar"class="btn btn-success btn-sm btn-block" (click)="guardarMedicion()" title="Guardar">Guardar</button>
+          <button type="button" id="botonEditar" class="btn btn-primary"
+            title="Editar cita" (click)="GuardarEdicion()">Editar</button>
+          <button id="botonEliminar" class="btn btn-danger"
+            title="Eliminar cita" (click)="Eliminar()">Eliminar</button>
+        </div>
+      </div>
+    

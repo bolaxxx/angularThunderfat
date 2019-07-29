@@ -1,0 +1,105 @@
+<div class="col-12"></div>
+<ng-form>
+  <div id="detalle">
+    <div class="form-group row ">
+      <label for="fecha_ini" class="col-2 col-form-label"
+        >Fecha y Hora de Inicio</label
+      >
+      <div class="col-10">
+        <input
+          class="form-control"
+          name="fecha_ini"
+          id="fecha_ini"
+          required="required"
+          autocomplete="false"
+          type="datetime-local"
+          [(ngModel)]="cita.fechaini"
+        />
+      </div>
+    </div>
+    <div class="form-group row ">
+      <label for="fecha_fin" class="col-2 col-form-label"
+        >Fecha yHora Fin
+      </label>
+      <div class="col-10">
+        <input
+          class="form-control"
+          name="fecha_fin"
+          id="fecha_fin"
+          required="required"
+          autocomplete="false"
+          type="datetime-local"
+          [(ngModel)]="cita.fechafin"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="paciente" class="col-2 col-form label">Paciente</label>
+      <div class="col-10">
+        <mat-form-field class="example-full-width col-12">
+          <input
+            matInput
+            placeholder="Paciente"
+            aria-label="Paciente"
+            [matAutocomplete]="auto"
+            [formControl]="stateCtrl"
+            style="flex: 100%"
+          />
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            [displayWith]="displayFn(pacientes)"
+          >
+            <mat-option
+              *ngFor="let paciente of filteredPaciente | async"
+              [value]="paciente.id"
+              with
+            >
+              <img
+                class="example-option-img"
+                aria-hidden
+                src="assets\baseline-account_box-24px.svg"
+                height="25"
+              />
+              <span>{{ paciente.nombre }} {{ paciente.apellidos }} </span> |
+              <!--<small>Apellidos: {{paciente.apellidos}}</small>|-->
+              <small> Dni: {{ paciente.dni }}</small>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="btn-group">
+      <ng-container *ngIf="isNew; else elseTemplate">
+        <button
+          name="botonGuardar"
+          type="button"
+          title="Guardar Medicion Especifica"
+          class="btn btn-success"
+          (click)="guardarCita()"
+        >
+          Guardar
+        </button>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <button
+          type="button"
+          name="botonEditar"
+          class="btn btn-primary"
+          title="Editar cita"
+          (click)="GuardarEdicion()"
+        >
+          Editar
+        </button>
+        <button
+          type="button"
+          name="botonEliminar"
+          class="btn btn-danger"
+          title="Eliminar cita"
+          (click)="Eliminar()"
+        >
+          Eliminar
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</ng-form>

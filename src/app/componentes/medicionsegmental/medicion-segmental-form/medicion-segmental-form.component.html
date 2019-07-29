@@ -1,0 +1,103 @@
+<div>
+<ng-form name="formularioMedicionGeneral">
+					<div class="form-group row ">
+				<label for="fecha" class="col-2 col-form-label">Fecha</label>
+				<div class="col-10">
+					<input hidden name="id_medicion_segmental" />
+					<input class="form-control" [(ngModel)]="medicion.fecha" name="fecha"
+						required="required" autocomplete="nope" type="date"  />
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="bdporcentajegrasas" class="col-2 col-form-label">
+					Bd%Grasas</label>
+				<div class="col-10">
+					<input class="form-control" [(ngModel)]="medicion.bdporcentajegrasas"
+						name="bdporcentajegrasas" required="required" type="number" min="0.1" step="0.1"/>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="bd_musculo" class="col-2 col-form-label">
+					Bd musculo</label>
+				<div class="col-10">
+					<input class="form-control" [(ngModel)]="medicion.bdmusculo"
+						name="bd_musculo" required="required" type="number" min="0.1" step="0.1" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="bimusculo" class="col-2 col-form-label">
+					Bi Musculo</label>
+				<div class="col-10">
+					<input class="form-control" [(ngModel)]="medicion.bimusculo" name="bimusculo"
+						required="required" type="number" min="0.1" step="0.1" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="piporcentajegrasas" class="col-2 col-form-label">
+					Pi%grasas</label>
+				<div class="col-10">
+					<input class="form-control" [(ngModel)]="medicion.piporcentajegrasas"
+						name="piporcentajegrasas" required="required" type="number" min="0.1" step="0.1"/>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="pdmusculo" class="col-2 col-form-label">
+					Pd Musculo</label>
+				<div class="col-10">
+					<input class="form-control" [(ngModel)]="medicion.pdmusculo" name="pdmusculo"
+						required="required" type="number" min="0.1" step="0.1" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="pdporcentajegrasas" class="col-2 col-form-label">
+					Pd%Grasas</label>
+				<div class="col-10">
+					<input class="form-control" [(ngModel)]="medicion.pdporcentajegrasas"
+						name="pdporcentajegrasas" required="required" type="number" min="0.1" step="0.1" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="tporcentajegrasa" class="col-2 col-form-label">
+					T%grasa</label>
+				<div class="col-10">
+					<input class="form-control" [(ngModel)]="medicion.tporcentajegrasa"
+						name="tporcentajegrasa" required="required" type="number" min="0.1" step="0.1" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="tmusculo" class="col-2 col-form-label">T Musculo</label>
+				<div class="col-10">
+					<input class="form-control" [(ngModel)]="medicion.tmusculo" name="tmusculo"
+						required="required" type="number" min="0.1" step="0.1"/>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="pimusculo" class="col-2 col-form-label">Pi Musculo</label>
+				<div class="col-10">
+					<input class="form-control" [(ngModel)]="medicion.pimusculo" name="pimusculo"
+						required="required" type="number" min="0.1" step="0.1"/>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="biporcentajegrasas" class="col-2 col-form-label">Bi%Grasas</label>
+				<div class="col-10">
+					<input class="form-control" [(ngModel)]="medicion.biporcentajegrasas"
+						name="biporcentajegrasas" required="required" type="number" min="0.1" step="0.1"/>
+				</div>
+			</div>
+
+					</ng-form>
+
+				</div>
+				<div class="modal-footer">
+					<div class="btn-group">
+						<button name="botonGuardar" type="button"
+							title="Guardar Medicion Especifica" class="btn btn-success"
+							(click)="guardarMedicion()">Guardar</button>
+						<button type="button" name="botonEditar" class="btn btn-primary"
+							title="Editar cita" (click)="GuardarEdicion()">Editar</button>
+						<button type="button" name="botonEliminar" class="btn btn-danger"
+							title="Eliminar cita" (click)="Eliminar()">Eliminar</button>
+					</div>
+				</div>

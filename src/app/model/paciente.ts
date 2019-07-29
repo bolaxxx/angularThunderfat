@@ -6,6 +6,7 @@ import { MedicionSegmental } from './medicion-segmental';
 import { PlanDieta } from './plan-dieta';
 import { AntecedenteClinicos } from './antecedente-clinicos';
 import { AntecedenteTratamiento } from './antecedente-tratamiento';
+import { Nutricionista } from './nutricionista';
 export class Paciente extends Usuario {
 nombre: string;
 apellidos: string;
@@ -18,6 +19,7 @@ dni: string;
 altura: number;
 telefono: string;
 sexo: string ;
+nutricionista: Nutricionista = new Nutricionista();
 medicionesgenerales: MedicionGeneral[] = [];
 medicionesespecificas: MedicionEspecifica[] = [];
 medicionessegmentales: MedicionSegmental[] = [];
