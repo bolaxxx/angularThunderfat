@@ -1,187 +1,211 @@
-<div class="bg-dark text-white container-fluid flex-fill">
-<ng-form id="pacienteFormulario" name="pacienteFormulario"  >
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="nombre">Nombre</label>
-      <input hidden name="id" id="id"  [(ngModel)]="paciente.id"/>
-      
-      <input
-        class="form-control"
-        name="nombre"
-        id="nombre"
-        required="required"
-        placeholder="Nombre"
-        [(ngModel)]="paciente.nombre"/>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="apellidos">Apellidos</label>
-      <input
-        class="form-control"
-        name="apellidos"
-        id="apellidos"
-        required="required"
-        placeholder="Apellidos"
-        [(ngModel)]="paciente.apellidos"
-      />
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="direccion">Direccion</label>
-    <input
-      class="form-control"
-      name="direccion"
-      id="direccion"
-      required="required"
-      placeholder="Direccion"
-      [(ngModel)]="paciente.direccion"
-    />
-  </div>
-
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="localidad">Localidad</label>
-      <input
-        class="form-control"
-        name="localidad"
-        id="localidad"
-        required="required"
-        placeholder="Localidad"
-        [(ngModel)]="paciente.localidad"/>
-    </div>
-
-    <div class="form-group col-md-4">
-      <label for="provincia">Provincia </label>
-      <input
-        class="form-control"
-        name="provincia"
-        id="provincia"
-        required="required"
-        placeholder="Provincia"
-        [(ngModel)]="paciente.provincia"/>
-    </div>
-
-    <div class="form-group col-md-2">
-      <label for="codigopostal">Codigo Postal</label>
-      <input
-        class="form-control"
-        name="codigopostal"
-        id="codigopostal"
-        required="required"
-        placeholder="Codigo Postal"
-        [(ngModel)]="paciente.codigopostal"
-      />
-    </div>
-  </div>
-
-  <div class="form-row">
-    <div class="form-group col-md-4">
-      <label for="fechanacimiento">Fecha Nacimiento</label>
-      <input
-        type="date"
-        class="form-control"
-        name="fechanacimiento"
-        id="fechanacimiento"
-        required="required"
-        [(ngModel)]="paciente.fechanacimiento"
-      />
-    </div>
-    <div class="form-group col-md-4">
-      <label for="dni">DNI </label>
-      <input
-        class="form-control"
-        name="dni"
-        id="dni"
-        required="required"
-        placeholder="DNI"
-        [(ngModel)]="paciente.dni"
-      />
-    </div>
-    <div class="form-group col-md-4">
-      <label for="email">Email</label>
-      <input
-        name="email"
-        id="email"
-        class="form-control"
-        required="required"
-        placeholder="Email"
-        [(ngModel)]="paciente.email"
-      />
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-4">
-      <label for="altura">Altura</label>
-      <input
-        class="form-control"
-        name="altura"
-        id="altura"
-        required="required"
-        type="number"
-        min="0.01"
-        step="0.01"
-        placeholder="Altura en Metros"
-        [(ngModel)]="paciente.altura"
-      />
-    </div>
-    <div class="form-group col-md-6">
-      <label for="telefono">Telefono</label>
-      <input
-        class="form-control"
-        name="telefono"
-        id="telefono"
-        required="required"
-        placeholder="Telefono de contacto"
-        [(ngModel)]="paciente.telefono"
-      />
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-4">
-      <label for="sexo">Sexo</label>
-
-      <div class="form-check form-check">
-        <input
-          type="radio"
-          name="sexo"
-          value="hombre"
-          class="form-check-input"
-          name="sexo"
-          id="sexo_hombre"
-          [(ngModel)]="paciente.sexo"
-        />
-        <label class="form-check-label" for="sexo">Hombre</label>
+<div class=" container-fluid flex-fill">
+  <div class="card bg-dark text-white">
+    <div class="card-header h-100">
+     
+       Datos del paciente
+        <button
+          class="float-sm-right btn btn-lg"
+          style="background-color:transparent;"
+        (click)=dismiss()>
+          <mat-icon [ngStyle]="{ color: 'white' }">cancel</mat-icon>
+        </button>
       </div>
-      <div class="form-check form-check">
-        <input
-          type="radio"
-          name="sexo"
-          value="mujer"
-          class="form-check-input"
-          id="sexo_mujer"
-          name="sexo"
-          [(ngModel)]="paciente.sexo"
-        />
-        <label class="form-check-label" for="sexo">Mujer</label>
-      </div>
-    </div>
-  </div>
-  <div class="row ">
-      <div class="btn-group center ml-3 flex mb-3">
-    <ng-container *ngIf="isNew; else elseTemplate">
-      <button class="btn-success lg ml-2 mr-2" (click)="guardarPaciente()"> Guardar</button>
-      </ng-container>
-      <ng-template #elseTemplate>
-        <button class="btn-primary lg ml-2 mr-2" (click)="GuardarEdicion()">Editar</button>
-        <button class="btn-danger lg ml-2 mr-2"(click)="Eliminar()"><a
-        >Eliminar</a> <span class="glyphicon glyphicon-bin"></span></button>
-      </ng-template>
-      
-        
-          
     
+    <div class="card-body">
+      <ng-form id="pacienteFormulario" name="pacienteFormulario">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="nombre">Nombre</label>
+            <input hidden name="id" id="id" [(ngModel)]="paciente.id" />
+
+            <input
+              class="form-control"
+              name="nombre"
+              id="nombre"
+              required="required"
+              placeholder="Nombre"
+              [(ngModel)]="paciente.nombre"
+            />
+          </div>
+          <div class="form-group col-md-5">
+            <label for="apellidos">Apellidos</label>
+            <input
+              class="form-control"
+              name="apellidos"
+              id="apellidos"
+              required="required"
+              placeholder="Apellidos"
+              [(ngModel)]="paciente.apellidos"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-9">
+            <label for="direccion">Direccion</label>
+            <input
+              class="form-control"
+              name="direccion"
+              id="direccion"
+              required="required"
+              placeholder="Direccion"
+              [(ngModel)]="paciente.direccion"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="localidad">Localidad</label>
+            <input
+              class="form-control"
+              name="localidad"
+              id="localidad"
+              required="required"
+              placeholder="Localidad"
+              [(ngModel)]="paciente.localidad"
+            />
+          </div>
+
+          <div class="form-group col-md-4">
+            <label for="provincia">Provincia </label>
+            <input
+              class="form-control"
+              name="provincia"
+              id="provincia"
+              required="required"
+              placeholder="Provincia"
+              [(ngModel)]="paciente.provincia"
+            />
+          </div>
+
+          <div class="form-group col-md-2">
+            <label for="codigopostal">Codigo Postal</label>
+            <input
+              class="form-control"
+              name="codigopostal"
+              id="codigopostal"
+              required="required"
+              placeholder="Codigo Postal"
+              [(ngModel)]="paciente.codigopostal"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="fechanacimiento">Fecha Nacimiento</label>
+            <input
+              type="date"
+              class="form-control"
+              name="fechanacimiento"
+              id="fechanacimiento"
+              required="required"
+              [(ngModel)]="paciente.fechanacimiento"
+            />
+          </div>
+          <div class="form-group col-md-3">
+            <label for="dni">DNI </label>
+            <input
+              class="form-control"
+              name="dni"
+              id="dni"
+              required="required"
+              placeholder="DNI"
+              [(ngModel)]="paciente.dni"
+            />
+          </div>
+          <div class="form-group col-md-3">
+            <label for="email">Email</label>
+            <input
+              name="email"
+              id="email"
+              class="form-control"
+              required="required"
+              placeholder="Email"
+              [(ngModel)]="paciente.email"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="altura">Altura</label>
+            <input
+              class="form-control"
+              name="altura"
+              id="altura"
+              required="required"
+              type="number"
+              min="0.01"
+              step="0.01"
+              placeholder="Altura en Metros"
+              [(ngModel)]="paciente.altura"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="telefono">Telefono</label>
+            <input
+              class="form-control"
+              name="telefono"
+              id="telefono"
+              required="required"
+              placeholder="Telefono de contacto"
+              [(ngModel)]="paciente.telefono"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="sexo">Sexo</label>
+
+            <div class="form-check form-check">
+              <input
+                type="radio"
+                name="sexo"
+                value="hombre"
+                class="form-check-input"
+                name="sexo"
+                id="sexo_hombre"
+                [(ngModel)]="paciente.sexo"
+              />
+              <label class="form-check-label" for="sexo">Hombre</label>
+            </div>
+            <div class="form-check form-check">
+              <input
+                type="radio"
+                name="sexo"
+                value="mujer"
+                class="form-check-input"
+                id="sexo_mujer"
+                name="sexo"
+                [(ngModel)]="paciente.sexo"
+              />
+              <label class="form-check-label" for="sexo">Mujer</label>
+            </div>
+          </div>
+        </div>
+      </ng-form>
+    </div>
+    <div class="card-footer text-muted">
+      <div class="row ">
+        <div class="btn-group center ml-3 flex mb-3">
+          <ng-container *ngIf="isNew; else elseTemplate">
+            <button
+              class="btn-success lg ml-2 mr-2"
+              (click)="guardarPaciente()"
+            >
+              Guardar
+            </button>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <button class="btn-primary lg ml-2 mr-2" (click)="GuardarEdicion()">
+              Editar
+            </button>
+            <button class="btn-danger lg ml-2 mr-2" (click)="Eliminar()">
+              <a>Eliminar</a> <span class="glyphicon glyphicon-bin"></span>
+            </button>
+          </ng-template>
+        </div>
       </div>
     </div>
-</ng-form>
+  </div>
 </div>
-

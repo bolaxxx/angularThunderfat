@@ -1,34 +1,22 @@
-<div  class="row">
-  <h2 class="title mt-3 ml-4">Listado de Paciente</h2>  
+<div class="jumbotron jumbotron-fluid">
+  <div class="container-fill">
+    
+ 
+<div  class="row  ml-2">
+  <h2 class="title mt-2 ml-4">Listado de Paciente</h2>  
 </div>
+<div class="container-fluid ">
 <div class="row">
   
-
-<div class="col-sm-3">
-   <div class="row ml-2">
-    <div class="form-group">
-      <label for="">Busqueda Paciente</label>
-      <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-      <small id="helpId" class="form-text text-muted">Introduzca Termino de busqueda </small>
-    </div>  
-  </div>
- <mat-list class="make-scrollable">  
-   <mat-list-item *ngFor="let pacienteItem of pacientes" (click)="selecionarPaciente(pacienteItem)">
-     
-       <mat-icon src="src/assets/iconouser.svg" ></mat-icon>
-      <h4 mat-line>    {{ pacienteItem.nombre |titlecase }} {{pacienteItem.apellidos |titlecase}}</h4>
-      <p mat-line> {{pacienteItem.dni }} </p>
-    <mat-divider></mat-divider>
+      <div class="col-3  ml-2">
+<app-listapaciente [pacientes]=pacientes 
+(seleccion)="selecionarPaciente($event)"
+(eliminado)="eliminarPaciente($event)"></app-listapaciente>
+      </div>
+<div class="col-8">
   
 
-    </mat-list-item>
- </mat-list> 
-</div>
-<div class="col-9">
-  
-
-<div class="container-fluid align-content-lg-center ">
-  <div class="container-fluid align-content-center">
+ 
 <!--     <br />
     <div class="row mt-5 mb-5 ml-5 mr-5">
       
@@ -102,6 +90,13 @@
   
   <app-informe *ngIf="isPaciententeSelected"
   [paciente]="pacienteSelected"></app-informe>
+</div>
+  <app-pacienteform *ngIf="newPaciente" [isNew]="newPaciente"
+  (evento)="procesaPropagar($event)"></app-pacienteform>
 </div>  
 
 </div>
+ </div>
+ </div>
+
+

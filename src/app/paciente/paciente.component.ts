@@ -22,6 +22,7 @@ export class PacienteComponent implements OnInit {
   searchtype = 0;
   isPaciententeSelected: boolean ;
   pacienteSelected: Paciente;
+  newPaciente: boolean;
   constructor(private authService: AuthService,
               private pacienteService: PacienteService,
               private  matlist: MatListModule,
@@ -33,92 +34,77 @@ export class PacienteComponent implements OnInit {
               private matMenu: MatMenuModule,
               private matSelect: MatSelectModule,
               private matInputModule: MatInputModule,
-              private matIconModule: MatIconModule) { }
+              private matIconModule: MatIconModule) {
+                this.pacienteService.getPacientes(this.authService.getusuario().id).subscribe(
+                  pacientes => this.pacientes = pacientes
+                );
+               }
               emailFormControl = new FormControl();
 
   ngOnInit() {
     this.pacienteService.getPacientes(this.authService.getusuario().id).subscribe(
       pacientes => this.pacientes = pacientes
     );
+    this.newPaciente = false;
   }
 
-  openBottonSheet( idSelect: number ) {
-    console.log(idSelect + ' el id select');
-    const refe =this.matBottonSheet.open(PacienteformComponent, {data: { id: [idSelect] , isNew : false}});
-    refe.afterDismissed().subscribe( response => this.pacienteService.getPacientes(this.authService.getusuario().id).subscribe(
-      pacientes => this.pacientes = pacientes
-    ));
-  }
-  openNewBottonSheet() {
-    const refe = this.matBottonSheet.open(PacienteformComponent, {data: {isNew: true}});
-    refe.afterDismissed().subscribe( response => this.pacienteService.getPacientes(this.authService.getusuario().id).subscribe(
-      pacientes => this.pacientes = pacientes
-    ));
-  }
-  listarMedicionGeneral(id: number): void {
-    this.router.navigate(['mediciongeneral/', id]);
 
-  }
-  listarMedicionSegmental(id: number): void {
-    this.router.navigate(['medicionsegmental/', id]);
+  procesaPropagar(mensaje) {
+    console.log(mensaje);
+    this.pacienteService.getPacientes(this.authService.getusuario().id).subscribe(
+      pacientes => { this.pacientes = pacientes;
+                     this.newPaciente = false;
+       } );
 
-  }
-  listarMedicionEspecifica(id: number): void {
-    this.router.navigate(['medicionespecifica/', id]);
-
-  }
-  listarAntecedenteClinico(id: number): void {
-    this.router.navigate(['antecedenteclinico/', id]);
-
-  }
-  listarAntecedenteTratamiento(id: number): void {
-    this.router.navigate(['antecedentetratamiento/', id]);
-
-  }
-  buscarPaciente(): void {
-    console.log( 'este es el searchterm' + this.searchTerm);
-    console.log ('Estes es el searchtype' + this.searchtype );
-    if (this.searchTerm === '' && this.searchtype === 0) {
-      this.pacienteService.getPacientes(this.authService.getusuario().id).subscribe(
-        pacientes => this.pacientes = pacientes
-      );
-
-    } else {
-      if (this.searchTerm === undefined || this.searchTerm === '') {
-        swal.fire('Ningun termino de busqueda ', 'por favor introduzca un termino para buscar ', 'error');
-
-      } else {
-        console.log('llego antes del switch ' + this.searchtype);
-        switch (+this.searchtype) {
-          case 0:
-            console.log('caso 0');
-            break;
-            case 1 :
-                this.pacienteService.buscarporDni(this.authService.getusuario().id, this.searchTerm)
-                .subscribe(pacientes => this.pacientes = pacientes);
-                console.log('caso 1');
-                break;
-
-            case 2:
-              this.pacienteService.buscarporNombreCompleto(this.authService.getusuario().id, this.searchTerm)
-              .subscribe(pacientes => this.pacientes = pacientes);
-              console.log('caso 2' + JSON.stringify(this.pacientes));
-              break;
-
-            case 3:
-               this.pacienteService.buscarporEmail(this.authService.getusuario().id, this.searchTerm)
-              .subscribe(pacientes => this.pacientes = pacientes);
-               console.log('caso 3');
-               break;
-
-          }
-      }
-    }
 
   }
   selecionarPaciente(paciente: Paciente): void {
-    this.isPaciententeSelected = false;
+    console.log('paciente selecionado' + JSON.stringify(paciente));
     this.pacienteSelected = paciente;
+    this.newPaciente = false;
+    this.isPaciententeSelected = false;
     this.isPaciententeSelected = true;
+  }
+  eliminarPaciente(paciente: Paciente): void {
+      console.log('llego al componente padre en eliminar');
+      let  i = 0;
+      console.log('estado del aarray pacientes antes de borrar ' + JSON.stringify(this.pacientes));
+      while (i < this.pacientes.length) {
+        if (this.pacientes[i].id === paciente.id) {
+          console.log('entro por el if eliminar ');
+          swal.fire({
+            title: '¿Estas seguro que quieres eliminar al paciente' + paciente.nombre + ' ' + paciente.apellidos +  ' ?',
+            text: 'No se podran recuperar los datos',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminalo '
+          }).then((result) => {
+            if (result.value) {
+              i = this.pacientes.length+1;
+              this.pacienteService.eliminarPaciente(paciente.id).subscribe(response => {
+                this.pacientes.splice(i, 1);
+                console.log('respuesta del alert+deberia haber borrado ');
+                swal.fire(
+                  '¡Eliminado!',
+                  'El paciente ha sido borrado.',
+                  'success'
+                );
+                this.pacienteService.getPacientes(this.authService.getusuario().id).subscribe(respuesta => this.pacientes = respuesta);
+              });
+            }
+          });
+
+        }
+        i++;
+      }
+      console.log('este es el array en el componente padre despues de eliminar ' + JSON.stringify(this.pacientes));
+  }
+  nuevoPaciente(): void {
+    this.isPaciententeSelected = false;
+    this.newPaciente = false;
+    this.newPaciente = true;
+
   }
 }

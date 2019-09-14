@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Paciente } from '../model/paciente';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import swal from 'sweetalert2';
 
 
@@ -76,7 +76,12 @@ export class PacienteService {
      }
      public eliminarPaciente(id: number): Observable<any> {
        console.log('llego al metodo eliminar');
-       return   this.http.delete(this.urlEndPoint + 'eliminar/' + id, {headers: this.agregarAuthorizationHeader()});
+       return   this.http.delete(this.urlEndPoint + 'eliminar/' + id, {headers: this.agregarAuthorizationHeader()}).
+       pipe(catchError( e =>{
+         console.error(e.error.mensaje);
+         swal.fire('error', e.error.mensaje, 'error');
+         return throwError(e);
+       }));
      }
      public updatePaciente(paciente: Paciente): Observable<Paciente> {
        console.log(JSON.stringify(paciente ) + 'update paciente');

@@ -1,3 +1,47 @@
-<p>
-  informe works!
-</p>
+
+<div class="row">
+  <h3> Paciente : {{ paciente.nombre | titlecase }}  {{ paciente.apellidos | titlecase }} </h3>  
+ </div>
+<div class="row">
+  <div class="btn-group justify-content flex-wrap">
+    <div class="btn-group">
+    <button mat-button color="primary">
+      Medicion General
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="btn-group">
+    <button mat-button color="accent">
+      Medicion Especifica
+      <mat-icon>add</mat-icon>
+    </button>
+    </div>
+    <div class="btn-group">
+    <button mat-button color="secondary">
+      Medicion Segmental
+      <mat-icon>add</mat-icon>
+    </button>
+    </div>
+    <div class="btn-group">
+    <button mat-button color="secondary">
+      Antecedente Clinico
+      <mat-icon>add</mat-icon>
+    </button>
+    </div>
+    <div class="btn-group">
+    <button mat-button color="secondary">
+      Antecedente Tratamiento
+      <mat-icon>add</mat-icon>
+    </button>
+    </div>
+    <div class="btn-group">
+      <button mat-button color="secondary" (click)="verDatosPersonales()">
+        Datos Personales <mat-icon>visibility</mat-icon>
+      </button>
+      </div>
+  </div>
+</div>
+ <div class="container">
+    <app-pacienteform [isNew]=false [pacienteid]=paciente.id *ngIf="formdatos"
+    (evento)="procesaPropagar($event)" ></app-pacienteform>
+</div>

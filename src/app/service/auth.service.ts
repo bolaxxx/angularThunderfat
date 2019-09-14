@@ -28,10 +28,10 @@ export class AuthService {
  public getTokenn(): string {
 
     if (this.token != null) {
-      console.log('token distinto de null');
+     // console.log('token distinto de null');
       return this.token;
     } else if (sessionStorage.getItem('token') != null && this.token == null ) {
-      console.log('token null y distinto de null en el storage');
+     // console.log('token null y distinto de null en el storage');
       this.token = sessionStorage.getItem('token');
       return this.token;
     }
@@ -40,7 +40,7 @@ export class AuthService {
   login(usuario: Usuario): Observable<any> {
     const urlEndPoint = 'http://localhost:8080/oauth/token';
     const credenciales = btoa('angularapp' + ':' + '12345');
-    console.log(credenciales + 'estas son las credenciales ');
+    // console.log(credenciales + 'estas son las credenciales ');
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': 'Basic ' + credenciales
@@ -49,7 +49,7 @@ export class AuthService {
     params.set('grant_type', 'password');
     params.set('username', usuario.email);
     params.set('password', usuario.psw);
-    console.log(params.toString());
+   // console.log(params.toString());
     return this.http.post<any>(urlEndPoint, params.toString(), {
       headers: httpHeaders
     });
@@ -76,24 +76,24 @@ export class AuthService {
 
  public isAuthenticated(): boolean {
     let payload = this.obtenerDatosToken(this.getTokenn());
-    console.log(JSON.stringify(payload ) + ' este es el payload ');
+    // console.log(JSON.stringify(payload ) + ' este es el payload ');
     if ( payload != null && payload.user_name && payload.user_name.length > 0) {
-      console.log('paso el if de authenticated = true');
+      // console.log('paso el if de authenticated = true');
       return true;
     }
-    console.log('no paso por el if');
+    // console.log('no paso por el if');
     return false;
   }
 
   logout(): void {
-    console.log('logout del service');
+   // console.log('logout del service');
     this.token = null;
     this.usuario = null;
     localStorage.clear();
   }
 
   hasRoles(roles: string): boolean {
-    console.log(this.usuario + ' this usuario desde el metodo has role');
+    // console.log(this.usuario + ' this usuario desde el metodo has role');
     if (this.getusuario().roles.includes(roles)) {
       return true;
     }

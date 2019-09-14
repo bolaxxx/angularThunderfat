@@ -66,6 +66,7 @@ import { ComidaComponent } from './componentes/plandieta/comida/comida.component
 import { PlatoplandietaComponent } from './componentes/plandieta/platoplandieta/platoplandieta.component';
 import { PlandietaService } from './service/plandieta.service';
 import { InformeComponent } from './componentes/informe/informe.component';
+import { ListapacienteComponent } from './componentes/listapaciente/listapaciente.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { InformeComponent } from './componentes/informe/informe.component';
     DiadietaComponent,
     ComidaComponent,
     PlatoplandietaComponent,
-    InformeComponent
+    InformeComponent,
+    ListapacienteComponent
   ],
   imports: [
     BrowserModule,
