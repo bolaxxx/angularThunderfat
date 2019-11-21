@@ -1,4 +1,5 @@
-<form modelAttribute="plandieta">
+<div class="container-fluid">
+<ng-form modelAttribute="plandieta" #formplandieta="ngForm">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
@@ -46,7 +47,12 @@
 
           <input class="form-control mb-2 mr-sm-2 mb-sm-0"
             name="fecha_ini" id="fecha_ini" required="required"
-           [(ngModel)]="dieta.fechaini" autocomplete="false" type="date" />
+           [(ngModel)]="dieta.fechaini" autocomplete="false" type="date" #fechaini="ngModel" [disabled]="dieta.dias.length >0"/>
+           <div class="alert alert-danger" *ngIf="fechaini.invalid && (fechaini.dirty || fechaini.touched)">
+              <div *ngIf="fechaini?.errors.required">
+               El campo es requerido
+              </div>
+              </div>
         </div>
 
       </div>
@@ -57,7 +63,12 @@
 
           <input class="form-control mb-2 mr-sm-2 mb-sm-0"
             name="fecha_fin" id="fecha_fin" required="required"
-            [(ngModel)]="dieta.fechafin"autocomplete="false" type="date" />
+            [(ngModel)]="dieta.fechafin"autocomplete="false" type="date" #fechafin="ngModel"[disabled]="dieta.dias.length >0"/>
+            <div class="alert alert-danger" *ngIf="fechafin.invalid && (fechafin.dirty || fechafin.touched)">
+                <div *ngIf="fechafin?.errors.required">
+                 El campo es requerido
+                </div>
+                </div>
         </div>
       </div>
 
@@ -67,8 +78,13 @@
           <label for="comidas_diarias">Nº Comidas Diarias </label>
 
           <input name="comidas_diarias" id="comidas_diarias"
-            required="required" autocomplete="false" type="number" step="1"
-            [(ngModel)]="dieta.comidasdiarias"class="form-control mb-2 mr-sm-2 mb-sm-0" />
+            required="required" autocomplete="false" max="8" min="1" type="number" step="1"
+            [(ngModel)]="dieta.comidasdiarias" #comidasdiarias="ngModel" class="form-control mb-2 mr-sm-2 mb-sm-0" [disabled]="dieta.dias.length >0" />
+            <div class="alert alert-danger" *ngIf="comidasdiarias.invalid && (comidasdiarias.dirty || comidasdiarias.touched)">
+                <div *ngIf="comidasdiarias?.errors.required">
+                 El campo es requerido
+                </div>
+                </div>
         </div>
       </div>
 
@@ -84,8 +100,13 @@
           <label for="cal_rango_max">Max Rango (Kcal)</label>
 
           <input name="cal_rango_max" id="cal_rango_max"
-             [(ngModel)]="dieta.calrangomax" required="required" autocomplete="false" type="number"
-            step="0.01" class="form-control" />
+             [(ngModel)]="dieta.calrangomax" required="required" autocomplete="false" type="number" #calrangomax="ngModel"
+            step="1" class="form-control" [disabled]="dieta.dias.length >0" />
+            <div class="alert alert-danger" *ngIf="calrangomax.invalid && (calrangomax.dirty || calrangomax.touched)">
+                <div *ngIf="calrangomax?.errors.required">
+                 El campo es requerido
+                </div>
+                </div>
 
         </div>
       </div>
@@ -95,7 +116,12 @@
 
           <input name="ingesta_cal_diaria" id="ingesta_cal_diaria"
             required="required" autocomplete="false" type="number"
-           [(ngModel)]="dieta.ingestacaldiaria" step="0.01" class="form-control" />
+           [(ngModel)]="dieta.ingestacaldiaria" step="1" class="form-control" #ingesta="ngModel" [disabled]="dieta.dias.length >0" />
+           <div class="alert alert-danger" *ngIf="ingesta.invalid && (ingesta.dirty || ingesta.touched)">
+              <div *ngIf="ingesta?.errors.required">
+               El campo es requerido
+              </div>
+              </div>
 
         </div>
       </div>
@@ -105,7 +131,12 @@
 
           <input class="form-control" name="cal_rango_min"
             id="cal_rango_min" required="required" autocomplete="false"
-            [(ngModel)]="dieta.calrangomin"type="number" step="0.01" class="form-control" />
+            [(ngModel)]="dieta.calrangomin"type="number" step="1" class="form-control" #calrangomin="ngModel" [disabled]="dieta.dias.length >0" />
+            <div class="alert alert-danger" *ngIf="calrangomin.invalid && (calrangomin.dirty || calrangomin.touched)">
+                <div *ngIf="calrangomin?.errors.required">
+                 El campo es requerido
+                </div>
+                </div>
 
         </div>
       </div>
@@ -118,8 +149,13 @@
 
           <input name="reparto_glucido_diario"
             id="reparto_glucido_diario" required="required"
-           [(ngModel)]="dieta.repartoglucidodiario" autocomplete="false" type="number" step="0.01"
-            class="form-control" />
+           [(ngModel)]="dieta.repartoglucidodiario" autocomplete="false" type="number" step="0.01 " min="0.00" max="100.00"
+            class="form-control" #repartoglucidodiario="ngModel"[disabled]="dieta.dias.length >0"/>
+            <div class="alert alert-danger" *ngIf="repartoglucidodiario.invalid && (repartoglucidodiario.dirty || repartoglucidodiario.touched)">
+                <div *ngIf="repartoglucidodiario?.errors.required">
+                 El campo es requerido
+                </div>
+                </div>
         </div>
       </div>
       <div class="col-sm-4">
@@ -129,7 +165,12 @@
           <input name="reparto_lipido_diario"
             id="reparto_lipido_diario" required="required"
             autocomplete="false" type="number" step="0.01"
-            [(ngModel)]="dieta.repartolipidodiario"class="form-control" />
+            [(ngModel)]="dieta.repartolipidodiario"class="form-control" min="0.00" max="100.00" #repartolipidodiario="ngModel" [disabled]="dieta.dias.length >0"/>
+            <div class="alert alert-danger" *ngIf="repartolipidodiario.invalid && (repartolipidodiario.dirty || repartolipidodiario.touched)">
+                <div *ngIf="repartolipidodiario?.errors.required">
+                 El campo es requerido
+                </div>
+                </div>
         </div>
       </div>
       <div class="col-sm-4">
@@ -138,8 +179,13 @@
 
           <input name="reparto_protido_diario"
             id="reparto_protido_diario" required="required"
-            [(ngModel)]="dieta.repartoprotidodiario"autocomplete="false" type="number" step="0.01"
-            class="form-control" />
+            [(ngModel)]="dieta.repartoprotidodiario"autocomplete="false" type="number" step="0.01"  min="0.00" max="100.00"
+            class="form-control" #repartoprotidodiario="ngModel" [disabled]="dieta.dias.length >0"/>
+            <div class="alert alert-danger" *ngIf="repartoprotidodiario.invalid && (repartoprotidodiario.dirty || repartoprotidodiario.touched)">
+                <div *ngIf="repartoprotidodiario?.errors.required">
+                 El campo es requerido
+                </div>
+                </div>
 
         </div>
       </div>
@@ -185,7 +231,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row ml-3">
       <div class="col-sm-6">
         <div class="form-group">
 
@@ -204,20 +250,51 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="btn-group" id="comidasButton" role="group"
-          aria-label="Definir comidas Plan">
-          <button type="button" class="btn btn-secondary" (click)="definirComida()">Comidas</button>
+  <ng-container *ngIf="dieta.dias.length <=0 ;else elseTemplate">
+      <div class="row">
+    
+          <div class="col-sm-3">
+            <div class="btn-group" id="comidasButton" role="group"
+              aria-label="Definir comidas Plan">
+              <button type="button" class="btn btn-secondary" (click)="definirComida()">Comidas</button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+      <div class="row ml-3 mr-3 mt-2 mb-2">
+         <!--
+            <app-diadieta [dias]="dieta.dias"  (listaDiaDieta)="guardarPlan($event)" ></app-diadieta>-->
+            
+              <div class="col-sm-3 ">
+              <app-diadieta [dias]="dieta.dias"  (listaDiaDieta)="selecccionarDia($event)"></app-diadieta>
+            </div>
+            <div class="col-sm-3 ">
+              <app-comida [diaSelected]="diaSelecionado" (comidaselect)="seleccionarComida($event)"  *ngIf="diaSelecionado"></app-comida>
+            </div>
+            <div class="col-sm-6" >
+              <app-platoplandieta *ngIf="platoform" [selectedMeal]="comidaSelecionada" (platosComida)="addPlatoToSelectedMeal($event)"></app-platoplandieta>
+            </div>
+            <div class="row mb-5">
+                <div class="btn-group-lg">
+                  <ng-container *ngIf="isNew ;else elseTemplate2">
+                <button class="btn-lg btn-success btn-lg flex-fill" (click)="savetoDatabase()">Guardar Plan </button>
+              </ng-container> 
+              <ng-template #elseTemplate2 >
+                  <button class="btn-lg btn-primary btn-lg flex-fill" (click)="updateToDatabase()">Guardar Edicion </button>
+              </ng-template>
+              </div>
+                
+              </div>
+            </div>
+          
+        
+  </ng-template>
+   
     <br>
     <br>
-    <div class="row">
-    <div class="container mt-3" *ngIf="isNew">
-      <app-diadieta [dias]="dieta.dias"  (listaDiaDieta)="guardarPlan($event)" ></app-diadieta>
-    </div>
+ 
+    <br>
+    <br>
+  </ng-form>
   </div>
-    <br>
-    <br>

@@ -82,7 +82,7 @@ export class PacienteComponent implements OnInit {
             confirmButtonText: 'Si, eliminalo '
           }).then((result) => {
             if (result.value) {
-              i = this.pacientes.length+1;
+              i = this.pacientes.length + 1;
               this.pacienteService.eliminarPaciente(paciente.id).subscribe(response => {
                 this.pacientes.splice(i, 1);
                 console.log('respuesta del alert+deberia haber borrado ');
@@ -106,5 +106,16 @@ export class PacienteComponent implements OnInit {
     this.newPaciente = false;
     this.newPaciente = true;
 
+  }
+  updatePacienteSelect(paciente) {
+    this.pacienteSelected = paciente;
+    this.isPaciententeSelected = false;
+    this.pacienteService.getPacientes(this.authService.getusuario().id).subscribe(
+      response => { this.pacientes = response;
+                    let i = response.findIndex(e => e.id === paciente.id);
+                    this.pacienteSelected = response[i];
+                    this.isPaciententeSelected=true;
+      });
+    this.newPaciente = false;
   }
 }

@@ -1,8 +1,5 @@
-<div class="row mt-4">
-  <button class="btn-success btn-sm" (click)="openNewBottonSheet()">Nuevo</button>
-</div>
 <div class="row mt-5">
-  <div class="col-md-6">
+    <div class="col-md-6">
 <mat-form-field>
   <input
     matInput
@@ -10,7 +7,9 @@
     placeholder="Filter"
   />
 </mat-form-field>
-
+    </div></div>
+    <diV class="row">
+        <div class="col">
 <div class="example-container mat-elevation-z8">
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- Position Column -->
@@ -27,8 +26,8 @@
 
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="openBottonSheet(row)"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="selecionarantecedente(row)"></tr>
 </mat-table>
 </div>
-</div>
-</div>
+        </div>
+        </diV>

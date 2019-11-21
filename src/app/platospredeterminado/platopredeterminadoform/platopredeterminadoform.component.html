@@ -1,4 +1,18 @@
-<form>
+<div class="bg-dark text-white ">
+    <div class="row ml-2">
+      <div class="col">
+      <h3>Datos Plato Predeterminado
+        </h3>
+        <button
+        class="float-right btn btn-lg"
+        style="background-color:transparent;"
+      (click)=close()>
+        <mat-icon [ngStyle]="{ color: 'white' }">cancel</mat-icon>
+      </button>
+    </div>
+    </div>
+    <div class="card-body">
+    <ng-form>
   <div class="form-group">
     <label for="nombre" class="col-form-label">Nombre</label>
     <input type="text" class="form-control" name="nombre" [(ngModel)]="platoPredeterminado.nombre" />
@@ -6,9 +20,9 @@
   <table id="TableIngrediente" class="table order-list">
     <thead>
       <tr>
-        <td>Alimento</td>
-        <td>Cantidad (Gramos)</td>
-        <td>Acciones</td>
+        <td><p class="text-white">Alimento</p></td>
+        <td><p class="text-white">Cantidad (Gramos)</p></td>
+        <td><p class="text-white">Acciones</p></td>
       </tr>
     </thead>
     <tbody>
@@ -22,7 +36,7 @@
                     aria-label="Alimento"
                     [matAutocomplete]="auto"
                     [formControl]="stateCtrl"
-                    style="flex: 100%"
+                    style="flex: 100% ;color: #fdf9f9;"
                   />
                   <mat-autocomplete
                     #auto="matAutocomplete"
@@ -70,39 +84,42 @@
         </td>
         <td class="col-sm-2"><a class="deleteRow"></a></td>
       </tr>
+      <tr><td class="col-sm-4"><p class="text-white">Nombre </p></td>
+        <td class="col-sm-4"><p class="text-white">cantidad</p></td>
+        <td class="col-sm-4"></td></tr>
       <tr *ngFor="let ingrediente of platoPredeterminado.ingredientes">
-        <td class="col-sm-4">{{ingrediente.alimento.nombre}}</td>
-        <td class="col-sm-4">{{ingrediente.cantidad}}</td>
+        <td class="col-sm-4"><p class="text-white">{{ingrediente.alimento.nombre}}</p></td>
+        <td class="col-sm-4"><p class="text-white">{{ingrediente.cantidad}}</p></td>
         <td class="col-sm-4"><button class="btn-danger" (click)="deleteIngrediente(ingrediente.alimento.id)">Eliminar</button></td>
       </tr>
     </tbody>
     <tfoot>
      
       <tr>
-        <td class="col-sm-2">Kcal Total</td>
-        <td class="col-sm-2">Proteinas Totales(gr)</td>
-        <td class="col-sm-2">Grasas Totales(gr)</td>
-        <td class="col-sm-2">Hidratos Totales(gr)</td>
+        <td class="col-sm-2"><p class="text-white">Kcal Total</p></td>
+        <td class="col-sm-2"><p class="text-white">Proteinas Totales(gr)</p></td>
+        <td class="col-sm-2"><p class="text-white">Grasas Totales(gr)</p></td>
+        <td class="col-sm-2"><p class="text-white">Hidratos Totales(gr)<p></td>
       </tr>
       <tr>
         <td class="col-sm-2">
-          <input type="number" disabled  class="form-control" name="kcaltotales" [(ngModel)]="platoPredeterminado.kcaltotales"/>
+          <input type="number" disabled  class="form-control " name="kcaltotales" [(ngModel)]="platoPredeterminado.kcaltotales"/>
         </td>
         <td class="col-sm-2">
-          <input type="number" disabled  class="form-control" name="proteinastotales" [(ngModel)]="platoPredeterminado.proteinastotales"/>
+          <input type="number" disabled  class="form-control " name="proteinastotales" [(ngModel)]="platoPredeterminado.proteinastotales"/>
         </td>
         <td class="col-sm-2">
-          <input type="number" disabled  class="form-control" name="grasastotales" [(ngModel)]="platoPredeterminado.grasastotales"/>
+          <input type="number" disabled  class="form-control " name="grasastotales" [(ngModel)]="platoPredeterminado.grasastotales"/>
         </td>
         <td class="col-sm-2">
-          <input type="number" disabled  class="form-control"  name="hidratostotales" [(ngModel)]="platoPredeterminado.hidratostotales"/>
+          <input type="number" disabled  class="form-control "  name="hidratostotales" [(ngModel)]="platoPredeterminado.hidratostotales"/>
         </td>
       </tr>
     </tfoot>
   </table>
   <div class="form-group">
     <label for="receta" class="col-form-label">Escriba aqui la receta :</label>
-    <textarea class="form-control" id="receta"></textarea>
+    <textarea class="form-control ml-1 mr-1" name="receta" [(ngModel)]="platoPredeterminado.receta"></textarea>
   </div>
   <tr>
     <ng-container *ngIf="isNew; else elseTemplate">
@@ -142,4 +159,5 @@
     
     
   </tr>
-</form>
+</ng-form>
+    </div>

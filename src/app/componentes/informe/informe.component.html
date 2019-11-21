@@ -1,47 +1,476 @@
-
 <div class="row">
-  <h3> Paciente : {{ paciente.nombre | titlecase }}  {{ paciente.apellidos | titlecase }} </h3>  
- </div>
+  <h3>
+    Paciente : {{ paciente.nombre | titlecase }}
+    {{ paciente.apellidos | titlecase }}
+  </h3>
+</div>
 <div class="row">
   <div class="btn-group justify-content flex-wrap">
     <div class="btn-group">
-    <button mat-button color="primary">
-      Medicion General
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
-  <div class="btn-group">
-    <button mat-button color="accent">
-      Medicion Especifica
-      <mat-icon>add</mat-icon>
-    </button>
+      <button
+        mat-button
+        color="primary"
+        name="mediciongeneral"
+        (click)="nuevaMedicionGeneral(formMedicionGenerales)"
+      >
+        Medicion General
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
     <div class="btn-group">
-    <button mat-button color="secondary">
-      Medicion Segmental
-      <mat-icon>add</mat-icon>
-    </button>
+      <button
+        mat-button
+        color="accent"
+        name="medicionespecifica"
+        (click)="nuevaMedicionEspecifica(MedicionEspecificadiv)"
+      >
+        Medicion Especifica
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
     <div class="btn-group">
-    <button mat-button color="secondary">
-      Antecedente Clinico
-      <mat-icon>add</mat-icon>
-    </button>
+      <button
+        mat-button
+        color="secondary"
+        name="medicionsegmental" 
+        (click)="nuevaMedicionSegmental(formmedicionsegmental)"
+      >
+        Medicion Segmental
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
     <div class="btn-group">
-    <button mat-button color="secondary">
-      Antecedente Tratamiento
-      <mat-icon>add</mat-icon>
-    </button>
+      <button
+        mat-button
+        color="secondary"
+        name="antecedenteclinico"
+        (click)="nuevaAntecedenteClinicos(antecedenteclinicoform)"
+      >
+        Antecedente Clinico
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div class="btn-group"> 
+      <button
+        mat-button
+        color="secondary"
+        name="antecedestratamiento"
+        (click)="nuevaAntecedenteTratamiento(antecedentetratamientoform)"
+      >
+        Antecedente Tratamiento
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
     <div class="btn-group">
-      <button mat-button color="secondary" (click)="verDatosPersonales()">
+      <button
+        mat-button
+        color="secondary"
+        name="datospersonales"
+        (click)="verDatosPersonales()"
+      >
         Datos Personales <mat-icon>visibility</mat-icon>
       </button>
-      </div>
+    </div>
   </div>
 </div>
- <div class="container">
-    <app-pacienteform [isNew]=false [pacienteid]=paciente.id *ngIf="formdatos"
-    (evento)="procesaPropagar($event)" ></app-pacienteform>
+<div class="container">
+  <div class="row mt-2 mb-2 ">
+    <div class="col-lg">
+      <app-pacienteform
+        [isNew]="false"
+        [pacienteid]="paciente.id"
+        *ngIf="formdatos"
+        (evento)="procesaPropagar($event)"
+      ></app-pacienteform>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm col-md-4">
+      <mat-card>
+        <ng-container
+          *ngIf="paciente.medicionesgenerales.length > 0; else elseTemplate"
+        >
+          <mat-card-header>
+            <mat-card-title>Mediciones Generales</mat-card-title>
+            <mat-card-subtitle
+              >Ultima fecha :
+              {{
+                paciente.medicionesgenerales[
+                  paciente.medicionesgenerales.length - 1
+                ].fecha | date
+              }}</mat-card-subtitle
+            >
+          </mat-card-header>
+          <mat-card-content>
+            <app-grafica1
+              [mediciones]="paciente.medicionesgenerales"
+            ></app-grafica1>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Ok</button>
+          </mat-card-actions>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <mat-card-header>
+            <mat-card-title>Mediciones Generales</mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>añade mediciones Generales para ver la evolucion del paciente</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Ok</button>
+          </mat-card-actions>
+        </ng-template>
+      </mat-card>
+    </div>
+
+    <div class=" col-sm col-md-4">
+      <mat-card>
+        <ng-container
+          *ngIf="paciente.medicionesespecificas.length > 0; else elseTemplate2"
+        >
+          <mat-card-header>
+            <mat-card-title>Mediciones Especifica Grasas</mat-card-title>
+            <mat-card-subtitle
+              >Ultima fecha :
+              {{
+                paciente.medicionesespecificas[
+                  paciente.medicionesespecificas.length - 1
+                ].fecha | date
+              }}</mat-card-subtitle
+            >
+          </mat-card-header>
+          <mat-card-content>
+            <app-grafica1especifica></app-grafica1especifica>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Ok</button>
+          </mat-card-actions>
+        </ng-container>
+        <ng-template #elseTemplate2>
+          <mat-card-header>
+            <mat-card-title>Mediciones Especifica Grasas</mat-card-title>
+            <mat-card-subtitle> </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Añade Mediciones Especifica para ver la grafica de progresion de
+              grasas
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Ok</button>
+          </mat-card-actions>
+        </ng-template>
+      </mat-card>
+    </div>
+    <div class="col-md-4 col-sm">
+      <mat-card>
+        <ng-container
+          *ngIf="paciente.medicionesespecificas.length > 0; else elseTemplate3"
+        >
+          <mat-card-header>
+            <mat-card-title>Mediciones Especifica Musculo </mat-card-title>
+            <mat-card-subtitle
+              >Ultima fecha :
+              {{
+                paciente.medicionesespecificas[
+                  paciente.medicionesespecificas.length - 1
+                ].fecha | date
+              }}</mat-card-subtitle
+            >
+          </mat-card-header>
+          <mat-card-content>
+            <app-grafica2especifica></app-grafica2especifica>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Ok</button>
+          </mat-card-actions>
+        </ng-container>
+        <ng-template #elseTemplate3>
+          <mat-card-header>
+            <mat-card-title>Mediciones Especifica Musculo </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Añade mediciones Especifica para ver la grafica de progresion del
+              musculo
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Ok</button>
+          </mat-card-actions>
+        </ng-template>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row mt-1">
+    <div class="col-lg" #formMedicionGenerales>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            Listados de Mediciiones Generales
+          </mat-card-title>
+          <mat-card-subtitle *ngIf="paciente.medicionesgenerales.length > 0">
+            Ultima Medicion :
+            {{
+              paciente.medicionesgenerales[
+                paciente.medicionesgenerales.length - 1
+              ].fecha | date
+            }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ng-container
+            *ngIf="paciente.medicionesgenerales.length > 0; else elseTemplate4"
+          >
+            <app-mediciongeneral
+              [mediciones]="paciente.medicionesgenerales"
+              (medicionSelect)="seleccionarMedicionGeneral($event)"
+            ></app-mediciongeneral>
+          </ng-container>
+          <ng-template #elseTemplate4>
+            <p>Ninguna medicion guardada .Añade una medicion general</p>
+          </ng-template>
+        </mat-card-content>
+        <mat-card-actions> </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row mt-1" *ngIf="formMedicionGeneneral">
+    <div class="col-lg">
+      <app-medicion-general-form
+        (edited)="editarMedicionGeneral($event)"
+        (discard)="discardMedicionGeneral($event)"
+        (added)="addMedicionGeneral($event)"
+        (deleted)="deleteMedicionGeneral($event)"
+        [isNew]="isMedicionGeneralNew"
+        [medicion]="mediciongeneralseleccionada"
+      ></app-medicion-general-form>
+    </div>
+  </div>
+  <div class="row mt-1 ">
+    <div class="col-lg" #MedicionEspecificadiv>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            Listado Mediciones Especifica
+          </mat-card-title>
+          <mat-card-subtitle *ngIf="paciente.medicionesespecificas.length > 0">
+            Ultima Medicion :
+            {{
+              paciente.medicionesespecificas[
+                paciente.medicionesespecificas.length - 1
+              ].fecha | date
+            }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ng-container
+            *ngIf="
+              paciente.medicionesespecificas.length > 0;
+              else elseTemplate5
+            "
+          >
+            <app-medicionespecifica
+              [mediconesespecificas]="paciente.medicionesespecificas"
+              (medicionSelect)="seleccionarMedicionEspecifica($event)"
+            ></app-medicionespecifica>
+          </ng-container>
+          <ng-template #elseTemplate5>
+            <p>añade nuevas mediciones especifica</p>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row mt-1" *ngIf="formMedicionEspecifica" >
+    <div class="col-lg">
+      <app-medicionespecificaform
+        (edited)="editarMedicionEspecifica($event)"
+        (discard)="discardMedicionEspecifica($event)"
+        (added)="addMedicionEspecifica($event)"
+        (deleted)="deleteMedicionEspecifica($event)"
+        [isNew]="isMedicionEspecificaNew"
+        [medicion]="medicionespecificaseleccionada"
+      ></app-medicionespecificaform>
+    </div>
+  </div>
+  <div class="row mt-1 "  >
+    <div class="col-lg" #formmedicionsegmental>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            Listado Mediciones Segmentales
+          </mat-card-title>
+          <mat-card-subtitle *ngIf="paciente.medicionessegmentales.length > 0">
+            Ultima Medicion :
+            {{
+              paciente.medicionessegmentales[
+                paciente.medicionessegmentales.length - 1
+              ].fecha | date
+            }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ng-container
+            *ngIf="
+              paciente.medicionessegmentales.length > 0;
+              else elseTemplate5
+            "
+          >
+            <app-medicionsegmental
+              [mediconessegmentales]="paciente.medicionessegmentales"
+              (medicionSelect)="seleccionarMedicionSegemental($event)"
+            ></app-medicionsegmental>
+          </ng-container>
+          <ng-template #elseTemplate5>
+            <p>añade nuevas mediciones segmentales</p>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row mt-1" *ngIf="formMedicionSegmental">
+    <div class="col-lg">
+      <app-medicion-segmental-form
+        (edited)="editarMedicionSegmental($event)"
+        (discard)="discardMedicionSegmental($event)"
+        (added)="addMedicionSegmental($event)"
+        (deleted)="deleteMedicionSegmental($event)"
+        [isNew]="isMedicionSegementallNew"
+        [medicion]="medicionsegementalseleccionada"
+      ></app-medicion-segmental-form>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-lg-6"  #antecedenteclinicoform>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            Antecedentes Clinicos
+          </mat-card-title>
+          <mat-card-subtitle *ngIf="paciente.antecedentesclinicos.length > 0"
+            >Ultimo Antecedente :
+            {{
+              paciente.antecedentesclinicos[
+                paciente.antecedentesclinicos.length - 1
+              ].fecha
+            }}</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <ng-container
+            *ngIf="paciente.antecedentesclinicos.length > 0; else elseTemplate9"
+          >
+            <app-antecedenteclinico
+              [antecedentes]="paciente.antecedentesclinicos"
+              (antecedenteclinicoSelecionado)="
+                seleccionarAntecedenteClinicos($event)
+              "
+            ></app-antecedenteclinico>
+          </ng-container>
+          <ng-template #elseTemplate9>
+            <p>añade antecedentes clinicos</p>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-lg-6" #antecedentetratamientoform>
+      <mat-card>
+        <mat-card-header> 
+          <mat-card-title>
+            Antecedentes Tratamiento
+          </mat-card-title>
+          <mat-card-subtitle
+            *ngIf="paciente.antecedentestratamientos.length > 0"
+            >Ultimo Antecedente :
+            {{
+              paciente.antecedentestratamientos[
+                paciente.antecedentestratamientos.length - 1
+              ].fecha
+            }}</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <ng-container
+            *ngIf="
+              paciente.antecedentestratamientos.length > 0;
+              else elseTemplate8
+            "
+          >
+            <app-antecedentetratamiento
+              [antecedentes]="paciente.antecedentestratamientos"
+              (antecedenteSelecionado)="
+                seleccionarAntecedenteTratamiento($event)
+              "
+            ></app-antecedentetratamiento>
+          </ng-container>
+          <ng-template #elseTemplate8>
+            <p>añade antecednetes de tratamiento</p>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row mt-1" *ngIf="formAntecedenteClinico">
+    <div class="col-lg" >
+      <app-antecedenteclinicoform 
+        (edited)="editarAntecedenteClinicos($event)"
+        (discard)="discardAntecedenteClinicos($event)"
+        (added)="addAntecedenteClinicos($event)"
+        (deleted)="deleteAntecedenteClinicos($event)"
+        [isNew]="isAntecedenteClinicoNew"
+        [antecedente]="antecedenteclinicoSelecionado"
+      ></app-antecedenteclinicoform>
+    </div>
+  </div>
+  <div class="row mt-1" *ngIf="formAntecedenteTratamiento">
+    <div class="col-lg">
+      <app-antecedentetratamientoform
+        (edited)="editarAntecedenteTratamiento($event)"
+        (discard)="discardAntecedenteTratamiento($event)"
+        (added)="addAntecedenteTratamiento($event)"
+        (deleted)="deleteAntecedenteTratamiento($event)"
+        [isNew]="isAntecedenteTratamientolNew"
+        [antecedente]="antecedentetratamientoselecionado"
+      ></app-antecedentetratamientoform>
+    </div>
+  </div>
+  <div class="row mt-1">
+    <div class="col-lg" #listadoDieta>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            Listados de Planes de Dieta 
+          </mat-card-title>
+          <mat-card-subtitle *ngIf="paciente.planesdieta.length > 0">
+            Ultima Dieta :
+            {{
+              paciente.planesdieta[
+                paciente.planesdieta.length - 1
+              ].fecha | date
+            }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ng-container
+            *ngIf="paciente.planesdieta.length > 0; else elseTemplate9"
+          >
+            <app-plandieta-table
+              [planes]="paciente.planesdieta"
+              (medicionSelect)="seleccionarMedicionGeneral($event)"
+              (deleted)="deletePlandieta($event)"
+            ></app-plandieta-table>
+          </ng-container>
+          <ng-template #elseTemplate9>
+            <p>Ningun plan de dieta guardado .Añade un plan de dieta</p>
+          </ng-template>
+        </mat-card-content>
+        <mat-card-actions> </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
 </div>

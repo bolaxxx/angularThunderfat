@@ -30,7 +30,7 @@ export class PlandietaService {
 
   getPacienteByid(id: number): Observable<PlanDieta> {
     return this.http
-      .get(this.urlEndPoint + 'detalle/' + id, {headers: this.agregarAuthorizationHeader()})
+      .get(this.urlEndPoint + 'detalle/' + id + '/', {headers: this.agregarAuthorizationHeader()})
       .pipe(map(response => response as PlanDieta));
     //  return  this.http.get<Cliente[]>(this.urlEndPoint);
   }
@@ -40,6 +40,10 @@ export class PlandietaService {
   }
 guardarCita(plandieta: PlanDieta, paciente: number): Observable<PlanDieta> {
   return this.http.post<PlanDieta>(this.urlEndPoint + 'save/' + this.authService.getusuario().id + '/' + paciente,
+  plandieta , {headers: this.agregarAuthorizationHeader()});
+}
+UpdatePlan(plandieta: PlanDieta, paciente: number): Observable<PlanDieta> {
+  return this.http.post<PlanDieta>(this.urlEndPoint + 'update/' + this.authService.getusuario().id + '/' + paciente,
   plandieta , {headers: this.agregarAuthorizationHeader()});
 }
   private isNotAuthorizado(e): boolean {

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../service/auth.service';
+
 import { AlimentoServiceService } from '../service/alimento-service.service';
-import { ActivatedRoute } from '@angular/router';
+
 import { Alimento } from '../model/alimento';
-import {MatButtonModule, MatBottomSheet, MAT_BOTTOM_SHEET_DATA} from '@angular/material';
-import { AlimentoformComponent } from '../componentes/alimentoform.component';
 
 @Component({
   selector: 'app-alimentos',
@@ -13,18 +11,18 @@ import { AlimentoformComponent } from '../componentes/alimentoform.component';
 })
 export class AlimentosComponent implements OnInit {
   alimentos: Alimento[];
-  constructor(private authService: AuthService,
-              private alimentoService: AlimentoServiceService,
-              private activatedRoute: ActivatedRoute, private matBottonSheet: MatBottomSheet,private matButton: MatButtonModule) { }
+  alimentoSeleccionado: Alimento;
+  isAlimentoSelected:boolean;
+  constructor(private alimentoService: AlimentoServiceService) {}
 
-openBottonSheet( idSelect: number ) {
-  console.log(idSelect + ' el id select');
-  this.matBottonSheet.open(AlimentoformComponent, {data: { id: [idSelect]}});
-}
-              ngOnInit() {
- this.alimentoService.getAlimentos().subscribe(
-    alimentos => this.alimentos = alimentos
-  );
+  ngOnInit() {
+    this.isAlimentoSelected=false; 
+    this.alimentoService
+      .getAlimentos()
+      .subscribe(alimentos => (this.alimentos = alimentos));
   }
-
+  selecionarAlimento(alimento){
+    this.alimentoSeleccionado=alimento;
+    this.isAlimentoSelected=true;
+  }
 }

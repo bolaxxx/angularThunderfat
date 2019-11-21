@@ -1,9 +1,9 @@
 
-<div class="row mt-5 mb-5">
-<button (click)="updateEvents()" id="updateEvents" class="btn-danger btn-sm">Update events</button>
-<button (click)="openDialog()" id="updateHeader">Nueva Cita</button>
+<div class="row mt-5 mb-5 ml-2 mr-2 ">
+<!-- <button (click)="updateEvents()" id="updateEvents" class="btn-danger btn-sm">Update events</button>-->
+<button (click)="openDialog()" id="updateHeader" class="mat-button btn-success">Nueva Cita</button>
 </div>
-<div class="row mb-5 center">
+<div class="row mb-5 ml-2 mr-2 center">
 <full-calendar
   *ngIf="options"
   #fullcalendar

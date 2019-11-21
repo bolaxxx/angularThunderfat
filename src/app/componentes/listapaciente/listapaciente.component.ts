@@ -12,6 +12,7 @@ export class ListapacienteComponent implements OnInit,OnChanges {
   @Input() pacientes: Paciente[];
   @Output() seleccion = new EventEmitter<Paciente>();
   @Output() eliminado = new EventEmitter<Paciente>();
+  @Output() nuevo = new EventEmitter<any>();
   // tslint:disable-next-line:variable-name
   private _searchTerm: string;
   public filteredPaciente: Paciente[];
@@ -36,6 +37,9 @@ export class ListapacienteComponent implements OnInit,OnChanges {
   eliminarPaciente(paciente: Paciente): void{
     console.log('paciente elimniado ' + JSON.stringify(paciente));
     this.eliminado.emit(paciente);
+  }
+  nuevoPaciente(): void {
+    this.nuevo.emit(true);
   }
   ngOnInit() {
 

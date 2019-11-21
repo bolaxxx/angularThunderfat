@@ -16,15 +16,10 @@ export class PacienteService {
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
-  private agregarAuthorizationHeader() {
-    const token = this.authService.getTokenn();
-    if (token != null) {
-      return this.httpHeaders.append('Authorization', 'Bearer ' + token);
-    }
-  }
+ 
   getPacientes(id: number): Observable<Paciente[]> {
     return this.http
-      .get(this.urlEndPoint + id + '/', {headers: this.agregarAuthorizationHeader()})
+      .get(this.urlEndPoint + id + '/')
       .pipe(map(response => response as Paciente[]
         ));
     //  return  this.http.get<Cliente[]>(this.urlEndPoint);
@@ -33,11 +28,11 @@ export class PacienteService {
 
   getPacienteByid(id: number): Observable<Paciente> {
     return this.http
-      .get(this.urlEndPoint + 'detalle/' + id + '/', {headers: this.agregarAuthorizationHeader()})
+      .get(this.urlEndPoint + 'detalle/' + id + '/')
       .pipe(map(response => response as Paciente));
     //  return  this.http.get<Cliente[]>(this.urlEndPoint);
   }
-     buscarporNombreCompleto(id: number , searchterm: string): Observable<Paciente[]> {
+    /* buscarporNombreCompleto(id: number , searchterm: string): Observable<Paciente[]> {
      const param = new HttpParams().set( 'id' , id.toString()).set('searchterm', searchterm);
      return this.http.get(this.urlEndPoint + 'searchFullName/',
      {headers: this.agregarAuthorizationHeader(),  params: param}).pipe(map(response => response as Paciente[]));
@@ -52,7 +47,8 @@ export class PacienteService {
       return this.http.get(this.urlEndPoint + 'searchPhone/',
       {headers: this.agregarAuthorizationHeader(),  params: param}).pipe(map(response => response as Paciente[]));
      }
-  private isNotAuthorizado(e): boolean {
+     */
+ /* private isNotAuthorizado(e): boolean {
     if (e.status === 401 ) {
       if (this.authService.isAuthenticated()) {
         this.authService.logout();
@@ -68,15 +64,15 @@ export class PacienteService {
       }
     return false;
      }
-
+*/
      public guardarPaciente(paciente: Paciente): any {
        paciente.nutricionista.id = this.authService.getusuario().id;
        paciente.nutricionista.email = this.authService.getusuario().email;
-       return this.http.post<Paciente>(this.urlEndPoint + 'save', paciente , {headers: this.agregarAuthorizationHeader()} );
+       return this.http.post<Paciente>(this.urlEndPoint + 'save', paciente  );
      }
      public eliminarPaciente(id: number): Observable<any> {
        console.log('llego al metodo eliminar');
-       return   this.http.delete(this.urlEndPoint + 'eliminar/' + id, {headers: this.agregarAuthorizationHeader()}).
+       return   this.http.delete(this.urlEndPoint + 'eliminar/' + id).
        pipe(catchError( e =>{
          console.error(e.error.mensaje);
          swal.fire('error', e.error.mensaje, 'error');
@@ -86,7 +82,7 @@ export class PacienteService {
      public updatePaciente(paciente: Paciente): Observable<Paciente> {
        console.log(JSON.stringify(paciente ) + 'update paciente');
        return this.http.put<Paciente>(this.urlEndPoint + 'actualizar/' + paciente.id,
-        paciente, {headers: this.agregarAuthorizationHeader()});
+        paciente);
 
      }
 }

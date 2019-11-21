@@ -7,14 +7,13 @@ import { DiaDieta } from '../../../model/diadieta';
   templateUrl: './diadieta.component.html',
   styleUrls: ['./diadieta.component.sass']
 })
-export class DiadietaComponent implements OnInit {
+export class DiadietaComponent implements OnInit,OnChanges {
+
 
   @Input() dias: DiaDieta[];
-  @Output() listaDiaDieta = new EventEmitter<DiaDieta[]>();
+  @Output() listaDiaDieta = new EventEmitter<DiaDieta>();
 
-   listdia: DiaDieta[] = [];
-   isDaySelected = false;
-   diaSelected: DiaDieta;
+ diaSelected=new DiaDieta();
 
   constructor() { }
   ngOnInit() {
@@ -24,7 +23,7 @@ export class DiadietaComponent implements OnInit {
     //  let temp = new DiaDieta();
     //  temp.fecha.setDate(this.plandieta.fechaini.getDate() + i);
     //  this.listdia.push(temp);
-    this.listdia=this.dias;
+    
 
 
     // }
@@ -34,22 +33,26 @@ export class DiadietaComponent implements OnInit {
     selectday(day: DiaDieta) {
       console.log(day);
       this.diaSelected = day;
-      this.isDaySelected = true;
+      
+      this.listaDiaDieta.emit(day);
 
 
     }
     SaveDaysToPlan() {
-      this.isDaySelected=false;
-      this.listaDiaDieta.emit(this.listdia);
+      //this.isDaySelected=false;
+      //this.listaDiaDieta.emit(this.listdia);
     }
     guardarComidaEnDays($event) {
     
       console.log(JSON.stringify($event) + 'this is event en diadieta');
       this.diaSelected = $event;
-      this.isDaySelected = false;
+    
      //onsole.log(JSON.stringify(this.listdia.push($event)) +' listdia en el componente diadieta metodoguardar'); 
       console.log(JSON.stringify(this.diaSelected) + 'comida select after add event');
     
+      }
+      ngOnChanges(changes: SimpleChanges): void {
+        
       }
 
 }

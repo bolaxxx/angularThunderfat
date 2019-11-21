@@ -1,0 +1,40 @@
+<div>
+    <div class="row ml-2">
+       <label for="">Busqueda Alimento </label>
+     <div class="input-group">
+       
+      
+       <input type="text" class="form-control" aria-label="searchTerm" id="" aria-describedby="helpId" placeholder="" [(ngModel)]="searchTerm">
+       <div class="input-group-append" >
+         <button mat-button  aria-label="buscarpaciente">
+           <mat-icon>search</mat-icon>
+         </button>
+       </div>
+       
+     </div>  
+     <small id="helpId" class="form-text text-muted">Introduzca Termino de busqueda </small>
+   </div>
+   <ng-container *ngIf="filteredAlimentos?.length>0; else elseTemplate">
+     
+    <mat-list class="custom-scroll-bar">  
+  
+          <mat-list-item *ngFor="let pacienteItem of filteredAlimentos" >
+            
+            <button mat-button (click)="selecionarAlimento(pacienteItem)" aria-label="verdetalle">
+              <mat-icon src="src/assets/iconouser.svg" >account_circle</mat-icon>
+            </button>
+             <h4 mat-line>    {{ pacienteItem.nombre |titlecase }} {{pacienteItem.estado}} </h4>
+             <p mat-line> Kcal:{{pacienteItem.cal }} Proteinas: {{pacienteItem.proteinas}} </p>
+             <p mat-line > Grasas: {{pacienteItem.grasas}} Hidratos de carbono:{{pacienteItem.hidratosdecarbono}}</p>
+           <mat-divider></mat-divider>
+         
+        
+           </mat-list-item>
+        </mat-list> 
+   </ng-container>
+   <ng-template #elseTemplate>
+     <p>No hay alimentos para mostrar</p>
+   </ng-template>
+   
+  </div>
+  

@@ -1,19 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FiltroAlimentario } from '../../model/filtro-alimentario';
-import { element } from 'protractor';
 import { Alimento } from '../../model/alimento';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
-import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatAutocompleteModule,
-  MatInputModule
-} from '@angular/material';
 import { AlimentoServiceService } from '../../service/alimento-service.service';
 import { FiltroalimentarioService } from '../../service/filtroalimentario.service';
-import { AuthService } from 'src/app/service/auth.service';
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-filtroalimentarioform',
@@ -23,18 +15,14 @@ import swal from 'sweetalert2';
 export class FiltroalimentarioformComponent implements OnInit {
   stateCtrl = new FormControl();
   filteredAlimentos: Observable<Alimento[]>;
-  filtroalimnetario: FiltroAlimentario = new FiltroAlimentario();
+  @Input()filtroalimnetario: FiltroAlimentario = new FiltroAlimentario();
   alimentos: Alimento[] = [];
-  isNew: boolean=true;
+  @Input() isNew: boolean;
+  @Output()filtro = new EventEmitter<any>();
+  @Output() discard = new EventEmitter<any>();
   constructor(
-    public dialogRef: MatDialogRef<FiltroalimentarioformComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    matautoComplete: MatAutocompleteModule,
-    matInput: MatInputModule,
     private alimentoService: AlimentoServiceService,
-    private filtroalimentarioService: FiltroalimentarioService,
-    private authService: AuthService
-  ) {
+    private filtroalimentarioService: FiltroalimentarioService  ) {
     this.filteredAlimentos = this.stateCtrl.valueChanges.pipe(
       startWith(''),
       map(state => (state ? this._filterStates(state) : this.alimentos.slice()))
@@ -45,20 +33,9 @@ export class FiltroalimentarioformComponent implements OnInit {
     this.alimentoService
       .getAlimentos()
       .subscribe(response => (this.alimentos = response));
-    if(this.data.isNew==false){
-        this.filtroalimentarioService.getPacienteByid(this.data.id).subscribe(response =>{
-          this.filtroalimnetario = response;
-          this.filtroalimnetario.alimentos = response.alimentos;
-          console.log(JSON.stringify(response)+' alimentos en response');
-        } );
-        this.isNew = false;
-      }else{
-        this.isNew= true;
-      }
   }
 
   borrarAlimento(id: number): void {
-    let i = 0;
     for (let ele = 0; ele < this.filtroalimnetario.alimentos.length; ele++) {
       if (this.filtroalimnetario.alimentos[ele].id === id) {
         this.filtroalimnetario.alimentos.splice(ele, 1);
@@ -92,18 +69,23 @@ export class FiltroalimentarioformComponent implements OnInit {
   }
   private _filterStates(value: string): Alimento[] {
     const filterValue = value;
-    //.toLowerCase();
+    // .toLowerCase();
 
     return this.alimentos.filter(
       alimento => alimento.nombre.toLowerCase().indexOf(filterValue) === 0
     );
   }
-  guardarFiltro(){
-    this.filtroalimentarioService.guardarFiltro(this.filtroalimnetario).subscribe(response=> console.log(response));
-    this.dialogRef.close();
+  guardarFiltro() {
+    this.filtroalimentarioService.guardarFiltro(this.filtroalimnetario).subscribe(response => {
+       console.log(response);
+       this.filtro.emit(this.filtroalimnetario); });
+
   }
-  eliminarFiltro( ){
-    this.filtroalimentarioService.borrarCita(this.filtroalimnetario.id).subscribe(response=> console.log(response));
-    this.dialogRef.close();
+  eliminarFiltro( ) {
+    this.filtroalimentarioService.borrarCita(this.filtroalimnetario.id).subscribe(response => console.log(response));
+
+  }
+  close(){
+    this.discard.emit(close);
   }
 }

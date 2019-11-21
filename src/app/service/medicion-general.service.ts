@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 import { MedicionGeneral } from '../model/medicion-general';
 import swal from 'sweetalert2';
 @Injectable({
@@ -20,7 +20,12 @@ export class MedicionGeneralService {
     }
   }
   guardarMedicion(medicion: MedicionGeneral, paciente: number): Observable<MedicionGeneral> {
-    return this.http.post<MedicionGeneral>(this.urlEndPoint + 'save/' + paciente, medicion , {headers: this.agregarAuthorizationHeader()} );
+    return this.http.post<MedicionGeneral>(this.urlEndPoint + 'save/' + paciente, medicion , {headers: this.agregarAuthorizationHeader()} )
+    .pipe(catchError(e => {
+console.error(e.error.mensaje);
+swal.fire('Error al crear la medicion',e.error.mensaje, 'error');
+return throwError(e);
+    }));
   }
   updateMedicicion(medicion: MedicionGeneral): Observable<MedicionGeneral>{
     console.log(JSON.stringify(medicion ) + 'update medicion');

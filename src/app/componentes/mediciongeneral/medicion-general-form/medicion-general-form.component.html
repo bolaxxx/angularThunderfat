@@ -1,102 +1,280 @@
-<div class="bg-dark text-white container-fluid flex-fill">
-<ng-form id="formularioMedicionGeneral" name="formularioMedicionGeneral" class="col-md-6">
-    <div class="form-group row ">
-      <label for="fecha" class="col-2 col-form-label">Fecha</label>
-      <div class="col-10">
-        <input hidden [(ngModel)]="medicion.id" name="id"/>
-        <input class="form-control" [(ngModel)]="medicion.fecha" name="fecha" id="fecha"
-          required="required" autocomplete="nope" type="date" />
+<div class="bg-dark text-white ">
+  <div class="row ml-2">
+    <div class="col">
+    <h3>Datos Medicion General
+      </h3>
+      <button
+      class="float-right btn btn-lg"
+      style="background-color:transparent;"
+    (click)=close()>
+      <mat-icon [ngStyle]="{ color: 'white' }">cancel</mat-icon>
+    </button>
+  </div>
+  </div>
+  <ng-form id="formularioMedicionGeneral" name="formularioMedicionGeneral" #formularioMedicionGeneral="ngForm">
+    <div class="form-row ml-2 mr-2">
+      <div class="form-group col-6 ">
+        <label for="fecha">Fecha</label>
+
+        <input hidden [(ngModel)]="medicion.id" name="id" />
+        <input
+          class="form-control"
+          [(ngModel)]="medicion.fecha"
+          name="fecha"
+          id="fecha"
+          required="required"
+          autocomplete="nope"
+          type="date"
+          #fecha="ngModel"
+        />
+        <div class="alert alert-danger" *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)">
+          <div *ngIf="fecha?.errors.required">
+           El campo es requerido
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="form-group row ml-2 mr-2">
+      <div class="form-group col-md-3">
+        <label for="brazo">Circunferencia Brazo(cm)</label>
+
+        <input
+          class="form-control"
+          [(ngModel)]="medicion.brazo"
+          name="brazo"
+          id="brazo"
+          required="required"
+          type="number"
+          #brazo="ngModel"
+          required min="0.0"
+        />
+        <div class="alert alert-danger" *ngIf="brazo.invalid && (brazo.dirty || brazo.touched)">
+          <div *ngIf="brazo?.errors.required">
+           El campo es requerido
+          </div>
+          <div *ngIf="brazo?.errors.min">
+            La circuferencia del brazo debe ser al menos 0.0
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="cadera" class="label">Cadera(cm)</label>
+        <input
+          class="form-control"
+          name="cadera"
+          id="cadera"
+          [(ngModel)]="medicion.cadera"
+          required="required"
+          type="number"
+          #cadera="ngModel"
+          required min="0.0"
+        />
+        <div class="alert alert-danger" *ngIf="cadera.invalid && (cadera.dirty || cadera.touched)">
+          <div *ngIf="cadera?.errors.required">
+           El campo es requerido
+          </div>
+          <div *ngIf="cadera?.errors.min">
+            La circuferencia de la cadera debe ser al menos 0.0
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="cintura" class="label">Cintura(cm)</label>
+
+        <input
+          class="form-control"
+          name="cintura"
+          [(ngModel)]="medicion.cintura"
+          id="cintura"
+          required="required"
+          type="number"
+          #cintura="ngModel"
+          required min="0.0"
+        />
+        <div class="alert alert-danger" *ngIf="cintura.invalid && (cintura.dirty || cintura.touched)">
+          <div *ngIf="cintura?.errors.required">
+           El campo es requerido
+          </div>
+          <div *ngIf="cintura?.errors.min">
+            La circuferencia de la cintura debe ser al menos 0.0
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="icc">I.C.C</label>
+
+        <input
+          class="form-control"
+          name="icc"
+          [(ngModel)]="medicion.icc"
+          id="icc"
+          required="required"
+          type="number"
+          #icc="ngModel"
+          required min="0.0"
+        />
+        <div class="alert alert-danger" *ngIf="icc.invalid && (icc.dirty || icc.touched)">
+          <div *ngIf="icc?.errors.required">
+           El campo es requerido
+          </div>
+          
+        </div>
       </div>
     </div>
 
-    <div class="form-group row">
-      <label for="brazo" class="col-2 col-form-label">Circunferencia
-        Brazo(cm)</label>
-      <div class="col-10">
-        <input class="form-control"  [(ngModel)]="medicion.brazo"name="brazo" id="brazo"
-          required="required" type="text" />
+    <div class="form-group row ml-2 mr-2">
+      <div class="form-group col-md-3">
+        <label for="peso_actual">Peso Actual(Kg)</label>
+
+        <input
+          class="form-control"
+          name="pesoactual"
+          [(ngModel)]="medicion.pesoactual"
+          name="peso_actual"
+          required="required"
+          type="number"
+          #pesoactual="ngModel"
+          required min="0.0"
+        />
+        <div class="alert alert-danger" *ngIf="pesoactual.invalid && (pesoactual.dirty || pesoactual.touched)">
+          <div *ngIf="pesoactual?.errors.required">
+           El campo es requerido
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="peso_ideal">Peso Ideal(Kg)</label>
+
+        <input
+          class="form-control"
+          name="peso_ideal"
+          id="peso_ideal"
+         
+          [(ngModel)]="medicion.pesoideal"
+          required="required"
+          type="number"
+          #pesoideal="ngModel"
+          required min="0.0"
+        />
+        <div class="alert alert-danger" *ngIf="pesoideal.invalid && (pesoideal.dirty || pesoideal.touched)">
+          <div *ngIf="pesoideal?.errors.required">
+           El campo es requerido
+          </div>
+          
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="IMC">IMC</label>
+
+        <input
+          class="form-control"
+          name="IMC"
+          id="IMC"
+          [(ngModel)]="medicion.imc"
+          required="required"
+          type="number"
+          #imc="ngModel"
+          required min="0.0"
+        />
+        <div class="alert alert-danger" *ngIf="imc.invalid && (imc.dirty || imc.touched)">
+          <div *ngIf="imc?.errors.required">
+           El campo es requerido
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="porcentajegrasas">%Grasas</label>
+
+        <input
+          class="form-control"
+          name="porcentajegrasas"
+          [(ngModel)]="medicion.porcentajegrasas"
+          id="porcentajegrasas"
+          required="required"
+          type="number"
+          #porcentajegrasas="ngModel"
+          required min="0.0"
+        />
+        <div class="alert alert-danger" *ngIf="porcentajegrasas.invalid && (porcentajegrasas.dirty || porcentajegrasas.touched)">
+          <div *ngIf="porcentajegrasas?.errors.required">
+           El campo es requerido
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="form-group row ml-2 mr-2">
+      <div class="form-group col-md-6">
+      <label for="tension_max" 
+        >Tension Maxima</label
+      >
+      
+        <input
+          class="form-control"
+          name="tension_max"
+          [(ngModel)]="medicion.tensionmax"
+          id="tension_max"
+          required="required"
+          type="number"
+          #tension_max="ngModel"
+          required min="0.0"
+        />
+        <div class="alert alert-danger" *ngIf="tension_max.invalid && (tension_max.dirty || tension_max.touched)">
+          <div *ngIf="tension_max?.errors.required">
+           El campo es requerido
+          </div>
+          
+        </div>
+      </div>
+    
+    <div class="form-group col-md-6">
+      <label for="tension_min"
+        >Tension Minima</label
+      >
+      
+        <input
+          class="form-control"
+          name="tension_min"
+          [(ngModel)]="medicion.tensionmin"
+          id="tension_min"
+          required="required"
+          type="number"
+          #tension_min="ngModel"
+          required min="0.0"
+        />
+        <div class="alert alert-danger" *ngIf="tension_min.invalid && (tension_min.dirty || tension_min.touched)">
+          <div *ngIf="tension_min?.errors.required">
+           El campo es requerido
+          </div>
+          
+        </div>
       </div>
     </div>
 
-    <div class="form-group row">
-      <label for="cadera" class="col-2 col-form-label">Cadera(cm)</label>
-      <div class="col-10">
-        <input class="form-control" name="cadera" id="cadera" [(ngModel)]="medicion.cadera"
-          required="required" type="text" />
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="cintura" class="col-2 col-form-label">Cintura(cm)</label>
-      <div class="col-10">
-        <input class="form-control" name="cintura" [(ngModel)]="medicion.cintura" id="cintura"
-          required="required" type="text" />
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="icc" class="col-2 col-form-label">I.C.C</label>
-      <div class="col-10">
-        <input class="form-control" name="icc" [(ngModel)]="medicion.icc" id="icc" type="text" />
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="peso_actual" class="col-2 col-form-label">Peso
-        Actual(Kg)</label>
-      <div class="col-10">
-        <input class="form-control" name="pesoactual" [(ngModel)]="medicion.pesoactual"
-          name="peso_actual" required="required" type="text" />
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="peso_ideal" class="col-2 col-form-label">Peso
-        Ideal(Kg)</label>
-      <div class="col-10">
-        <input class="form-control" name="peso_ideal"
-          id="peso_ideal" required="required" [(ngModel)]="medicion.pesoideal" type="text" />
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="IMC" class="col-2 col-form-label">IMC</label>
-      <div class="col-10">
-        <input class="form-control" name="IMC" id="IMC" [(ngModel)]="medicion.imc" type="text" />
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="porcentajegrasas" class="col-2 col-form-label">%Grasas</label>
-      <div class="col-10">
-        <input class="form-control" name="porcentajegrasas"
-         [(ngModel)]="medicion.porcentajegrasas" id="porcentajegrasas" type="text" />
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="tension_max" class="col-2 col-form-label">Tension
-        Maxima</label>
-      <div class="col-10">
-        <input class="form-control" name="tension_max" [(ngModel)]="medicion.tensionmax"
-          id="tension_max" type="text" />
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="tension_min" class="col-2 col-form-label">Tension
-        Minima</label>
-      <div class="col-10">
-        <input class="form-control" name="tension_min" [(ngModel)]="medicion.tensionmin"
-          id="tension_min" type="text" />
-      </div>
-    </div>
-    <div class="row ">
-        <div class="btn-group center ml-3 flex mb-3">
-      <ng-container *ngIf="isNew; else elseTemplate">
-        <button class="btn-success lg ml-2 mr-2" (click)="guardarMedicion()"> Guardar</button>
+    <div class="row ml-2 ">
+      <div class="btn-group center ml-3 flex mb-3">
+        <ng-container *ngIf="isNew; else elseTemplate">
+          <button class="btn-success lg ml-2 mr-2" (click)="guardarMedicion()" [disabled]="!formularioMedicionGeneral.form.valid">
+            Guardar
+          </button>
         </ng-container>
         <ng-template #elseTemplate>
-          <button class="btn-primary lg ml-2 mr-2" (click)="GuardarEdicion()">Editar</button>
-          <button class="btn-danger lg ml-2 mr-2"(click)="Eliminar()"><a
-          >Eliminar</a> <span class="glyphicon glyphicon-bin"></span></button>
+          <button class="btn-primary lg ml-2 mr-2" (click)="GuardarEdicion()"[disabled]="!formularioMedicionGeneral.form.valid">
+            Editar
+          </button>
+          <button class="btn-danger lg ml-2 mr-2" (click)="Eliminar()">
+            <a>Eliminar</a> <span class="glyphicon glyphicon-bin"></span>
+          </button>
         </ng-template>
       </div>
     </div>
   </ng-form>
-
 </div>

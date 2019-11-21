@@ -1,16 +1,8 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { Alimento } from '../model/alimento';
+import { Component, OnInit } from '@angular/core';
 import { PlatoPredeterminado } from '../model/plato-predeterminado';
-import { PlatopredeterminadoformComponent } from './platopredeterminadoform/platopredeterminadoform.component';
-import { MatDialogRef, MAT_DIALOG_DATA, MatAutocompleteModule,
-   MatInputModule, MatDialog, MatSort, MatTableModule, MatTableDataSource } from '@angular/material';
-import { AlimentoServiceService } from '../service/alimento-service.service';
 import { PlatopredeterminadoService } from '../service/platopredeterminado.service';
 import { AuthService } from '../service/auth.service';
-import { startWith, map } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-platospredeterminado',
@@ -18,51 +10,91 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./platospredeterminado.component.sass']
 })
 export class PlatospredeterminadoComponent implements OnInit {
-  displayedColumns: string[] = ['Nombre',
-  'KcalTotal', 'ProteinasTotal', 'GrasasTotales', 'HidratosTotales' ];
-  platos: PlatoPredeterminado [];
-  dataSource;
-  @ViewChild(MatSort) sort: MatSort;
-  constructor(private authService: AuthService, private mattable: MatTableModule,
-              private filtroService: PlatopredeterminadoService, private route: ActivatedRoute,
-              public dialog: MatDialog ) {
+  platos: PlatoPredeterminado[]=[];
+  constructor(private authService: AuthService, private servicePlatoPredeterminado: PlatopredeterminadoService) {
   }
+  isPlatoPredeterminadoSelected: boolean ;
+  PlatoPredeterminadoSelected: PlatoPredeterminado;
+  newPlatoPredeterminado: boolean;
 
   ngOnInit() {
-    this.filtroService.getPlatosNutricionista(this.authService.getusuario().id).subscribe(
-      platos => this.dataSource = new MatTableDataSource(platos));
+    this.newPlatoPredeterminado=false;
+    this.isPlatoPredeterminadoSelected=false;
+    this.servicePlatoPredeterminado.getPlatosNutricionista(this.authService.getusuario().id).subscribe(
+      platos => this.platos = platos);
   }
-  openDialog() {
-    const dialogRef = this.dialog.open(PlatopredeterminadoformComponent, {
-      width: '850px',
-      autoFocus: true,
-      data: {isNew: true}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.filtroService.getPlatosNutricionista(this.authService.getusuario().id).subscribe(respuesta =>{
-        this.dataSource = new MatTableDataSource(respuesta);
-      });
-    });
-  }
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    //this.filtroService.getPlatosNutricionista(this.authService.getusuario().id).subscribe(respuesta =>{
-      //this.dataSource = new MatTableDataSource(respuesta);
-  //});
+  procesaPropagar(mensaje) {
+    console.log(mensaje);
+    this.servicePlatoPredeterminado.getPlatosNutricionista(this.authService.getusuario().id).subscribe(
+      pacientes => { this.platos = pacientes;
+                     this.newPlatoPredeterminado = false;
+       } );
 
-}
-openDetails(row: any) {
-  const dialogRef = this.dialog.open(PlatopredeterminadoformComponent, {
-    width: '850px',
-    autoFocus: true,
-    data: {isNew: false,
-      id: row.id}
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-    this.filtroService.getPlatosNutricionista(this.authService.getusuario().id).subscribe(
-      filtros=> this.dataSource = new MatTableDataSource(filtros));
-  });
-}
+
+  }
+  selecionarPlatoPredeterminado(paciente: PlatoPredeterminado): void {
+    console.log('paciente selecionado' + JSON.stringify(paciente));
+    this.PlatoPredeterminadoSelected = paciente;
+    this.newPlatoPredeterminado = false;
+    this.isPlatoPredeterminadoSelected = false;
+    this.isPlatoPredeterminadoSelected = true;
+  }
+  eliminarPlatoPredeterminado(paciente: PlatoPredeterminado): void {
+      console.log('llego al componente padre en eliminar');
+      let  i = 0;
+      console.log('estado del aarray pacientes antes de borrar ' + JSON.stringify(this.platos));
+      while (i < this.platos.length) {
+        if (this.platos[i].id === paciente.id) {
+          console.log('entro por el if eliminar ');
+          swal.fire({
+            title: '¿Estas seguro que quieres eliminar el plato' + paciente.nombre + '  ?',
+            text: 'No se podran recuperar los datos',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminalo '
+          }).then((result) => {
+            if (result.value) {
+              i = this.platos.length + 1;
+              this.servicePlatoPredeterminado.borrarCita(paciente.id).subscribe(() => {
+                this.platos.splice(i, 1);
+                console.log('respuesta del alert+deberia haber borrado ');
+                swal.fire(
+                  '¡Eliminado!',
+                  'El paciente ha sido borrado.',
+                  'success'
+                );
+                this.servicePlatoPredeterminado.getPlatosNutricionista(this.authService.getusuario().id)
+                .subscribe(respuesta =>{ this.platos = respuesta;this.isPlatoPredeterminadoSelected=false});
+              });
+            }
+          });
+
+        }
+        i++;
+      }
+      console.log('este es el array en el componente padre despues de eliminar ' + JSON.stringify(this.platos));
+  }
+  nuevoPlatoPredeterminado(): void {
+    this.PlatoPredeterminadoSelected=new PlatoPredeterminado();
+    this.isPlatoPredeterminadoSelected = false;
+    this.isPlatoPredeterminadoSelected = true;
+    this.newPlatoPredeterminado = true;
+
+  }
+  updatePlatoPredeterminadoSelect(paciente) {
+    this.PlatoPredeterminadoSelected = paciente;
+    this.isPlatoPredeterminadoSelected = false;
+    this.servicePlatoPredeterminado.getPlatosNutricionista(this.authService.getusuario().id).subscribe(
+      response => { this.platos = response;
+                    let i = response.findIndex(e => e.id === paciente.id);
+                    this.PlatoPredeterminadoSelected = response[i];
+                    this.isPlatoPredeterminadoSelected=true;
+      });
+    this.newPlatoPredeterminado = false;
+  }
+  closeform(mensaje){
+    this.isPlatoPredeterminadoSelected=false;
+  }
 }

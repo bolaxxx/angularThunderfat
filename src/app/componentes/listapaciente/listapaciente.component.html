@@ -1,16 +1,17 @@
 <!---->
+<div>
   <div class="row ml-2">
      <label for="">Busqueda Paciente</label>
    <div class="input-group">
      
      <div class="input-group-prepend">
-      <button mat-button (click)="nuevoPaciente()">
+      <button mat-button (click)="nuevoPaciente()" aria-label="nuevopaciente">
        <mat-icon >add</mat-icon>
      </button>
      </div>
-     <input type="text" class="form-control" name="searchTerm" id="" aria-describedby="helpId" placeholder="" [(ngModel)]="searchTerm">
+     <input type="text" class="form-control" aria-label="searchTerm" id="" aria-describedby="helpId" placeholder="" [(ngModel)]="searchTerm">
      <div class="input-group-append" >
-       <button mat-button (click)="filterPaciente()">
+       <button mat-button  aria-label="buscarpaciente">
          <mat-icon>search</mat-icon>
        </button>
      </div>
@@ -19,13 +20,14 @@
    <small id="helpId" class="form-text text-muted">Introduzca Termino de busqueda </small>
  </div>
  <ng-container *ngIf="filteredPaciente?.length>0; else elseTemplate">
-    <mat-list class="make-scrollable">  
+   
+  <mat-list class="custom-scroll-bar">  
 
         <mat-list-item *ngFor="let pacienteItem of filteredPaciente" >
-            <button mat-button (click)="eliminarPaciente(pacienteItem)">
+            <button mat-button (click)="eliminarPaciente(pacienteItem)" aria-label="eliminarpaciente">
               <mat-icon>delete</mat-icon>
             </button>
-          <button mat-button (click)="selecionarPaciente(pacienteItem)" >
+          <button mat-button (click)="selecionarPaciente(pacienteItem)" aria-label="verdetalle">
             <mat-icon src="src/assets/iconouser.svg" >account_circle</mat-icon>
           </button>
            <h4 mat-line>    {{ pacienteItem.nombre |titlecase }} {{pacienteItem.apellidos |titlecase}}</h4>
@@ -40,4 +42,4 @@
    <p>No hay pacientes para mostrar</p>
  </ng-template>
  
-
+</div>

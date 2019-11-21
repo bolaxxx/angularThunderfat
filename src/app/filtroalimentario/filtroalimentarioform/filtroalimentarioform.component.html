@@ -1,106 +1,143 @@
-<mat-dialog-content>
-  <form>
-  <div class="form-group">
-    <label for="nombre" class="col-form-label">Nombre</label>
-    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="filtroalimnetario.nombre" />
+<div class="card text-white bg-dark">
+ <div class="card-header">
+  <div class="row">
+    <div class="col-sm-8 flex-fill">Datos del filtro Alimentario</div>
+    <div class="col-sm-3 flex-fill">
+        <div class="col-sm-3 align-content-end" >
+  <button mat-button class="align"(click)="close()" ><mat-icon class="justify-content-end">close</mat-icon></button>
+</div>
+</div>
   </div>
-  <div class="form-group">
-    <label for="descripcion" class="col-form-label">Descripcion</label>
-    <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="filtroalimnetario.descripcion"/>
-  </div>
-  <div class="form-group row">
-      <label for="paciente" class="col-2 col-form label">Alimento</label>
-      <div class="col-10">
-        <mat-form-field class="example-full-width col-10">
-          <input
-            matInput
-            placeholder="Alimento"
-            aria-label="Alimento"
-            [matAutocomplete]="auto"
-            [formControl]="stateCtrl"
-            style="flex: 100%"
-          />
-          <mat-autocomplete
-            #auto="matAutocomplete"
-            [displayWith]="displayFn(alimentos)"
-          > 
-            <mat-option
-              *ngFor="let alimento of filteredAlimentos | async"
-              [value]="alimento.id"
-              with
-            >
-                          <img
-                class="example-option-img"
-                aria-hidden
-                src="assets\descarga.jpg"
-                height="25"
-              />
-              <span>{{ alimento.nombre }}</span> |
-              <!--<small>Apellidos: {{paciente.apellidos}}</small>|-->
-              <small>Estado: {{ alimento.estado }}</small>
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-        <button class="btn-primary btn-group-sm" (click)="addalimento()">Añadir</button>
-      </div>
-    </div>
-  <table id="TableAlimentos" class="table order-list">
-    <thead>
-      <tr>
-        <td>Alimento</td>
-        <td>Estado</td>
-        <td> </td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let alimento of filtroalimnetario.alimentos" >
-      
-        <td class="col-sm-4">
-          
-          {{alimento.nombre}}
-        </td>
-
-        <td class="col-sm-4">{{alimento.estado}}</td>
-        <td class="col-sm-2">
-          <button (click)="borrarAlimento(alimento.id)" class="btn-danger"  > Eliminar </button>
-        </td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-    <ng-container *ngIf="isNew; else elseTemplate">
-        <td colspan="5" style="text-align: left;" >
-            <input
-              type="button"
-              class="btn btn-lg btn-block btn-success "
-              id="guardarFiltro"
-              value="Guardar Filtro Alimentario"
-              (click)="guardarFiltro()"
-            />
-          </td>
-        </ng-container>
-        <ng-template #elseTemplate>
-            <td colspan="5" style="text-align: left;" >
-                <input
-                  type="button"
-                  class="btn btn-lg btn-block btn-primary "
-                  id="guardarFiltro"
-                  value="Editar Filtro Alimentario"
-                />
-              </td>
-              <td colspan="5" style="text-align: left;" >
+ </div>
+  <div class="card-body">
+      <mat-dialog-content>
+          <ng-form #filtroAlimentario="ngForm">
+          <div class="form-group">
+            <label for="nombre" class="col-form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required minlength="4" [(ngModel)]="filtroalimnetario.nombre" #nombre="ngModel"/>
+            <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                <div *ngIf="nombre?.errors.required">
+                 El campo es requerido
+                </div>
+                <div *ngIf="nombre?.errors.minlength">
+                  Nombre debe tener al menos 4 caracteres
+                </div>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="descripcion" class="col-form-label">Descripcion</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion" required minlength="4" [(ngModel)]="filtroalimnetario.descripcion" #descripcion="ngModel"/>
+            <div class="alert alert-danger" *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+                <div *ngIf="descripcion?.errors.required">
+                 El campo es requerido
+                </div>
+                <div *ngIf="descripcion?.errors.minlength">
+                  Nombre debe tener al menos 4 caracteres
+                </div>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label for="paciente" class="col-2 col-form label">Alimento</label>
+              <div class="col-10">
+                <mat-form-field class="example-full-width col-10">
                   <input
-                    type="button"
-                    class="btn btn-lg btn-block btn-danger "
-                    id="guardarFiltro"
-                    value="Eliminar Filtro Alimentario"
-                    (click)="eliminarFiltro()"
+                    matInput
+                    placeholder="Alimento"
+                    aria-label="Alimento"
+                    [matAutocomplete]="auto"
+                    [formControl]="stateCtrl"
+                    style="flex: 100%"
                   />
+                  <mat-autocomplete
+                    #auto="matAutocomplete"
+                    [displayWith]="displayFn(alimentos)"
+                  > 
+                    <mat-option
+                      *ngFor="let alimento of filteredAlimentos | async"
+                      [value]="alimento.id"
+                      with
+                    >
+                                  <img
+                        class="example-option-img"
+                        aria-hidden
+                        src="assets\descarga.jpg"
+                        height="25"
+                      />
+                      <span>{{ alimento.nombre }}</span> |
+                      <!--<small>Apellidos: {{paciente.apellidos}}</small>|-->
+                      <small>Estado: {{ alimento.estado }}</small>
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <button class="btn-primary btn-group-sm" (click)="addalimento()">Añadir</button>
+              </div>
+            </div>
+          <table id="TableAlimentos" class="table order-list text-white-50">
+            <thead>
+              <tr>
+                <td>Alimento</td>
+                <td>Estado</td>
+                <td> </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let alimento of filtroalimnetario.alimentos" >
+              
+                <td class="col-sm-4">
+                  
+                  {{alimento.nombre}}
                 </td>
-        </ng-template>
         
-      </tr>
-    </tfoot>
-  </table>
-</form>
-</mat-dialog-content>
+                <td class="col-sm-4">{{alimento.estado}}</td>
+                <td class="col-sm-2">
+                  <button (click)="borrarAlimento(alimento.id)" class="btn-danger"  > Eliminar </button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr><div class="alert alert-warning" *ngIf="filtroAlimentario.form.valid && filtroalimnetario.alimentos.length<=0">
+                  <div >
+                   Añade al menos un alimento  al filtro 
+                  </div></div></tr>
+              <tr>
+            <ng-container *ngIf="isNew; else elseTemplate">
+                <td colspan="5" style="text-align: left;" >
+                    <input
+                      type="button"
+                      class="btn btn-lg btn-block btn-success "
+                      id="guardarFiltro"
+                      value="Guardar Filtro Alimentario"
+                      (click)="guardarFiltro()"
+                      [disabled]="!filtroAlimentario.form.valid && filtroalimnetario.alimentos.length<=0"
+                    />
+                  </td>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <td colspan="5" style="text-align: left;" >
+                        <input
+                          type="button"
+                          class="btn btn-lg btn-block btn-primary "
+                          id="guardarFiltro"
+                          value="Editar Filtro Alimentario"
+                          [disabled]="!filtroAlimentario.form.valid && filtroalimnetario.alimentos.length<=0"
+                        />
+                      </td>
+                      <td colspan="5" style="text-align: left;" >
+                          <input
+                            type="button"
+                            class="btn btn-lg btn-block btn-danger "
+                            id="guardarFiltro"
+                            value="Eliminar Filtro Alimentario"
+                            (click)="eliminarFiltro()"
+                          />
+                        </td>
+                </ng-template>
+                
+              </tr>
+            </tfoot>
+          </table>
+        </ng-form>
+        </mat-dialog-content>
+            
+  </div>
+</div>

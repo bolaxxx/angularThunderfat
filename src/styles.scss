@@ -31,5 +31,13 @@ $angularThunderfat-theme: mat-light-theme($angularThunderfat-primary, $angularTh
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {min-height: 100vh;
+    height: auto;
+    margin: 0; }
+//body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@font-face {
+    font-family: 'Arvo-block';
+    font-display: block;
+    src: local('Arvo'), url(https://fonts.gstatic.com/s/arvo/v9/rC7kKhY-eUDY-ucISTIf5PesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+  }
+  

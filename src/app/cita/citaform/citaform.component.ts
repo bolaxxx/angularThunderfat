@@ -66,6 +66,7 @@ export class CitaformComponent implements OnInit {
   }
   public guardarCita(): void{
   this.cita.paciente= this.pacientes.find(paciente=> paciente.id===this.stateCtrl.value);
+  console.log(this.cita);
   this.citaService.guardarCita(this.cita).subscribe(response => console.log(response));
   this.dialogRef.close();
   }

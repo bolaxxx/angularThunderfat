@@ -90,6 +90,7 @@ export class AuthService {
     this.token = null;
     this.usuario = null;
     localStorage.clear();
+    sessionStorage.clear();
   }
 
   hasRoles(roles: string): boolean {

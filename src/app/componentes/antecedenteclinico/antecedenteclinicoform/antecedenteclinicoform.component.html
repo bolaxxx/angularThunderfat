@@ -1,45 +1,80 @@
-      <div>
-      <ng-form id="antecedenteClinicoFormulario"
+<div class="bg-dark text-white ">
+    <div class="row ml-2">
+      <div class="col">
+        <h3>Datos Antecedente Clinico</h3>
+        <button
+          class="float-right btn btn-lg"
+          style="background-color:transparent;"
+          (click)="close()"
+        >
+          <mat-icon [ngStyle]="{ color: 'white' }">cancel</mat-icon>
+        </button>
+      </div>
+    </div>
+  
+    <div class="row">
+      <ng-form #antecedenteClinicoFormulario="ngForm"
           name="antecedenteClinicoFormulario">
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
+          <div class="form-group row ml-2 mr-2">
+            <div class="form-group col-sm-6">
+              
                 <label for="antecedente_tratamiento">Antecedente
                    Clinico </label><input hidden id="paciente.id_usuario" /> <input
-                  class="form-control" [(ngModel)]="antecedente.antecedente" name="antecedente"
+                  class="form-control" [(ngModel)]="antecedente.antecedente" type="text" name="antecedente"  #antecedentenombre="ngModel" required minlength="4"
                   required="required" />
-
+                  <div class="alert alert-danger" *ngIf="antecedentenombre.invalid && (antecedentenombre.dirty || antecedentenombre.touched)">
+                    <div *ngIf="antecedentenombre?.errors.required">
+                     El campo es requerido
+                    </div>
+                    <div *ngIf="antecedentenombre?.errors.minlength">
+                      Nombre debe tener al menos 4 caracteres
+                    </div>
+                  </div>
               </div>
-            </div>
-            <div class="col-sm">
-              <div class="form-group">
+         
+            <div class="form-group col-sm-6">
+              
                 <label for="fecha">Fecha </label> <input type="date"
                   class="form-control" [(ngModel)]="antecedente.fecha" name="fecha"
-                  required="required" />
+                  required="required"
+                  #fecha="ngModel" />
+                  <div class="alert alert-danger" *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)">
+                    <div *ngIf="fecha?.errors.required">
+                     El campo es requerido
+                    </div>
+                    
+                  </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
+          
+          <div class="form-group row ml-2 mr-2">
+            <div class="form-group col-lg">
+              
                 <label for="observacion ">Observacion </label>
                 <textarea class="form-control" [(ngModel)]="antecedente.observacion"
                   name="observacion"></textarea>
               </div>
             </div>
-          </div>
+         
 
 
         </ng-form>
       </div>
       <div class="modal-footer">
+<ng-container *ngIf="isNew; else elseTemplate">
+    <div class="btn-group">
+        <button type ="button" id="botonGuardar"class="btn btn-success btn-sm btn-block" (click)="guardarMedicion()" title="Guardar" [disabled]="!antecedenteClinicoFormulario.form.valid" >Guardar</button>
+    </div>
+</ng-container>
+<ng-template #elseTemplate>
+    <div class="btn-group">
 
-        <div class="btn-group">
-          <button type ="button" id="botonGuardar"class="btn btn-success btn-sm btn-block" (click)="guardarMedicion()" title="Guardar">Guardar</button>
-          <button type="button" id="botonEditar" class="btn btn-primary"
-            title="Editar cita" (click)="GuardarEdicion()">Editar</button>
-          <button id="botonEliminar" class="btn btn-danger"
-            title="Eliminar cita" (click)="Eliminar()">Eliminar</button>
-        </div>
+        <button type="button" id="botonEditar" class="btn btn-primary"
+          title="Editar cita" (click)="GuardarEdicion()"  [disabled]="!antecedenteClinicoFormulario.form.valid">Editar</button>
+        <button id="botonEliminar" class="btn btn-danger"
+          title="Eliminar cita" (click)="Eliminar()">Eliminar</button>
+      </div>
+
+</ng-template>
       </div>
     

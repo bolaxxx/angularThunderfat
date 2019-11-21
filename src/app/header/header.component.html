@@ -9,7 +9,7 @@
         <a class="nav-link"[routerLink]="[ '/']">Home  <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-       <a [routerLink]="[ '/find-nutricionista']" class="nav-link"ls>Buscar Nutricionista</a>
+       <a [routerLink]="[ '/find-nutricionista']" class="nav-link text-white-50">Buscar Nutricionista</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Trabaja con Nosotros </a>
@@ -17,22 +17,22 @@
     </ul>
     <ul class="navbar-nav mr-auto" *ngIf="authService.hasRoles('ROLE_ADMIN')">
         <li class="nav-item">
-            <a [routerLink]="[ '/paciente']" class="nav-link">Pacientes</a>
+            <a [routerLink]="[ '/paciente']" class="nav-link text-white-50">Pacientes</a>
           </li>
           <li class="nav-item">
-              <a [routerLink]="[ '/cita']" class="nav-link">Citas</a>
+              <a [routerLink]="[ '/cita']" class="nav-link text-white-50">Citas</a>
             </li>
             <li class="nav-item">
-                <a [routerLink]="[ '/alimentos']" class="nav-link">Alimentos</a>
+                <a [routerLink]="[ '/alimentos']" class="nav-link text-white-50">Alimentos</a>
               </li>
-              <li class="nav-item">
-                  <a [routerLink]="[ '/filtroalimentario']" class="nav-link">Filtros Alimentarios</a>
+              <li class="nav-item text-white-50">
+                  <a [routerLink]="[ '/filtroalimentario']" class="nav-link ">Filtros Alimentarios</a>
                 </li>
                 <li class="nav-item">
-                    <a [routerLink]="[ '/platopredeterminado']" class="nav-link">Platos</a>
+                    <a [routerLink]="[ '/platopredeterminado']" class="nav-link text-white-50">Platos</a>
                   </li>
                   <li class="nav-item">
-                      <a [routerLink]="[ '/plandieta']" class="nav-link">Planes Dieta</a>
+                      <a [routerLink]="[ '/plandieta']" class="nav-link text-white-50">Planes Dieta</a>
                     </li>
     </ul>
      <ul class="navbar-nav mr-auto"*ngIf="authService.hasRoles('ROLE_USER')">
@@ -42,10 +42,10 @@
      </ul>
     <ul class="navbar-nav navbar-right">
       <li *ngIf="!authService.isAuthenticated()"class="nav-item">
-        <a  [routerLink]="[ '/login']" class="btn-primary btn-sm">Log in</a>
+        <a  [routerLink]="[ '/login']" class="btn-danger btn-sm">Log in</a>
       </li>
       <li *ngIf="authService.isAuthenticated()" class="nav-item">
-        <a (click)="logout()"  class="btn-primary btn-sm">Log out</a>
+        <a (click)="logout()"  class="btn-danger btn-sm">Log out</a>
       </li>
     </ul>
   </div>

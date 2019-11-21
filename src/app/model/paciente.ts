@@ -26,5 +26,5 @@ medicionessegmentales: MedicionSegmental[] = [];
 citas: Cita[]=[];
 planesdieta: PlanDieta [] = [];
 antecedentesclinicos: AntecedenteClinicos [] = [];
-antecedentesdetratamiento: AntecedenteTratamiento [] = [];
+antecedentestratamientos: AntecedenteTratamiento [] = [];
 }

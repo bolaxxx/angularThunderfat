@@ -1,4 +1,12 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Output,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { PlatoPlanDieta } from '../../../model/plato-plan-dieta';
 import { Comida } from '../../../model/comida';
 import { PlatoPredeterminado } from '../../../model/plato-predeterminado';
@@ -15,7 +23,7 @@ import { Ingrediente } from 'src/app/model/ingrediente';
   templateUrl: './platoplandieta.component.html',
   styleUrls: ['./platoplandieta.component.sass']
 })
-export class PlatoplandietaComponent implements OnInit {
+export class PlatoplandietaComponent implements OnInit, OnChanges {
   @Output() platosComida = new EventEmitter<PlatoPlanDieta[]>();
   @Input() selectedMeal: Comida;
   stateCtrl = new FormControl();
@@ -45,13 +53,13 @@ export class PlatoplandietaComponent implements OnInit {
     console.log(
       JSON.stringify(this.selectedMeal.platos) + 'platos del selected meal init'
     );
-    this.selectedMeal.platos.forEach(element => {
-      this.platosForm.push(element);
-      this.kcaltotales += element.kcaltotales;
-      console.log(
-        JSON.stringify(this.platosForm) + 'platos del form en bucle meal init'
-      );
-    });
+    ///this.selectedMeal.platos.forEach(element => {
+      //this.platosForm.push(element);
+      //this.kcaltotales += element.kcaltotales;
+      //console.log(
+        //JSON.stringify(this.platosForm) + 'platos del form en bucle meal init'
+      //);
+    //});
   }
 
   addPlatosToMeal() {
@@ -84,7 +92,7 @@ export class PlatoplandietaComponent implements OnInit {
         platotemp = response;
         const platotoAdd = new PlatoPlanDieta();
         platotemp.ingredientes.forEach(ingrediente => {
-          let ingredienteTemp = new Ingrediente();
+          const ingredienteTemp = new Ingrediente();
           ingredienteTemp.alimento = ingrediente.alimento;
           ingredienteTemp.cantidad = ingrediente.cantidad;
           ingredienteTemp.grasastotales = ingrediente.grasastotales;
@@ -93,9 +101,12 @@ export class PlatoplandietaComponent implements OnInit {
           ingredienteTemp.kcaltotales = ingrediente.kcaltotales;
 
           platotoAdd.ingredientes.push(ingredienteTemp);
-          console.log("ingredientes añadidos en añadir plato "+JSON.stringify(platotoAdd.ingredientes));
+          console.log(
+            'ingredientes añadidos en añadir plato ' +
+              JSON.stringify(platotoAdd.ingredientes)
+          );
         });
-       // platotoAdd.ingredientes = platotemp.ingredientes;
+        // platotoAdd.ingredientes = platotemp.ingredientes;
         platotoAdd.grasastotales = platotemp.grasastotales;
         platotoAdd.proteinastotales = platotemp.proteinastotales;
         platotoAdd.hidratostotales = platotemp.hidratostotales;
@@ -105,5 +116,18 @@ export class PlatoplandietaComponent implements OnInit {
         this.kcaltotales += platotemp.kcaltotales;
         this.platosForm.push(platotoAdd);
       });
+  }
+  deletePlatoFromMeal(plato) {
+    this.kcaltotales = -this.selectedMeal.platos[plato].kcaltotales;
+    this.selectedMeal.platos.splice(plato, 1);
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.kcaltotales = 0;
+    this.platosForm= changes.selectedMeal.currentValue.platos;
+    this.selectedMeal.platos.forEach(element => {
+        this.kcaltotales += element.kcaltotales;
+       // this.platosForm.push(element);
+      });
+    
   }
 }

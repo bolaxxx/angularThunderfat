@@ -1,23 +1,21 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container-fill">
-    
- 
-<div  class="row  ml-2">
-  <h2 class="title mt-2 ml-4">Listado de Paciente</h2>  
-</div>
-<div class="container-fluid ">
-<div class="row">
-  
-      <div class="col-3  ml-2">
-<app-listapaciente [pacientes]=pacientes 
-(seleccion)="selecionarPaciente($event)"
-(eliminado)="eliminarPaciente($event)"></app-listapaciente>
+<div class="paciente">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container-fill">
+      <div class="row  ml-2">
+        <h2 class="title mt-2 ml-4">Listado de Paciente</h2>
       </div>
-<div class="col-8">
-  
-
- 
-<!--     <br />
+      <div class="container-fluid ">
+        <div class="row">
+          <div class="col-md-3 col-sm ml-2">
+            <app-listapaciente
+              [pacientes]="pacientes"
+              (seleccion)="selecionarPaciente($event)"
+              (eliminado)="eliminarPaciente($event)"
+              (nuevo)="nuevoPaciente()"
+            ></app-listapaciente>
+          </div>
+          <div class="col-md-8 col-sm">
+            <!--     <br />
     <div class="row mt-5 mb-5 ml-5 mr-5">
       
    <div class=" row ">
@@ -87,16 +85,21 @@
  
     <br /><br />
   </div> -->
-  
-  <app-informe *ngIf="isPaciententeSelected"
-  [paciente]="pacienteSelected"></app-informe>
+
+            <app-informe
+              *ngIf="isPaciententeSelected"
+              [pacienteIn]="pacienteSelected"
+              (pacienteEdited)="updatePacienteSelect($event)"
+            ></app-informe>
+
+            <app-pacienteform
+              *ngIf="newPaciente"
+              [isNew]="newPaciente"
+              (evento)="procesaPropagar($event)"
+            ></app-pacienteform>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-  <app-pacienteform *ngIf="newPaciente" [isNew]="newPaciente"
-  (evento)="procesaPropagar($event)"></app-pacienteform>
-</div>  
-
-</div>
- </div>
- </div>
-
-

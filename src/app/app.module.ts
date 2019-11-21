@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './usuarios/login.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FindNutricionistaComponent } from './find-nutricionista/find-nutricionista.component';
 import { PacienteComponent } from './paciente/paciente.component';
@@ -44,7 +44,7 @@ import { MedicionespecificaComponent } from './componentes/medicionespecifica/me
 import { AntecedenteclinicoComponent } from './componentes/antecedenteclinico/antecedenteclinico.component';
 import { AntecedentetratamientoComponent } from './componentes/antecedentetratamiento/antecedentetratamiento.component';
 import { AntecedenteclinicoformComponent } from './componentes/antecedenteclinico/antecedenteclinicoform/antecedenteclinicoform.component';
-import { AntecedentetratamientoformComponent } from './componentes/antecedentetratamiento/antecedentetratamientoform/antecedentetratamientoform.component';
+import { AntecedentetratamientoformComponent }from './componentes/antecedentetratamiento/antecedentetratamientoform/antecedentetratamientoform.component';
 import { Grafica1especificaComponent } from './componentes/medicionespecifica/grafica1especifica/grafica1especifica.component';
 import { Grafica2especificaComponent } from './componentes/medicionespecifica/grafica2especifica/grafica2especifica.component';
 import { MedicionespecificaformComponent } from './componentes/medicionespecifica/medicionespecificaform/medicionespecificaform.component';
@@ -67,6 +67,16 @@ import { PlatoplandietaComponent } from './componentes/plandieta/platoplandieta/
 import { PlandietaService } from './service/plandieta.service';
 import { InformeComponent } from './componentes/informe/informe.component';
 import { ListapacienteComponent } from './componentes/listapaciente/listapaciente.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
+import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
+import { ListAlimentosComponent } from './alimentos/list-alimentos/list-alimentos.component';
+import { ListplatospredeterminadoComponent } from './platospredeterminado/listplatospredeterminado/listplatospredeterminado.component';
+import { ListFiltroAlimentarioComponent } from './filtroalimentario/list-filtro-alimentario/list-filtro-alimentario.component';
+import { PlandietaTableComponent } from './componentes/plandieta/plandieta-table/plandieta-table.component';
+import { DetalleplanComponent } from './componentes/plandieta/detalleplan/detalleplan.component';
+
 
 @NgModule({
   declarations: [
@@ -104,7 +114,12 @@ import { ListapacienteComponent } from './componentes/listapaciente/listapacient
     ComidaComponent,
     PlatoplandietaComponent,
     InformeComponent,
-    ListapacienteComponent
+    ListapacienteComponent,
+    ListAlimentosComponent,
+    ListplatospredeterminadoComponent,
+    ListFiltroAlimentarioComponent,
+    PlandietaTableComponent,
+    DetalleplanComponent
   ],
   imports: [
     BrowserModule,
@@ -127,7 +142,8 @@ import { ListapacienteComponent } from './componentes/listapaciente/listapacient
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatListModule
+    MatListModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     PacienteService,
@@ -137,7 +153,9 @@ import { ListapacienteComponent } from './componentes/listapaciente/listapacient
     AntecedentetratamientoService,
     MedicionsegmentalService,
     FiltroalimentarioService,
-    PlandietaService
+    PlandietaService,
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   entryComponents: [
     AlimentoformComponent,

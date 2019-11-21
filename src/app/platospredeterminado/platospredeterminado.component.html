@@ -1,60 +1,30 @@
-
-<p>
-  platospredeterminado works!
-</p>
-<button (click)="openDialog()" class="btn-success">Nuevo Plato</button>
-<div class="col-md-6">
-  <mat-form-field>
-    <input
-      matInput
-      (keyup)="applyFilter($event.target.value)"
-      placeholder="Filter"
-    />
-  </mat-form-field>
-
-  <div class="example-container mat-elevation-z8">
-    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!-- Position Column -->
-      <ng-container matColumnDef="Nombre" class="mr-2">
-        <th mat-header-cell *matHeaderCellDef class="mr-2">Nombre</th>
-        <td mat-cell *matCellDef="let element" class="mr-2">
-          {{ element.nombre }}
-        </td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="KcalTotal" class="ml-2">
-        <th mat-header-cell *matHeaderCellDef class="ml-2">KcalTotales</th>
-        <td mat-cell *matCellDef="let element" class="ml-2">
-          {{ element.kcaltotales | number : '1.2-2' }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="ProteinasTotal" class="ml-2">
-        <th mat-header-cell *matHeaderCellDef class="ml-2">ProteinasTotales</th>
-        <td mat-cell *matCellDef="let element" class="ml-2">
-          {{ element.proteinastotales | number : '1.2-2' }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="GrasasTotales" class="ml-2">
-        <th mat-header-cell *matHeaderCellDef class="ml-2">GrasasTotales</th>
-        <td mat-cell *matCellDef="let element" class="ml-2">
-          {{ element.grasastotales | number : '1.2-2'}}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="HidratosTotales" class="ml-2">
-        <th mat-header-cell *matHeaderCellDef class="ml-2">HidratosTotales</th>
-        <td mat-cell *matCellDef="let element" class="ml-2">
-          {{ element.hidratostotales | number : '1.2-2'}}
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns" class="mr-2"></tr>
-      <tr
-        mat-row
-        *matRowDef="let row; columns: displayedColumns"
-        class="mr-2"
-        (click)="openDetails(row)" 
-      ></tr>
-    </mat-table>
+<div class="paciente">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container-fill">
+      <div class="row  ml-2">
+        <h2 class="title mt-2 ml-4">Listado de Platos Predeterminados</h2>
+      </div>
+      <div class="container-fluid ">
+        <div class="row">
+          <div class="col-md-3 col-sm ml-2">
+            <app-listplatospredeterminado
+              [platos]="platos" 
+              (seleccion)="selecionarPlatoPredeterminado($event)"
+              (eliminado)="eliminarPlatoPredeterminado($event)"
+              (nuevo)="nuevoPlatoPredeterminado()"
+            ></app-listplatospredeterminado>
+          </div>
+          <div class="col-md-8 col-sm">
+             <app-platopredeterminadoform
+              *ngIf="isPlatoPredeterminadoSelected"
+              [isNew]="newPlatoPredeterminado"
+              [platoPredeterminado]="PlatoPredeterminadoSelected"
+              (plato)="procesaPropagar($event)"
+              (dismiss)="closeform($event)"
+            ></app-platopredeterminadoform>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

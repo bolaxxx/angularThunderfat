@@ -53,7 +53,7 @@ export class CitaComponent implements OnInit {
       data: {isNew: false, id: model.event.id}
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('The dialog was closed'+ result);
       const calendario = this.fullcalendar.getApi() ;
       calendario.refetchEvents();
     });

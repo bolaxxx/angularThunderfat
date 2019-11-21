@@ -1,157 +1,290 @@
-<div class="bg-dark text-white container-fluid flex-fill">
-<ng-form id="formularioMedicionEspecifica" >
-  <div class="form-group row ">
-    <label for="fecha" class="col-3 col-form-label">Fecha</label>
-    <div class="col-10">
+<div class="bg-dark text-white ">
+    <div class="row ml-2">
+      <div class="col">
+      <h3>Datos Medicion Especifica 
+        </h3>
+        <button
+        class="float-right btn btn-lg"
+        style="background-color:transparent;"
+      (click)=close()>
+        <mat-icon [ngStyle]="{ color: 'white' }">cancel</mat-icon>
+      </button>
+    </div>
+    </div>
+<ng-form id="formularioMedicionEspecifica" #formularioMedicionEspecifica="ngForm" >
+  <div class="form-group row  ml-2 mr-2">
+      <div class="form-group col-md-3">
+    <label >Fecha</label>
+    
        <input class="form-control"
         name="fecha" [(ngModel)]="medicion.fecha" id="fecha" required="required" autocomplete="false"
-        type="date" />
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="peso" class="col-3 col-form-label">Peso</label>
-    <div class="col-10">
+        type="date"  #fecha="ngModel" />
+        <div class="alert alert-danger" *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)">
+          <div *ngIf="fecha?.errors.required">
+           El campo es requerido
+          </div>
+          
+        </div>
+      </div>
+        <div class="form-group col-md-3">
+    <label >Peso</label>
+   
       <input class="form-control" [(ngModel)]="medicion.peso" name="peso" id="peso"
-        required="required" type="text" />
+      required="required"
+          type="number"
+          #peso="ngModel"
+          required min="0.0"
+        />
+        <div class="alert alert-danger" *ngIf="peso.invalid && (peso.dirty || peso.touched)">
+          <div *ngIf="peso?.errors.required">
+           El campo es requerido
+          </div>
+          <div *ngIf="peso?.errors.min">
+            La circuferencia del brazo debe ser al menos 0.0
+          </div>
+        </div>
     </div>
-  </div>
-  <div class="form-group row">
+ 
+    <div class="form-group col-md-3">
     <label for="porcentajegrasa" class="col-3 col-form-label">%Grasas</label>
-    <div class="col-10">
+    
       <input class="form-control" [(ngModel)]="medicion.porcentajegrasa" name="porcentajegrasa"
-        id="porcentajegrasa" required="required" type="text" />
+        id="porcentajegrasa" required="required"  type="number"
+        #porcentajegrasa="ngModel"
+        required min="0.0"
+        max="100.0"
+      />
+      <div class="alert alert-danger" *ngIf="porcentajegrasa.invalid && (porcentajegrasa.dirty || porcentajegrasa.touched)">
+        <div *ngIf="porcentajegrasa?.errors.required">
+         El campo es requerido
+        </div>
+        <div *ngIf="porcentajegrasa?.errors.min">
+          La circuferencia del brazo debe ser al menos 0.0
+        </div>
+      </div>
     </div>
-  </div>
+  
 
-  <div class="form-group row">
+    <div class="form-group col-md-3">
     <label for="metabolismo" class="col-3 col-form-label">Metabolismo</label>
-    <div class="col-10">
+   
       <input class="form-control" [(ngModel)]="medicion.metabolismo"name="metabolismo" id="metabolismo"
-        required="required" type="text" />
+        required="required"  type="number"
+        #metabolismo="ngModel"
+        required min="0.0"
+      />
+      <div class="alert alert-danger" *ngIf="metabolismo.invalid && (metabolismo.dirty || metabolismo.touched)">
+        <div *ngIf="metabolismo?.errors.required">
+         El campo es requerido
+        </div>
+        <div *ngIf="metabolismo?.errors.min">
+          La circuferencia del brazo debe ser al menos 0.0
+        </div>
+      </div>
     </div>
   </div>
-  <div class="form-group row">
-    <label for="edad_met" class="col-3 col-form-label">Edad
+  <div class="form-group row  ml-2 mr-2">
+      <div class="form-group col-md-3">
+    <label >Edad
       Metabolica</label>
-    <div class="col-10">
+    
       <input class="form-control" name="edadmet" [(ngModel)]="medicion.edadmet" id="edad_met"
-        required="required" type="text" />
+        required="required"  type="number"
+        #edadmet="ngModel"
+        required min="0.0"
+      />
+      <div class="alert alert-danger" *ngIf="edadmet.invalid && (edadmet.dirty || edadmet.touched)">
+        <div *ngIf="edadmet?.errors.required">
+         El campo es requerido
+        </div>
+        <div *ngIf="edadmet?.errors.min">
+          La circuferencia del brazo debe ser al menos 0.0
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="musculo" class="col-3 col-form-label">Musculo</label>
-    <div class="col-10">
+
+    <div class="form-group col-md-3">
+    <label>Musculo</label>
+    
       <input class="form-control" name="musculo" [(ngModel)]="medicion.musculo" id="musculo"
-        required="required" type="text" />
+        required="required" type="number"
+        #musculo="ngModel"
+        required min="0.0"
+      />
+      <div class="alert alert-danger" *ngIf="musculo.invalid && (musculo.dirty || musculo.touched)">
+        <div *ngIf="musculo?.errors.required">
+         El campo es requerido
+        </div>
+        <div *ngIf="musculo?.errors.min">
+          La circuferencia del brazo debe ser al menos 0.0
+        </div>
+      </div>
     </div>
-  </div>
+  
 
 
 
-  <div class="form-group row">
-    <label for="grasas" class="col-3 col-form-label">Grasa</label>
-    <div class="col-10">
+    <div class="form-group col-md-3">
+    <label >Grasa</label>
       <input class="form-control" name="grasas" [(ngModel)]="medicion.grasas" id="grasas"
-        required="required" type="text" />
+        required="required" type="number"
+        #grasas="ngModel"
+        required min="0.0"
+      />
+      <div class="alert alert-danger" *ngIf="grasas.invalid && (grasas.dirty || grasas.touched)">
+        <div *ngIf="grasas?.errors.required">
+         El campo es requerido
+        </div>
+        <div *ngIf="grasas?.errors.min">
+          La circuferencia del brazo debe ser al menos 0.0
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group row">
-    <label for="grasavisceral" class="col-3 col-form-label">Grasa
+
+    <div class="form-group col-md-3">
+    <label >Grasa
       Visceral</label>
-    <div class="col-10">
+   
       <input class="form-control" name="grasavisceral"
-        id="grasavisceral" required="required" [(ngModel)]="medicion.grasavisceral" type="text" />
+        id="grasavisceral" required="required" [(ngModel)]="medicion.grasavisceral"  type="number"
+        #grasavisceral="ngModel"
+        required min="0.0"
+      />
+      <div class="alert alert-danger" *ngIf="grasavisceral.invalid && (grasavisceral.dirty || grasavisceral.touched)">
+        <div *ngIf="grasavisceral?.errors.required">
+         El campo es requerido
+        </div>
+        <div *ngIf="grasavisceral?.errors.min">
+          La circuferencia del brazo debe ser al menos 0.0
+        </div>
+      </div>
     </div>
   </div>
-  <div class="form-group row">
-    <label for="masa_osea" class="col-3 col-form-label">Masa
+  <div class="form-group row  ml-2 mr-2">
+ 
+      <div class="form-group col-md-3">
+    <label >Masa
       Osea</label>
-    <div class="col-10">
+    
       <input class="form-control" name="masaosea" [(ngModel)]="medicion.masaosea" id="masa_osea"
-        required="required" type="text" />
+        required="required"  type="number"
+        #masaosea="ngModel"
+        required min="0.0"
+      />
+      <div class="alert alert-danger" *ngIf="masaosea.invalid && (masaosea.dirty || masaosea.touched)">
+        <div *ngIf="masaosea?.errors.required">
+         El campo es requerido
+        </div>
+        <div *ngIf="masaosea?.errors.min">
+          La circuferencia del brazo debe ser al menos 0.0
+        </div>
+      </div>
     </div>
-  </div>
   
-  <div id="calculado">
-    <div class="form-group row">
-      <label for="mbi" class="col-3 col-form-label">MBI</label>
-      <div class="col-10">
+  
+  
+    <div class="form-group col-md-3">
+      <label >MBI</label>
+     
         <input class="form-control" id="mbi" [(ngModel)]="medicion.mbi" name="mbi" required
-          type="text" />
+        type="number"
+        #mbi="ngModel"
+        required min="0.0"
+      />
+      <div class="alert alert-danger" *ngIf="mbi.invalid && (mbi.dirty || mbi.touched)">
+        <div *ngIf="mbi?.errors.required">
+         El campo es requerido
+        </div>
+        <div *ngIf="edadmet?.errors.min">
+          La circuferencia del brazo debe ser al menos 0.0
+        </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <label for="grasasIdMin" class="col-3 col-form-label">grasasIdMin</label>
-      <div class="col-10">
+      </div>
+    
+   
+      <div class="form-group col-md-3">
+      <label for="grasasIdMin">grasasIdMin</label>
+     
         <input class="form-control" id="grasasIdMin"
-          name="grasasIdMin" required type="text" [(ngModel)]="medicion.grasasidmin" />
+          name="grasasIdMin" required type="number" min="0.0" [(ngModel)]="medicion.grasasidmin" />
       </div>
-    </div>
-    <div class="form-group row">
-      <label for="grasasIdMax" class="col-3 col-form-label">grasasIdMax</label>
-      <div class="col-10">
+    
+    <div class="form-group col-md-3">
+      <label >grasasIdMax</label>
+     
         <input class="form-control" id="grasasIdMax" name="grasasIdMax" required
-          type="text" [(ngModel)]="medicion.grasaidmax" />
+          type="number" [(ngModel)]="medicion.grasaidmax" min="0.0" />
       </div>
     </div>
-    <div class="form-group row">
-      <label for="aguaId" class="col-3 col-form-label">aguaId</label>
-      <div class="col-10">
+    <div class="form-group row  ml-2 mr-2">
+        <div class="form-group col-md-3">
+      <label >aguaId</label>
         <input class="form-control" id="aguaId" [(ngModel)]="medicion.aguaid"  name="aguaId" required
-          type="text" />
+          type="number" min="0.0"/>
       </div>
-    </div>
-    <div class="form-group row">
-      <label for="MusculoIdMax" class="col-3 col-form-label">MusculoIdMax</label>
-      <div class="col-10">
+    
+      <div class="form-group col-md-3">
+      <label >MusculoIdMax</label>
+      
         <input class="form-control" id="MusculoIdMax"
-          name="MusculoIdMax" required type="text" [(ngModel)]="medicion.musculoidmax" />
+          name="MusculoIdMax" required type="number" [(ngModel)]="medicion.musculoidmax" min="0.0"/>
       </div>
-    </div>
-    <div class="form-group row">
-      <label for="MusculoIdMin" class="col-3 col-form-label">MusculoIdMin</label>
-      <div class="col-10">
+    
+      <div class="form-group col-md-3">
+      <label >MusculoIdMin</label>
+      
         <input class="form-control" id="MusculoIdMin"
-          name="MusculoIdMin" required type="text" [(ngModel)]="medicion.musculoidmin" />
+          name="MusculoIdMin" required type="number" min="0.0" [(ngModel)]="medicion.musculoidmin" />
       </div>
-    </div>
-    <div class="form-group row">
-      <label for="PesoOxMuscMax" class="col-3 col-form-label">PesoOxMuscMax</label>
-      <div class="col-10">
+    
+    <div class="form-group col-md-3">
+      <label >PesoOxMuscMax</label>
+      
         <input class="form-control" id="PesoOxMuscMax"
-          name="PesoOxMuscMax" required type="text" [(ngModel)]="medicion.poxmusmax" />
+          name="PesoOxMuscMax" required type="number" [(ngModel)]="medicion.poxmusmax" min="0.0" />
       </div>
     </div>
-    <div class="form-group row">
-      <label for="PesoOxMuscMin" class="col-3 col-form-label">PesoOxMuscMin</label>
-      <div class="col-10">
+      <div class="form-group row  ml-2 mr-2">
+          <div class="form-group col-md-3">
+      <label >PesoOxMuscMin</label>
+      
         <input class="form-control" id="PesoOxMuscMin"
-          name="PesoOxMuscMin" required type="text" [(ngModel)]="medicion.poxmusmin"/>
+          name="PesoOxMuscMin" required type="number" min="0.0" [(ngModel)]="medicion.poxmusmin"/>
       </div>
-    </div>
-    <div class="form-group row">
-      <label for="LitrosAgua" class="col-3 col-form-label">LitrosAgua</label>
-      <div class="col-10">
+    
+      <div class="form-group col-md-3">
+      <label>LitrosAgua</label>
+     
         <input class="form-control" id="LitrosAgua" [(ngModel)]="medicion.litrosagua" name="LitrosAgua"
-          required type="text" />
+          required  required type="number" #litrosagua="ngModel"/>
+          <div class="alert alert-danger" *ngIf="litrosagua.invalid && (litrosagua.dirty || litrosagua.touched)">
+            <div *ngIf="litrosagua?.errors.required">
+             El campo es requerido
+            </div>
+            
+          </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <label for="RetencionLiquidos" class="col-3 col-form-label">RetencionLiquidos</label>
-      <div class="col-10">
+    
+    <div class="form-group col-md-3">
+      <label >RetencionLiquidos</label>
+   
         <input class="form-control" id="RetencionLiquidos"
-          name="RetencionLiquidos" required type="text" [(ngModel)]="medicion.retencionliquidos"/>
-      </div>
+          name="RetencionLiquidos" required [(ngModel)]="medicion.retencionliquidos" min="0.0" required type="number" #retencionliquidos="ngModel"/>
+          <div class="alert alert-danger" *ngIf="retencionliquidos.invalid && (retencionliquidos.dirty || retencionliquidos.touched)">
+            <div *ngIf="retencionliquidos?.errors.required">
+             El campo es requerido
+            </div>
+            
+          </div>
     </div>
-  </div><div class="form-group row">
-    <label for="porcentajeagua" class="col-3 col-form-label">%Agua</label>
-    <div class="col-10">
-      <input class="form-control" name="porcentajeagua" [(ngModel)]="medicion.porcentajeagua" id="porcentajeagua" required="required" type="text">
+    <div class="form-group col-md-3">
+    <label >%Agua</label>
+    
+      <input class="form-control" name="porcentajeagua" [(ngModel)]="medicion.porcentajeagua" id="porcentajeagua" min="0.0" required="required" type="text">
     </div>
   </div>
 
-  
 </ng-form>
 
 
@@ -159,11 +292,11 @@
 <div class="btn-group">
     <ng-container *ngIf="isNew; else elseTemplate">
   <button id="botonGuardar" type="button" title="Guardar Medicion Especifica"
-    class="btn btn-success" (click)="guardarMedicion()" >Guardar</button>
+    class="btn btn-success" (click)="guardarMedicion()"[disabled]="!formularioMedicionEspecifica.form.valid" >Guardar</button>
     </ng-container>
     <ng-template #elseTemplate>
   <button type="button" id="botonEditar" class="btn btn-primary"
-    title="Editar cita" (click)="GuardarEdicion()">Editar</button> <button type="button"
+    title="Editar cita" (click)="GuardarEdicion()" [disabled]="!formularioMedicionEspecifica.form.valid">Editar</button> <button type="button"
     id="botonEliminar" class="btn btn-danger" title="Eliminar cita" (click)="Eliminar()" >Eliminar</button>
     </ng-template>
 </div>

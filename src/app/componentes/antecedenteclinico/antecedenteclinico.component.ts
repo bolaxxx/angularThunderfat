@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { AntecedenteClinicos } from '../../model/antecedente-clinicos';
 import { AntecedenteclinicoService } from '../../service/antecedenteclinico.service';
 import { MatSort, MatTableModule, MatBottomSheet, MatTableDataSource } from '@angular/material';
@@ -12,44 +12,33 @@ import { AntecedenteclinicoformComponent } from './antecedenteclinicoform/antece
   templateUrl: './antecedenteclinico.component.html',
   styleUrls: ['./antecedenteclinico.component.sass']
 })
-export class AntecedenteclinicoComponent implements OnInit {
+export class AntecedenteclinicoComponent implements OnInit, OnChanges {
+
   displayedColumns: string[] = ['Fecha',
   'antecedente' ];
-  antecedentes: AntecedenteClinicos [];
+  @Input() antecedentes: AntecedenteClinicos [];
+  @Output() antecedenteclinicoSelecionado = new EventEmitter<AntecedenteClinicos>();
   dataSource;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private authService: AuthService,
-              private medicongeneralService: AntecedenteclinicoService, private router: ActivatedRoute,
-              private mattable: MatTableModule,
-              private matBottonSheet: MatBottomSheet) { }
+  constructor(private mattable: MatTableModule,
+             ) { }
 
   ngOnInit() {
-    this.medicongeneralService.getMedciones(Number(this.router.snapshot.paramMap.get('id'))).subscribe(
-      mediciones => this.dataSource = new MatTableDataSource(mediciones));
+    this.dataSource = new MatTableDataSource(this.antecedentes);
   }
-  openBottonSheet( idSelect: any ): void {
-    console.log(JSON.stringify(idSelect) + ' el id select');
-    const refe = this.matBottonSheet.open(AntecedenteclinicoformComponent, {data: { id: [idSelect.id] ,
-      isNew : false, idpaciente: Number(this.router.snapshot.paramMap.get('id'))}});
-    refe.afterDismissed().subscribe( response =>
-      this.medicongeneralService.getMedciones(Number(this.router.snapshot.paramMap.get('id'))).subscribe(respuesta =>{
-        this.dataSource = new MatTableDataSource(respuesta);
-        console.log('llego al dissmis');
-
-  }));
+  seleccionarAntecedente( idSelect: AntecedenteClinicos ): void {
+    this.antecedenteclinicoSelecionado.emit(idSelect);
 }
 
-openNewBottonSheet(): void {
-    const refe = this.matBottonSheet.open(AntecedenteclinicoformComponent,
-      {data: {isNew: true, idpaciente: Number(this.router.snapshot.paramMap.get('id'))}});
-    refe.afterDismissed().subscribe( response =>
-      this.medicongeneralService.getMedciones(Number(this.router.snapshot.paramMap.get('id'))).subscribe(respuesta =>{
-        this.dataSource = new MatTableDataSource(respuesta) ;
-        console.log('llego al dissmis'+ respuesta);
-      } ));
-
-  }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.antecedentes.isFirstChange()){
+      this.dataSource= new MatTableDataSource(changes.antecedentes.currentValue);
+    }else{
+      this.dataSource= new MatTableDataSource(changes.antecedentes.currentValue);
+    }
   }
 }
