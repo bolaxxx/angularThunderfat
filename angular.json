@@ -147,5 +147,8 @@
       }
     }
   },
-  "defaultProject": "angularThunderfat"
+  "defaultProject": "angularThunderfat",
+  "cli": {
+    "analytics": "9c747de1-ece1-46c7-8629-563dd8505f31"
+  }
 }
