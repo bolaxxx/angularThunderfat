@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatListModule, MatBottomSheet,
-   MatButtonModule, MatMenuModule, MatCardModule,
-   MatSelectModule, MatInputModule, MatIconModule } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 import { Paciente } from '../model/paciente';
 import { AuthService } from '../service/auth.service';
 import { PacienteService } from '../service/paciente.service';
@@ -75,7 +80,7 @@ export class PacienteComponent implements OnInit {
           swal.fire({
             title: '¿Estas seguro que quieres eliminar al paciente' + paciente.nombre + ' ' + paciente.apellidos +  ' ?',
             text: 'No se podran recuperar los datos',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',

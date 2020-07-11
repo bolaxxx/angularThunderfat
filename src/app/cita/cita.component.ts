@@ -10,7 +10,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import esLocale from '@fullcalendar/core/locales/es';
 import { ActivatedRoute } from '@angular/router';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { CitaformComponent } from './citaform/citaform.component';
 @Component({
   selector: 'app-cita',

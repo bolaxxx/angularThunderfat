@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { MedicionSegmental } from '../../../model/medicion-segmental';
 import { MedicionsegmentalService } from '../../../service/medicionsegmental.service';
-import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-medicion-segmental-form',

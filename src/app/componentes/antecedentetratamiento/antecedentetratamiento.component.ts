@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild, Output, Input, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
 import { AntecedentetratamientoService } from '../../service/antecedentetratamiento.service';
 import { MedicionSegmental } from 'src/app/model/medicion-segmental';
-import { MatSort, MatTableModule, MatBottomSheet, MatTableDataSource } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { MatSort } from '@angular/material/sort';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/service/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { MedicionSegmentalFormComponent } from '../medicionsegmental/medicion-segmental-form/medicion-segmental-form.component';

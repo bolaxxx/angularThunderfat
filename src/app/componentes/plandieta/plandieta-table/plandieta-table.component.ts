@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
 import { MedicionGeneral } from 'src/app/model/medicion-general';
-import { MatSort, MatTableModule, MatTableDataSource } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/service/auth.service';
 import { MedicionGeneralService } from 'src/app/service/medicion-general.service';
 import { PlandietaService } from '../../../service/plandieta.service';

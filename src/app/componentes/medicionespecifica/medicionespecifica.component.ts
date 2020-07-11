@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild, Input, Output, EventEmitter, OnChanges, S
 import { AuthService } from 'src/app/service/auth.service';
 import { MedicionespecificaService } from '../../service/medicionespecifica.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatTableModule, MatBottomSheet, MatSort, MatTableDataSource } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { MatSort } from '@angular/material/sort';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { BaseChartDirective, Label, Color } from 'ng2-charts';
 import { MedicionEspecifica } from '../../model/medicion-especifica';
 import { ChartDataSets, ChartOptions } from 'chart.js';

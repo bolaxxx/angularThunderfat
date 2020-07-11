@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { AntecedenteclinicoService } from '../../../service/antecedenteclinico.service';
 import { AntecedenteClinicos } from '../../../model/antecedente-clinicos';
-import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-antecedenteclinicoform',

@@ -3,12 +3,9 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Alimento } from 'src/app/model/alimento';
 import { PlatoPredeterminado } from 'src/app/model/plato-predeterminado';
-import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatAutocompleteModule,
-  MatInputModule
-} from '@angular/material';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 import { AlimentoServiceService } from 'src/app/service/alimento-service.service';
 import { PlatopredeterminadoService } from 'src/app/service/platopredeterminado.service';
 import { AuthService } from 'src/app/service/auth.service';

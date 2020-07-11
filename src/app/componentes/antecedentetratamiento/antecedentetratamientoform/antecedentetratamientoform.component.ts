@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { AntecedentetratamientoService } from '../../../service/antecedentetratamiento.service';
 import { AntecedenteTratamiento } from '../../../model/antecedente-tratamiento';
-import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-antecedentetratamientoform',

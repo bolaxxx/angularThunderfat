@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
 import { MedicionGeneral } from '../../../model/medicion-general';
 import { MedicionGeneralService } from '../../../service/medicion-general.service';
-import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { Paciente } from 'src/app/model/paciente';
 
 @Component({

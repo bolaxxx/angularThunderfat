@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Usuario } from '../model/usuario';
-import { getToken } from '@angular/router/src/utils/preactivation';
+
 
 
 @Injectable({

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { MedicionespecificaService } from '../../../service/medicionespecifica.service';
-import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MedicionEspecifica } from '../../../model/medicion-especifica';
 
 @Component({

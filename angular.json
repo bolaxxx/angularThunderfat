@@ -34,7 +34,7 @@
               "node_modules/sweetalert2/dist/sweetalert2.min.css"
             ],
             "scripts": [],
-            "es5BrowserSupport": true
+           
           },
           "configurations": {
             "production": {

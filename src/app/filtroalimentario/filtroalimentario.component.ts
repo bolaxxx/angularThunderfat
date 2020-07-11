@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FiltroalimentarioService } from '../service/filtroalimentario.service';
 import { AuthService } from '../service/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatDialog, MatTableModule, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { FiltroalimentarioformComponent } from './filtroalimentarioform/filtroalimentarioform.component';
 import { FiltroAlimentario } from '../model/filtro-alimentario';
 import swal from 'sweetalert2';
@@ -55,7 +57,7 @@ export class FiltroalimentarioComponent implements OnInit {
           swal.fire({
             title: '¿Estas seguro que quieres eliminar al Filtro' + paciente.nombre + ' ?',
             text: 'No se podran recuperar los datos',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',

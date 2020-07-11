@@ -8,12 +8,9 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { MedicionSegmental } from '../../model/medicion-segmental';
-import {
-  MatSort,
-  MatTableModule,
-  MatBottomSheet,
-  MatTableDataSource
-} from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { MatSort } from '@angular/material/sort';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MedicionsegmentalService } from '../../service/medicionsegmental.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { ActivatedRoute } from '@angular/router';

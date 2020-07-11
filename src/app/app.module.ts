@@ -14,21 +14,17 @@ import { AlimentosComponent } from './alimentos/alimentos.component';
 import { AlimentoServiceService } from './service/alimento-service.service';
 import { AlimentoformComponent } from './componentes/alimentoform.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatButtonModule,
-  MatBottomSheet,
-  MatBottomSheetModule,
-  MatCardModule,
-  MatMenuModule,
-  MatTableDataSource,
-  MatListModule,
-  MatTableModule,
-  MatSortModule,
-  MatInputModule,
-  MatSelectModule,
-  MatIconModule,
-  MatDialogModule
-} from '@angular/material';
+import { MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { PacienteformComponent } from './componentes/pacienteform/pacienteform.component';
 import { PacienteService } from './service/paciente.service';
 import { MediciongeneralComponent } from './componentes/mediciongeneral/mediciongeneral.component';
@@ -55,7 +51,7 @@ import { AntecedenteclinicoService } from './service/antecedenteclinico.service'
 import { AntecedentetratamientoService } from './service/antecedentetratamiento.service';
 import { MedicionsegmentalService } from './service/medicionsegmental.service';
 import { CitaformComponent } from './cita/citaform/citaform.component';
-import { MatAutocomplete, MatAutocompleteModule } from '@angular/material';
+import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FiltroalimentarioformComponent } from './filtroalimentario/filtroalimentarioform/filtroalimentarioform.component';
 import { FiltroalimentarioService } from './service/filtroalimentario.service';
 import { PlatopredeterminadoformComponent } from './platospredeterminado/platopredeterminadoform/platopredeterminadoform.component';
