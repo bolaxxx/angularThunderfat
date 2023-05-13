@@ -3,6 +3,7 @@ import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,14 +11,11 @@ import swal from 'sweetalert2';
 })
 export class HeaderComponent implements OnInit {
   navbarCollapsed = true;
+  opened: boolean;
+
+  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
   constructor(  public authService: AuthService, private router: Router ) { }
-    logout(): void {
-      console.log('logut del componet');
-      this.authService.logout();
-      swal.fire('hasta luego', 'Logout con exito', 'success');
-      this.router.navigate([ '/login']);
-      sessionStorage.clear();
-    }
+  
   ngOnInit() {
   }
  
@@ -26,3 +24,4 @@ export class HeaderComponent implements OnInit {
       this.navbarCollapsed = !this.navbarCollapsed;
   }
 }
+ 

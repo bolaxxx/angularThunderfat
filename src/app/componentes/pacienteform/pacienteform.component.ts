@@ -1,12 +1,11 @@
 import {
   Component,
   OnInit,
-  Inject,
   Input,
   Output,
   EventEmitter
 } from '@angular/core';
-import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+
 import { PacienteService } from 'src/app/service/paciente.service';
 import { Paciente } from 'src/app/model/paciente';
 

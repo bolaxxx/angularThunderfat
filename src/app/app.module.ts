@@ -40,7 +40,7 @@ import { MedicionespecificaComponent } from './componentes/medicionespecifica/me
 import { AntecedenteclinicoComponent } from './componentes/antecedenteclinico/antecedenteclinico.component';
 import { AntecedentetratamientoComponent } from './componentes/antecedentetratamiento/antecedentetratamiento.component';
 import { AntecedenteclinicoformComponent } from './componentes/antecedenteclinico/antecedenteclinicoform/antecedenteclinicoform.component';
-import { AntecedentetratamientoformComponent }from './componentes/antecedentetratamiento/antecedentetratamientoform/antecedentetratamientoform.component';
+import { AntecedentetratamientoformComponent } from './componentes/antecedentetratamiento/antecedentetratamientoform/antecedentetratamientoform.component';
 import { Grafica1especificaComponent } from './componentes/medicionespecifica/grafica1especifica/grafica1especifica.component';
 import { Grafica2especificaComponent } from './componentes/medicionespecifica/grafica2especifica/grafica2especifica.component';
 import { MedicionespecificaformComponent } from './componentes/medicionespecifica/medicionespecificaform/medicionespecificaform.component';
@@ -72,7 +72,10 @@ import { ListplatospredeterminadoComponent } from './platospredeterminado/listpl
 import { ListFiltroAlimentarioComponent } from './filtroalimentario/list-filtro-alimentario/list-filtro-alimentario.component';
 import { PlandietaTableComponent } from './componentes/plandieta/plandieta-table/plandieta-table.component';
 import { DetalleplanComponent } from './componentes/plandieta/detalleplan/detalleplan.component';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { WorkWithUsComponent } from './work-with-us/work-with-us.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -115,11 +118,13 @@ import { DetalleplanComponent } from './componentes/plandieta/detalleplan/detall
     ListplatospredeterminadoComponent,
     ListFiltroAlimentarioComponent,
     PlandietaTableComponent,
-    DetalleplanComponent
+    DetalleplanComponent,
+    WorkWithUsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatToolbarModule,
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -139,6 +144,8 @@ import { DetalleplanComponent } from './componentes/plandieta/detalleplan/detall
     ReactiveFormsModule,
     MatDialogModule,
     MatListModule,
+    MatToolbarModule,
+    MatSidenavModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
@@ -150,8 +157,8 @@ import { DetalleplanComponent } from './componentes/plandieta/detalleplan/detall
     MedicionsegmentalService,
     FiltroalimentarioService,
     PlandietaService,
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   entryComponents: [
     AlimentoformComponent,
@@ -167,4 +174,4 @@ import { DetalleplanComponent } from './componentes/plandieta/detalleplan/detall
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
