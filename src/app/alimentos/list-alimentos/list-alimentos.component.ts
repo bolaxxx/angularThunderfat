@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Alimento } from 'src/app/model/alimento';
 
-
 @Component({
   selector: 'app-list-alimentos',
   templateUrl: './list-alimentos.component.html',

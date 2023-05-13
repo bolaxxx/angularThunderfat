@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PlatopredeterminadoformComponent } from './platopredeterminadoform.component';
 
@@ -6,7 +6,7 @@ describe('PlatopredeterminadoformComponent', () => {
   let component: PlatopredeterminadoformComponent;
   let fixture: ComponentFixture<PlatopredeterminadoformComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PlatopredeterminadoformComponent ]
     })
